@@ -5,4 +5,5 @@ class Trail < ApplicationRecord
   has_many :followers, through: :favorite, source: :user
   belongs_to :experience
   has_many :trail_users, through: :experience, source: :user
+  has_and_belongs_to_many :tags
 end

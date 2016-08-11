@@ -1,0 +1,2 @@
+class CrumbsController < ApplicationController
+end
