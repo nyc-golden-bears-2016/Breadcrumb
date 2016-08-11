@@ -3,8 +3,6 @@ class CreateTrails < ActiveRecord::Migration[5.0]
     create_table :trails do |t|
       t.string :name, null: false
       t.text :description
-      # t.string :media_link_1
-      # t.string :media_link_2 one-to-many table
       t.float :latitude
       t.float :longitude
       t.boolean :private, default: false
