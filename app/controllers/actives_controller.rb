@@ -26,8 +26,6 @@ end
 
 private
 
-def trail_params
-end
 
 def current_trail
 end
