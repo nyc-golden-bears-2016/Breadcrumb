@@ -20,6 +20,10 @@ Rails.application.routes.draw do
   get '/active/:id/leave' => 'active#leave'
   get '/active/:id' => 'active#show'
 
-  get '/active/:id/update'
+  get '/active/:id/update' => 'active#show'
   #route to update user position
+
+  devise_for :users 
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # add 'devise' gem; create USER model/migration; migrate db
 end
