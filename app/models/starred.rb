@@ -1,0 +1,2 @@
+class Starred < ApplicationRecord
+end
