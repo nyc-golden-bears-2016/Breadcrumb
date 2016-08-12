@@ -1,5 +1,6 @@
 class ActivesController < ApplicationController
-before_action :current_trail, :current_user
+before_action :current_trail, except: [:join]
+before_action :current_user
 
 def join
   if trail.private
@@ -28,9 +29,11 @@ private
 
 
 def current_trail
+  @trail = Trail.find(params[:id])
 end
 
 def current_user
+  @user ||= User.find(session[:user_id])
 end
 
 def location_params
