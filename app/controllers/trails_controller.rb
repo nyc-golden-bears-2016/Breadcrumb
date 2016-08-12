@@ -1,12 +1,12 @@
 class TrailsController < ApplicationController
-
+# before_action :current_user
   def index
     #make method to show trails that are published, recent, and (if user has
     #current location), base it around location
     #use pagination gem
     #have form to search
     #private trails will not show description, but instead list 'private'
-    available_trails = Trail.where(published: true, public:true)
+    @trails = Trail.where(published: true).page params[:page]
     # available_trails.nearby
     # available_trails.order(created_at: :desc)
     # @trails = available_trails.paginate
@@ -50,4 +50,13 @@ private
     params.require(:trail).permit(:latitude, :longitude)
   end
 
+  # def current_user
+  #   @user ||= User.find(session[:user_id])
+  # end
+
+  def redirect
+    if !!current_user
+      redirect_to new_user_session
+    end
+  end
 end

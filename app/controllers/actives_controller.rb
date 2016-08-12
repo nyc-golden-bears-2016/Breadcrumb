@@ -12,12 +12,13 @@ before_action :current_user
   end
 
   def leave
-    crumb = Experience.last_crumb_reached
-    #can we call the last crumb they hit and mark it as a save point?
-    # made a new column in the experience model to hold that info
+
   end
 
   def show
+
+    #can we call the last crumb they hit and mark it as a save point?
+    # made a new column in the experience model to hold that info
   end
 
   def crumb
@@ -25,7 +26,7 @@ before_action :current_user
     @trail = Trail.find(params[:active_id])
     @crumb = Crumb.find(params[:id])
     if @trail.sequential
-      Experience.update(last_crumb_reached: @crumb.order_number)
+      Experience.update_attribute(last_crumb_reached: @crumb.order_number)
     end
   end
 
@@ -36,7 +37,7 @@ before_action :current_user
 private
 
   def current_trail
-    @trail = Trail.find(params[:id])
+    @trail ||= Trail.find(params[:id])
   end
 
   def current_user
