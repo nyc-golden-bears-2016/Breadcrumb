@@ -1,4 +1,4 @@
-class Unordered < Trail
+class UnorderedTrail < Trail
   def initialize
     super
     self.sequential = false

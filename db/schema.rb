@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160811204809) do
+ActiveRecord::Schema.define(version: 20160812041345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,9 +44,12 @@ ActiveRecord::Schema.define(version: 20160811204809) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer  "crumb_id",   null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "crumb_id",       null: false
+    t.string   "imageable_type"
+    t.integer  "imageable_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
   end
 
   create_table "sounds", force: :cascade do |t|
@@ -56,10 +59,16 @@ ActiveRecord::Schema.define(version: 20160811204809) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.integer  "trail_id",               null: false
-    t.string   "description", limit: 25
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.string   "subject",    limit: 25
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  create_table "tags_trails", force: :cascade do |t|
+    t.integer  "trail_id",   null: false
+    t.integer  "tag_id",     null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "trails", force: :cascade do |t|
@@ -79,7 +88,6 @@ ActiveRecord::Schema.define(version: 20160811204809) do
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
-    t.string   "password"
     t.float    "latitude"
     t.float    "longitude"
     t.datetime "created_at",                          null: false

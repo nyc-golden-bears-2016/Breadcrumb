@@ -1,4 +1,4 @@
 class Experience < ApplicationRecord
-  belongs_to :trail
-  belongs_to :user
+  belongs_to :trail, required: false
+  belongs_to :user, required: false
 end
