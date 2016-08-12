@@ -1,9 +1,11 @@
+
 <h2>Log in</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
+    <%= f.label :login %><br />
+    <%= f.text_field :login, autofocus: true %>
   </div>
 
   <div class="field">
@@ -22,6 +24,7 @@
     <%= f.submit "Log in" %>
   </div>
 <% end %>
+<%= link_to "Forgot Password", new_user_password_path, :class => 'navbar-link'  %>
 
-<%= render "devise/shared/links" %>
+
 
