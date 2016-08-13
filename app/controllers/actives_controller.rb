@@ -1,17 +1,30 @@
 class ActivesController < ApplicationController
 before_action :current_trail, except: [:crumb]
 before_action :log_in
+before_action :current_active, :correct_password, only: [:show, :crumb, :update]
+before_action :which_trail, only: [:join]
 
   def join
-    @active = Active.new
-    if @trail.priv == false
-      redirect_to "/actives/#{@trail.id}"
+    if !Active.find_by(user: current_user, trail: @newtrail)
+      if @newtrail.priv == false
+        @active = Active.create(user: current_user, trail: @newtrail)
+        redirect_to "/actives/#{@active.id}"
+      else
+        @active = Active.new
+      end
+    else
+      redirect_to "/actives/#{Active.find_by(user: current_user, trail: @newtrail).id}"
     end
   end
 
   def joined
-    if priv_trail_params
-
+    entered = priv_trail_params[:entered_password]
+    if entered == @trail.password
+      @active = Active.create(user: current_user, trail: @trail, entered_password: entered)
+      redirect_to "/actives/#{@active.id}"
+    else
+      redirect_to current_user
+      #make error handling
     end
   end
 
@@ -21,6 +34,7 @@ before_action :log_in
 
   def show
     @active ||= Active.create(user: current_user, trail: @trail)
+    @crumbs = @active.crumbs_available
     #can we call the last crumb they hit and mark it as a save point?
     # made a new column in the experience model to hold that info
   end
@@ -41,7 +55,15 @@ before_action :log_in
 private
 
   def current_trail
-    @trail ||= Trail.find(params[:id])
+    @trail ||= Active.find(params[:id]).trail
+  end
+
+  def which_trail
+    @newtrail = Trail.find(params[:id])
+  end
+
+  def current_active
+    @active ||= Active.find(params[:id])
   end
 
   def log_in
@@ -54,5 +76,12 @@ private
     params.require(:active).permit(:entered_password)
   end
 
+  def correct_password
+    if @trail.priv && (@trail.password == @active.entered_password)
+      true
+    else
+     redirect_to new_user_session_path
+    end
+  end
 
 end
