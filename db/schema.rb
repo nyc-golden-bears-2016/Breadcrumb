@@ -29,11 +29,13 @@ ActiveRecord::Schema.define(version: 20160812041345) do
   end
 
   create_table "experiences", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "trail_id"
-    t.boolean  "completed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "user_id",                            null: false
+    t.integer  "trail_id",                           null: false
+    t.boolean  "completed",          default: false
+    t.integer  "last_crumb_reached", default: 0
+    t.boolean  "winner",             default: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
   end
 
   create_table "favorites", force: :cascade do |t|
