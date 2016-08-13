@@ -1,13 +1,17 @@
+<%= render "maps/trail-map" %>
+
+<div class="text-container">
 <%= form_for(@trail) do |t| %>
 		Title: <%= t.text_field(:name) %><br>
     Description: <%= t.text_area(:description) %><br>
     Private? <%= t.check_box(:priv) %><br>
     Ordered Trail? <%= t.check_box(:sequential) %><br><br>
-
+    <%= t.hidden_field(:latitude) %>
+    <%= t.hidden_field(:longitude) %>
 
 <%= t.submit "Save Trail" %>
 <% end %>
-
+</div>
 <!-- <#% form_for(@image) do |i| %>
   <#%= i.hidden_field(:imageable_type, :value => Trail) %>
 <#%= f.password_field :password %> -->
