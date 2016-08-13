@@ -1,6 +1,6 @@
 class ActivesController < ApplicationController
 before_action :current_trail, except: [:crumb]
-before_action :current_user
+before_action :redirect
 
   def join
     # if @trail.private
@@ -40,8 +40,10 @@ private
     @trail ||= Trail.find(params[:id])
   end
 
-  def current_user
-    @user ||= User.find(session[:user_id])
+  def redirect
+   if !current_user
+     redirect_to new_user_session_path, notice: 'You are not logged in.'
+   end
   end
 
   # def location_params

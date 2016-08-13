@@ -1,59 +1,12 @@
 
-<div>
-<h5>Your Trails<h5>
-<%@user.created_trails.each do |t|%>
-<%=t.name%>
-<%if t.private%>
-[PRIVATE] Password: <%=t.password%>
-<%else%>
-[PUBLIC]
-<%end%>
-<%end%>
-<h5>Future Trails<h5>
-<%@user.favorite_trails.each do |t|%>
-<%=t.name%>
-<%if t.private%>
-[PRIVATE]
-<%else%>
-[PUBLIC]
-<%end%>
-<%end%>
 
-<h5>Past Trails<h5>
-<%@user.experiences.each do |t|%>
-<%=t.trail.name%>
-  <%if t.trail.private%>
-    [PRIVATE]
-  <%else%>
-    [PUBLIC]
-  <%end%>
-  <%if t.complete%>
-    Completed!
-    <%if t.winner%>
-      YOU WON!!!
-    <%end%>
-  <%else%>
-    Not complete yet...at Crumb <%=t.last_crumb_reached%>
-  <%end%>
-<%end%>
-
-
-
-
-<div>
 <h4>Explore </h4>
 <%@trails.each do |t|%>
-<%=t.name%>
-<%if t.private%>
-    [PRIVATE]
-  <%else%>
-    [PUBLIC]
-  <%end%>
-by <%=t.creator.username.upcase%><br>
+<%=link_to t.name, t%>
+by <%=link_to t.creator.username, t.creator%><br>
 <%=t.description%><br><br>
 <%end%>
 
 <%= link_to_previous_page @trails, 'Previous' %>
 <%= paginate @trails, :window => 1, :remote => true %>
 <%= link_to_next_page @trails, 'Next' %>
-</div>
