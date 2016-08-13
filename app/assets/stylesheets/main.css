@@ -1,0 +1,112 @@
+body {
+/*  opacity: 0;
+  -webkit-transition: opacity 3s ease-in;
+     -moz-transition: opacity 3s ease-in;
+      -ms-transition: opacity 3s ease-in;
+       -o-transition: opacity 3s ease-in;
+          transition: opacity 3s ease-in;*/
+  background-color: black;
+  color: white;
+
+}
+
+/*body.fadein {
+    opacity: 1;
+}*/
+
+h1 {
+  color: white;
+  font-family: fantasy;
+}
+
+p {
+  margin:  -5px;
+  padding: 0px;
+}
+
+
+.image-parent {
+ text-align: center;
+
+}
+
+.text-container{
+  margin: 10px auto;
+  text-align: center;
+}
+
+
+.style_image {
+  background-size: cover;
+  text-align: center;
+  margin:0 auto;
+}
+
+
+#display-map {
+  width: 760px;
+  height: 484px;
+  margin: 0px auto;
+}
+
+#map-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -6px;
+  margin:auto;
+  pointer-events: none;
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+}
+
+
+#map-parent {
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  background: black;
+  position: relative;
+
+}
+
+#pac-input {
+  margin: 0px auto;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  text-overflow: ellipsis;
+  width: 300px;
+  display: block;
+    }
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+#recenter-button {
+  background-color: #ffe4c9;
+  border: 2px solid black;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+  cursor: pointer;
+  margin-top: 15px;
+  margin-right: 40px;
+  color: rgb(25,25,25);
+  font-size: 16px;
+  padding: 5px 10px;
+  font-family: fantasy;
+}
+
+#search-box {
+  font-size: 1em;
+  padding: 5px;
+  text-align: center;
+  background: white;
+  border-radius: 3px;
+}
+
+#search-box:focus {
+  outline-color: #ffd9b3;
+}

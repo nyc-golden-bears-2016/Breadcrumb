@@ -1,3 +1,6 @@
+//= require jquery
+//= require app_assets
+
 $(document).ready(function() {
   $("#password_confirmation").keyup(validate);
 });

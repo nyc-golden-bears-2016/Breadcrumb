@@ -1,3 +1,5 @@
+<%= render "maps/crumb-map" %>
+
 <%=form_for([@trail, @crumb]) do |c| %>
     Name: <%= c.text_field(:name) %><br>
     Description: <%= c.text_area(:description) %><br>
@@ -8,6 +10,7 @@
     <% if @trail.sequential %>
     Order Number  <%= c.text_area(:order_number) value: @trail.crumbs.length + 1%><br>
     <% end %>
-
+    <%= c.hidden_field(:latitude) %>
+    <%= c.hidden_field(:longitude) %>
   <%= c.submit "Add Crumb" %>
 <% end %>
