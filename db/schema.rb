@@ -15,27 +15,28 @@ ActiveRecord::Schema.define(version: 20160812041345) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "actives", force: :cascade do |t|
+    t.integer  "user_id",                            null: false
+    t.integer  "trail_id",                           null: false
+    t.boolean  "completed",          default: false
+    t.integer  "last_crumb_reached", default: 0
+    t.boolean  "winner",             default: false
+    t.string   "entered_password"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
   create_table "crumbs", force: :cascade do |t|
     t.string   "name",                            null: false
     t.text     "description"
-    t.float    "latitude",                        null: false
-    t.float    "longitude",                       null: false
+    t.float    "latitude"
+    t.float    "longitude"
     t.boolean  "requires_answer", default: false
     t.string   "answer"
     t.integer  "trail_id",                        null: false
     t.integer  "order_number"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
-  end
-
-  create_table "experiences", force: :cascade do |t|
-    t.integer  "user_id",                            null: false
-    t.integer  "trail_id",                           null: false
-    t.boolean  "completed",          default: false
-    t.integer  "last_crumb_reached", default: 0
-    t.boolean  "winner",             default: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -46,7 +47,8 @@ ActiveRecord::Schema.define(version: 20160812041345) do
   end
 
   create_table "images", force: :cascade do |t|
-    t.integer  "crumb_id",       null: false
+    t.string   "name"
+    t.string   "avatar"
     t.string   "imageable_type"
     t.integer  "imageable_id"
     t.datetime "created_at",     null: false
@@ -78,7 +80,7 @@ ActiveRecord::Schema.define(version: 20160812041345) do
     t.text     "description"
     t.float    "latitude"
     t.float    "longitude"
-    t.boolean  "private",     default: false
+    t.boolean  "priv",        default: false
     t.boolean  "sequential",  default: false
     t.boolean  "published",   default: false
     t.integer  "creator_id"

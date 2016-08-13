@@ -1,0 +1,19 @@
+<br><%=link_to 'Add Favorite', "/users/#{current_user.id}/add/#{@trail.id}"%><br>
+
+
+<h2><%=@trail.name%></h2>
+
+<% if @trail.priv%>
+[PRIVATE]
+<%else%>
+[PUBLIC]
+<%end%>
+
+<% if @trail.sequential%>
+To be followed in sequence.
+<%end%>
+
+<p><%=@trail.description%></p><br>
+
+
+<%=link_to 'Start!', "/actives/#{@trail.id}/join"%>

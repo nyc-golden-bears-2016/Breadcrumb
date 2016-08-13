@@ -4,8 +4,8 @@ class User < ApplicationRecord
   has_many :created_trails, class_name: 'Trail', foreign_key: :creator_id, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :favorite_trails, through: :favorites, source: :trail
-  has_many :experiences, dependent: :destroy
-  has_many :walked_trails, through: :experiences, source: :trail
+  has_many :actives, dependent: :destroy
+  has_many :walked_trails, through: :actives, source: :trail
   has_many :images, as: :imageable, dependent: :destroy
 
   devise :database_authenticatable, :registerable,

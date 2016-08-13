@@ -5,7 +5,7 @@ class CreateTrails < ActiveRecord::Migration[5.0]
       t.text :description
       t.float :latitude
       t.float :longitude
-      t.boolean :private, default: false
+      t.boolean :priv, default: false
       t.boolean :sequential, default: false
       t.boolean :published, default: false
       t.integer :creator_id, foreign_key: true
