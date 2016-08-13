@@ -3,8 +3,8 @@ class CreateCrumbs < ActiveRecord::Migration[5.0]
     create_table :crumbs do |t|
       t.string :name, null: false
       t.text :description
-      t.float :latitude, null: false
-      t.float :longitude, null: false
+      t.float :latitude
+      t.float :longitude
       t.boolean :requires_answer, default: false
       t.string :answer, default: nil
       t.integer :trail_id, null: false

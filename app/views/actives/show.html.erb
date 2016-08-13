@@ -1,0 +1,14 @@
+
+<h2><%=@trail.name%></h2>
+
+<% if @trail.sequential%>
+To be followed in sequence.
+<%end%>
+
+<p><%=@trail.description%></p><br>
+
+
+<p><%@crumbs.each do |c|%>
+<%=link_to c.name, [c.trail, c]%>
+<%end%>
+</p><br>

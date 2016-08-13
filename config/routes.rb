@@ -11,11 +11,12 @@ Rails.application.routes.draw do
 
   get '/trails/:id/publish' => 'trails#publish'
 
-  get '/active/:active_id/crumb/:id' => 'active#crumb'
-  get '/active/:id/join' => 'active#join'
-  get '/active/:id/leave' => 'active#leave'
-  get '/active/:id' => 'active#show'
-  get '/active/:id/update' => 'active#update'
+  get '/actives/:active_id/crumb/:id' => 'actives#crumb'
+  get '/actives/:id/join' => 'actives#join'
+  post '/actives/:id/joined' => 'actives#joined'
+  get '/actives/:id/leave' => 'actives#leave'
+  get '/actives/:id' => 'actives#show'
+  get '/actives/:id/update' => 'actives#update'
 
   devise_for :users
 
