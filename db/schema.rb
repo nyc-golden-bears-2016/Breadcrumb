@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20160815160853) do
     t.datetime "updated_at",                     null: false
   end
 
+<<<<<<< 9f17c4695720c394ecd3ef81037069cf2b0c6591
   create_table "actives", force: :cascade do |t|
     t.integer  "user_id",                            null: false
     t.integer  "trail_id",                           null: false
@@ -34,6 +35,14 @@ ActiveRecord::Schema.define(version: 20160815160853) do
     t.string   "entered_password"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+=======
+  create_table "experiences", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "trail_id"
+    t.boolean  "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+>>>>>>> add pg_search gem to gemfile
   end
 
   create_table "crumbs", force: :cascade do |t|
