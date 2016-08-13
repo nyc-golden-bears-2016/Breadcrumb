@@ -25,7 +25,6 @@ before_action :redirect, only: [:edit, :update, :destroy]
   def edit
     # if !@trail.published
       @tags = Tag.all.map {|t| t.subject }
-      @image = Image.new
     # else
     #   redirect_to current_user
     #   #make error handling - you cannot edit a published trail
@@ -54,6 +53,8 @@ before_action :redirect, only: [:edit, :update, :destroy]
   end
 
   def destroy
+    @trail.destroy
+    redirect_to current_user
   end
 
 private

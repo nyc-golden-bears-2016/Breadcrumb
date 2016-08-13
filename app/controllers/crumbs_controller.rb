@@ -9,16 +9,14 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
   def create
     @crumb = @trail.crumbs.new(crumb_params)
     if @crumb.save
-      redirect_to "/trails/#{@trail.id}/crumbs/#{@crumb.id}/edit"
+      redirect_to "/trails/#{@trail.id}/edit"
     else
       redirect_to current_user
       #make error handling
     end
   end
 
-  def show
-    # @crumb = Crumb.find(params[:id])
-  end
+
 
   def edit
     # @crumb = Crumb.find(params[:id])
@@ -30,6 +28,7 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
 
   def destroy
     @crumb.destroy
+    redirect_to "/trails/#{@crumb.trail.id}/edit"
   end
 
   private

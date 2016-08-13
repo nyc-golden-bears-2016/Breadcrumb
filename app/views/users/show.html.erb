@@ -8,13 +8,16 @@
     <%if t.priv%>
       [PRIVATE]<br>
         <%if current_user == t.creator%>
-          Password: <%=t.password%>
+          Password: <%=t.password%><br>
         <%end%>
     <%else%>
       [PUBLIC]<br>
     <%end%>
       <%if current_user == t.creator && !t.published%>
-        <%=link_to 'Edit/Publish', edit_trail_path%>
+        <%=link_to 'Edit/Publish', edit_trail_path%><br>
+        <%=form_for(t, :html => { :method => :delete }) do |f|%>
+          <%= f.submit "Delete Trail" %>
+          <% end %><br>
       <%end%>
 <%end%>
 <h5>Saved Trails<h5>

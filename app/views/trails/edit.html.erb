@@ -14,7 +14,9 @@
   <%@trail.crumbs.each do |c|%>
     <%= c.name %><br>
     <%= c.description %><br>
-    <%= link_to trail_crumbs_path, method: delete %>
+    <%=form_for([@trail, c], :html => { :method => :delete }) do |f|%>
+      <%= f.submit "Delete Crumb" %>
+      <% end %>
   <% end %>
 <% end %>
 
