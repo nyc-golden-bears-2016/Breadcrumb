@@ -2,6 +2,11 @@
 
 <%=form_for([@trail, @crumb]) do |c| %>
     Name: <%= c.text_field(:name) %><br>
+<%if @trail.sequential%>
+    Number in Sequence: <%= c.text_field :order_number, placeholder: @trail.crumbs.length + 1 %><br>
+<%else%>
+    <%= c.hidden_field :order_number, value: @trail.crumbs.length + 1 %>
+<%end%>
     Description: <%= c.text_area(:description) %><br>
     Locked? <%= c.check_box(:requires_answer) %><br>
     If locked, inlcude question in description and add answer below.

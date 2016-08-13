@@ -1,6 +1,6 @@
 class CrumbsController < ApplicationController
 before_action :current_trail
-before_action :current_crumb, only: [:edit, :update, :destroy]
+before_action :current_crumb, only: [:edit, :update, :destroy, :show]
 
   def new
     @crumb = @trail.crumbs.new
@@ -16,8 +16,12 @@ before_action :current_crumb, only: [:edit, :update, :destroy]
     end
   end
 
+  def show
+    # @crumb = Crumb.find(params[:id])
+  end
+
   def edit
-    @crumb = Crumb.find(params[:id])
+    # @crumb = Crumb.find(params[:id])
   end
 
   def update

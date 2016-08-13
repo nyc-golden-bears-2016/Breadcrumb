@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 before_action :redirect
 
+
   def show
     #unpublished trails - link to edit
     #published trails - private have password next to it
@@ -15,7 +16,7 @@ before_action :redirect
 
   def redirect
    if !current_user
-     redirect_to new_user_session_path, notice: 'You are not logged in.'
+     redirect_to new_user_session_path
    end
   end
 

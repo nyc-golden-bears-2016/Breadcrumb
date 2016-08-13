@@ -8,7 +8,7 @@ class Trail < ApplicationRecord
   belongs_to :active, required: false
   has_many :trail_users, through: :active, source: :user
   has_and_belongs_to_many :tags
-  has_many :images, as: :imageable, dependent: :destroy
+
 
 def all_true
   if self.latitude && self.longitude
