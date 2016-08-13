@@ -4,4 +4,5 @@ class WelcomeController < ApplicationController
     #static page with creators/logo/brief description/register/login
   end
 
+
 end

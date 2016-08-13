@@ -1,0 +1,13 @@
+<% form_for(new_trail_crumb_path) do |c| %>
+    Name: <%= c.text_field(:name) %><br>
+    Description: <%= c.text_area(:description) %><br>
+    Locked? <%= c.check_box(:requires_answer) %><br>
+    If locked, add question in description and add answer below.
+    <%= c.text_area(:answer) %><br>
+
+    <% if @trail.sequential %>
+      <%= c.text_area(:number) %><br>
+    <% end %>
+
+  <%= c.submit "Add Crumb" %>
+<% end %>

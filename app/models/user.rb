@@ -13,8 +13,7 @@ class User < ApplicationRecord
 
   validates :username, :email, { :uniqueness => {
     :case_sensitive => false}, presence: true }
-  # validates :email, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, message: "Email doesn't belong to a valid domain." }
-  validates :password, length: { minimum: 8 }
+
   validate :validate_username
 
 def self.find_first_by_auth_conditions(warden_conditions)

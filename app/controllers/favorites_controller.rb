@@ -1,9 +1,9 @@
 class FavoritesController < ApplicationController
-before_action :current_trail, :current_user
+before_action :current_trail, :redirect
 
   def add
     #just get links to create/destroy favorites associations
-    if !Favorite.find_by(user: @user, trail: @trail)
+    if !Favorite.find_by(user: current_user, trail: @trail)
       Favorite.create(user: @user, trail: @trail)
     else
       render '_error'
@@ -11,8 +11,8 @@ before_action :current_trail, :current_user
   end
 
   def remove
-    if Favorite.find_by(user: @user, trail: @trail)
-      Favorite.find_by(user: @user, trail: @trail).destroy
+    if Favorite.find_by(user: current_user, trail: @trail)
+      Favorite.find_by(user: current_user, trail: @trail).destroy
     else
       render '_error'
     end
@@ -24,8 +24,10 @@ private
       @trail = Trail.find(params[:id])
     end
 
-    def current_user
-      @user ||= User.find(session[:user_id])
+    def redirect
+     if !current_user
+       redirect_to new_user_session_path, notice: 'You are not logged in.'
+     end
     end
 
   end
