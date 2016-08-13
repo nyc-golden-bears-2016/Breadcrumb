@@ -2,8 +2,9 @@ class TrailsController < ApplicationController
 before_action :current_trail, only: [:edit, :update, :destroy, :show]
 before_action :log_in, only: [:new ]
 before_action :redirect, only: [:edit, :update, :destroy]
+
   def index
-    @trails = Trail.where(published: true, private: false).page params[:page]
+    @trails = Trail.where(published: true, priv: false).page params[:page]
     # available_trails.nearby.order(created_at: :desc)
   end
 

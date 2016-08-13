@@ -1,8 +1,8 @@
 class ActivesController < ApplicationController
-before_action :current_trail, except: [:crumb]
 before_action :log_in
+before_action :current_trail, except: [:join, :joined, :crumb]
 before_action :current_active, :correct_password, only: [:show, :crumb, :update]
-before_action :which_trail, only: [:join]
+before_action :which_trail, only: [:joined, :join]
 
   def join
     if !Active.find_by(user: current_user, trail: @newtrail)
@@ -19,8 +19,8 @@ before_action :which_trail, only: [:join]
 
   def joined
     entered = priv_trail_params[:entered_password]
-    if entered == @trail.password
-      @active = Active.create(user: current_user, trail: @trail, entered_password: entered)
+    if entered == @newtrail.password
+      @active = Active.create(user: current_user, trail: @newtrail, entered_password: entered)
       redirect_to "/actives/#{@active.id}"
     else
       redirect_to current_user
@@ -50,6 +50,9 @@ before_action :which_trail, only: [:join]
 
   def update
   #update number of available bullets
+  if !(@active.last_crumb_reached == @active.trail.crumbs.length)
+    @active.last_crumb_reached +=1
+  end
   end
 
 private
@@ -77,10 +80,14 @@ private
   end
 
   def correct_password
-    if @trail.priv && (@trail.password == @active.entered_password)
-      true
+    if @trail.priv
+      if @trail.password == @active.entered_password
+        true
+      else
+        redirect_to new_user_session_path
+      end
     else
-     redirect_to new_user_session_path
+      true
     end
   end
 
