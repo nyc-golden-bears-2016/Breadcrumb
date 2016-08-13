@@ -1,5 +1,6 @@
 class TrailsController < ApplicationController
 before_action :redirect
+before_action :current_trail, only: [:edit]
   def index
     @trails = Trail.where(published: true, private: false).page params[:page]
     # available_trails.nearby
@@ -13,10 +14,12 @@ before_action :redirect
   end
 
   def create
+  @trail = current_user.created_trails.new(trail_params)
     if @trail.save
-      redirect_to '/edit'
+      redirect_to "/trails/#{@trail.id}/edit"
     else
       render '_errors'
+    end
   end
 
   def edit
@@ -48,11 +51,11 @@ before_action :redirect
 private
 
   def trail_params
-    params.require(:trail).permit(:latitude, :longitude)
+    params.require(:trail).permit(:name, :description)
   end
 
   def current_trail
-    Trail.find(params[:id])
+    @trail = Trail.find(params[:id])
   end
 
   def published?
