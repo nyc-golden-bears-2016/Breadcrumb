@@ -1,0 +1,15 @@
+<%= form_for(@trail) do |t| %>
+		Title: <%= t.text_field(:name) %><br>
+    Description: <%= t.text_area(:description) %><br>
+    Private? <%= t.check_box(:private) %><br>
+    Ordered Trail? <%= t.check_box(:sequential) %><br><br>
+
+
+<%= t.submit "Save Trail" %>
+<% end %>
+
+<!-- <#% form_for(@image) do |i| %>
+  <#%= i.hidden_field(:imageable_type, :value => Trail) %>
+<#%= f.password_field :password %> -->
+  <!-- <#%= i.submit "Add Photo" %>
+<#% end %> -->

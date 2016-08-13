@@ -1,0 +1,13 @@
+<%if @trail.crumbs%>
+  <%@trail.crumbs.each do |c|%>
+    <%= c.name %><br>
+    <%= c.description %><br>
+    <%= link_to trail_crumbs_path, method: delete %>
+  <% end %>
+<% end %>
+
+Select up to three (3) Tags:
+
+
+
+<td><%= link_to "New", new_trail_crumb_path(@trail) %></td>
