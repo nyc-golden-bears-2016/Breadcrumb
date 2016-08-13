@@ -1,0 +1,4 @@
+<%= form_for @active, url: "/actives/#{@newtrail.id}/joined", method:'post' do |t| %>
+		Password Required: <%= t.text_field(:entered_password) %><br>
+    <%= t.submit "Enter" %>
+  <% end %>

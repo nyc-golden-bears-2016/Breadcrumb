@@ -1,12 +1,13 @@
 class FavoritesController < ApplicationController
-before_action :current_trail, :redirect
+before_action :current_trail, :redirect, only: [:add, :remove]
 
   def add
-    #just get links to create/destroy favorites associations
     if !Favorite.find_by(user: current_user, trail: @trail)
-      Favorite.create(user: @user, trail: @trail)
+      Favorite.create(user: current_user, trail: @trail)
+      redirect_to_current_user
     else
-      render '_error'
+      redirect_to current_user
+      #make error handling
     end
   end
 
@@ -14,7 +15,8 @@ before_action :current_trail, :redirect
     if Favorite.find_by(user: current_user, trail: @trail)
       Favorite.find_by(user: current_user, trail: @trail).destroy
     else
-      render '_error'
+      redirect_to current_user
+      #make error handling
     end
   end
 

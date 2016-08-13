@@ -4,20 +4,26 @@
 <div>
 <h5>Created Trails<h5>
 <%current_user.created_trails.each do |t|%>
-  <%=t.name%>
-    <%if t.private%>
-      [PRIVATE] Password: <%=t.password%>
+  <%=link_to t.name, t%>
+    <%if t.priv%>
+      [PRIVATE]<br>
+        <%if current_user == t.creator%>
+          Password: <%=t.password%>
+        <%end%>
     <%else%>
-      [PUBLIC]
+      [PUBLIC]<br>
     <%end%>
+      <%if current_user == t.creator && !t.published%>
+        <%=link_to 'Edit/Publish', edit_trail_path%>
+      <%end%>
 <%end%>
 <h5>Saved Trails<h5>
 <%current_user.favorite_trails.each do |t|%>
-  <%=t.name%>
-    <%if t.private%>
-      [PRIVATE]
+  <%=link_to t.name, t%>
+    <%if t.priv%>
+      [PRIVATE]<br>
     <%else%>
-      [PUBLIC]
+      [PUBLIC]<br>
     <%end%>
 <%end%>
 
@@ -25,14 +31,14 @@
 
 <div>
 <h5>Past Trails<h5>
-<%current_user.experiences.each do |t|%>
-<%=t.trail.name%>
-  <%if t.trail.private%>
+<%current_user.actives.each do |t|%>
+  <%=link_to t.trail.name, t.trail%>
+  <%if t.trail.priv%>
     [PRIVATE]
   <%else%>
     [PUBLIC]
   <%end%>
-  <%if t.complete%>
+  <%if t.completed%>
     Completed!
     <%if t.winner%>
       YOU WON!!!
@@ -45,10 +51,11 @@
 <div>
 <h4>Explore </h4>
   <%@trails.each do |t|%>
-    <%if t.private%>
-        <%=t.name%>[PRIVATE]
+  <%=link_to t.name, t%>
+    <%if t.priv%>
+      [PRIVATE]
     <%else%>
-      <%=link_to t.name, t%>[PUBLIC]
+      [PUBLIC]
     <%end%>
   by <%=link_to t.creator.username, t.creator%><br>
   <%=t.description%><br><br>
