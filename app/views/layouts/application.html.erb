@@ -8,8 +8,18 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
+<<<<<<< da46aeb62eb0df29fa1a0e2467d6ee795b1085bf
   <body class="<%= controller_name %> <%= action_name %>">
+=======
+  <body>
+<%= form_tag root_path, method: :get do %>
+  <%= text_field_tag :query, params[:query] %>
+  <%= submit_tag "GO", name: nil %>
+<% end %>	
+
+>>>>>>> get basic search to work on console
 			  <p class="navbar">
+			  	<%= link_to 'Home', root_path, :class => 'navbar-link' %> |
 				<% if user_signed_in? %>
 				  <strong><%=link_to current_user.username, current_user %></strong> |
 				  <%= link_to 'Account Preferences', edit_user_registration_path, :class => 'navbar-link' %> |
@@ -27,6 +37,7 @@
 				<% if alert %>
 				  <p class="alert alert-danger"><%= alert %></p>
 				<% end %>
+
     <%= yield %>
   </body>
 </html>

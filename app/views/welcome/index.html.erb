@@ -6,4 +6,10 @@
     <%= link_to 'Trails near you!', trails_path%>
   </div>
 
-<div class="hidden"></div>
+<% if @results != [] && !@results.nil? %>
+  <h1>results:</h1>
+	<% @results.each do |trail| %>
+	<%= trail.name %>
+	<% end %>
+	<% end %>
+
