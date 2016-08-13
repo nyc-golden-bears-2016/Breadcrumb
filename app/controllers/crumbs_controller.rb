@@ -22,16 +22,11 @@ before_action :current_trail, :current_user
     @trail = Trail.find(params[:trail_id])
   end
 
-  def logged_in?
-    !!session[:user_id]
-  end
-
-  def current_user
-    if logged_in?
-      @user ||= User.find(session[:user_id])
-    else
-      redirect_to new_user_session
+  def trail_creator
+    if !(current_user == @trail.creator)
+      redirect_to new_user_session_url
     end
   end
+
 
 end

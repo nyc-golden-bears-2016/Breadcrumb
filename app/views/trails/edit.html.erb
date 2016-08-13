@@ -6,23 +6,8 @@
   <% end %>
 <% end %>
 
-Select Tags:
+Select up to three (3) Tags:
 
 
 
 <td><%= link_to "New", new_trail_crumb_path(@trail) %></td>
-
-<%= form_for(@image, multipart: true) do |f| %>
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :avatar %>
-    <%= f.file_field :avatar %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Add an image' %>
-    <%= link_to 'Nevermind', images_path, class: 'button' %>
-  </div>
-<% end %>
