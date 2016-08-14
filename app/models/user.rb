@@ -40,7 +40,6 @@ class User < ApplicationRecord
 
   def nearby_trails
     trails = Trail.near([self.latitude, self.longitude], 10)
-    byebug
   end
 
   def set_coords(latitude, longitude)

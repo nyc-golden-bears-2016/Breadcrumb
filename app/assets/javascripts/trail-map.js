@@ -11,8 +11,8 @@ function initialize() {
       };
 
 
-    var initalLat = 40.70690094223122;
-    var initialLong = -74.00895144247752;
+    var initalLat = $("#trail_latitude").val();
+    var initialLong = $("#trail_longitude").val();
 
     // Set Initial Map Properties
     var mapProps = {
@@ -65,14 +65,8 @@ function initialize() {
     circle.bindTo('center', marker, 'position');
 
 
-
-    // Set Map styles and marker
-    map.mapTypes.set('styled_map', styledMapType);
-    map.setMapTypeId('styled_map');
-    marker.setMap(map);
-
-
-    google.maps.event.addListener(marker, 'dragend', function(evt){
+    // // Print current coordinates of the Marker to the 'Current' Div
+ google.maps.event.addListener(marker, 'dragend', function(evt){
       var pos = {
           lat: evt.latLng.lat().toFixed(8),
           lng: evt.latLng.lng().toFixed(8)
@@ -81,19 +75,10 @@ function initialize() {
       $("#trail_latitude").val(marker.position.lat().toFixed(8));
       $("#trail_longitude").val(marker.position.lng().toFixed(8));
     });
-
-        // Set Initial Coordinates
-     navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-          };
-        map.setCenter(pos);
-        marker.setPosition(pos);
-
-      }, options);
-
-
+    // Set Map styles and marker
+    map.mapTypes.set('styled_map', styledMapType);
+    map.setMapTypeId('styled_map');
+    marker.setMap(map);
 
   ////// SEARCH BOX //////
 
