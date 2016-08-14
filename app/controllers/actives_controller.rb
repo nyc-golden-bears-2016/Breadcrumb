@@ -1,6 +1,5 @@
 class ActivesController < ApplicationController
 before_action :log_in
-before_action :redirect, except: [:joined, :join]
 before_action :current_trail, except: [:join, :joined, :crumb]
 before_action :current_active, :correct_password, only: [:show, :crumb, :update, :destroy]
 before_action :correct_password, only: [:show, :crumb, :update]
@@ -43,18 +42,26 @@ before_action :which_trail, only: [:joined, :join]
 
   def crumb
     #this route is nested, finding the trail is different
-    @trail = Trail.find(params[:active_id])
+    @trail = Active.find(params[:active_id]).trail
     @crumb = Crumb.find(params[:id])
-    if @trail.sequential
-      Active.update_attribute(last_crumb_reached: @crumb.order_number)
+  end
+
+  def answered
+    entered = locked_crumb_params[:entered_answer]
+    if entered == @crumb.answer
+      @active = Active.update_attribute(entered_answer: entered, last_crumb_reached: @crumb.order_number + 1)
+      redirect_to "/actives/#{@active.id}"
+    else
+      redirect_to "/actives/#{@active.id}"
+      #make error handling
     end
   end
 
   def update
   #update number of available bullets
-  if !(@active.last_crumb_reached == @active.trail.crumbs.length)
-    @active.last_crumb_reached +=1
-  end
+    unless @active.last_crumb_reached == @active.trail.crumbs.length
+      @active.last_crumb_reached +=1
+    end
   end
 
   def destroy
@@ -98,10 +105,14 @@ private
     end
   end
 
-  def redirect
-   unless current_user == @active.creator
-     redirect_to new_user_session_path
-   end
+  def active_redirect
+    if Active.find(params[:active_id]).last_crumb_reached >= Crumb.find(params[:id])
+        true
+    elsif trail_creator
+      true
+    else
+      redirect_to "/actives/#{params[:active_id]}/join"
+     end
   end
 
 end

@@ -1,13 +1,14 @@
 class CrumbsController < ApplicationController
 before_action :current_trail
 before_action :current_crumb, only: [:edit, :update, :destroy, :show]
+before_action :trail_creator, only: [:show]
 
   def new
     @crumb = @trail.crumbs.new
   end
 
   def create
-    @crumb = @trail.crumbs.new(crumb_params)
+    @crumb = @trail.crumbs.new(crumb_params.merge(order_number: @trail.crumbs.length))
     if @crumb.save
       redirect_to "/trails/#{@trail.id}/edit"
     else
@@ -16,8 +17,10 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
     end
   end
 
-  def edit
+  def show
+  end
 
+  def edit
   end
 
   def update
@@ -40,7 +43,9 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
   end
 
   def trail_creator
-    if !(current_user == @trail.creator)
+    if current_user == @trail.creator
+      true
+    else
       redirect_to_root
     end
   end

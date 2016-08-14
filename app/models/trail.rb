@@ -10,18 +10,25 @@ class Trail < ApplicationRecord
   has_and_belongs_to_many :tags
 
 
-def all_true
-  if self.latitude && self.longitude
-    incomplete = self.crumbs.keep_if {|c| c.latitude && c.longitude }
-    if incomplete.empty?
-      true
+  def all_true
+    if self.latitude && self.longitude
+      incomplete = self.crumbs.keep_if {|c| c.latitude && c.longitude }
+      if incomplete.empty?
+        true
+      else
+        names = incomplete.map { |c| c.name }
+        "All crumbs require latitude and longitude. Please return to #{names}"
+      end
     else
-      names = incomplete.map { |c| c.name }
-      "All crumbs require latitude and longitude. Please return to #{names}"
+      "A trail requires a base latitude and longitude."
     end
-  else
-    "A trail requires a base latitude and longitude."
   end
+
+def order_crumbs
+  ordered = self.crumbs.sort {|a,b| a.created_at <=> b.created_at}
+  ordered.each_with_index do |t, i|
+    t.update_attribute(:order_number, i + 1)
+    end
 end
 
 
