@@ -7,15 +7,8 @@ class Active < ApplicationRecord
       self.trail.crumbs
     else
       num = self.last_crumb_reached
-      available = []
-      ordered = self.trail.crumbs.sort {|a,b| a.order_number <=> b.order_number}
-      ordered.each_with_index do |t, i|
-      	if i <= num
-      		available << t
-      	end
-      end
-    available
+      self.trail.crumbs[0..(num-1)]
+    end
   end
-end
 
 end

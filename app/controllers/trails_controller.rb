@@ -51,6 +51,7 @@ before_action :redirect, only: [:edit, :update, :destroy]
 
   def destroy
     @trail.destroy
+    @trail.destroy_related
     redirect_to current_user
   end
 
