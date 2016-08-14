@@ -10,22 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160813231750) do
+ActiveRecord::Schema.define(version: 20160812041345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-
-  create_table "active_crumbs", force: :cascade do |t|
-    t.integer  "active_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "actives", force: :cascade do |t|
     t.integer  "user_id",                            null: false
     t.integer  "trail_id",                           null: false
     t.boolean  "completed",          default: false
-    t.integer  "last_crumb_reached", default: 0
+    t.integer  "last_crumb_reached", default: 1
     t.boolean  "winner",             default: false
     t.string   "entered_password"
     t.datetime "created_at",                         null: false
