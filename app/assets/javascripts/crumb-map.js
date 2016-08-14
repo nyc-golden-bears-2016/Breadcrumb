@@ -11,9 +11,9 @@ function initialize() {
       };
 
 
-    var initalLat = 40.70690094223122;
-    var initialLong = -74.00895144247752;
-
+    var initalLat = $("#crumb_latitude").val();
+    var initialLong = $("#crumb_longitude").val();
+    debugger;
     // Set Initial Map Properties
     var mapProps = {
         center:new google.maps.LatLng(initalLat, initialLong),
@@ -55,16 +55,6 @@ function initialize() {
     marker.setMap(map);
 
         // Set Initial Coordinates
-     navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-          };
-        map.setCenter(pos);
-        marker.setPosition(pos);
-
-      }, options);
-
 
   ////// SEARCH BOX //////
 
@@ -125,8 +115,8 @@ function initialize() {
     var centerControl = new CenterControl(map);
 }
 // Close Initialize Function
-$(".crumb.new").ready(function() {
-      // Initialize Map
-  google.maps.event.addDomListener(window, 'load', initialize);
-});
 
+if ( $('.crumbs').length ){ 
+    // Initialize Map
+  google.maps.event.addDomListener(window, 'load', initialize);
+};

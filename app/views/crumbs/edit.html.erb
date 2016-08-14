@@ -11,7 +11,7 @@
     Locked? <%= c.check_box(:requires_answer) %><br>
     If locked, inlcude question in description and add answer below.
     <%= c.text_area(:answer) %><br>
-    <%= c.hidden_field(:latitude) %>
-    <%= c.hidden_field(:longitude) %>
+    <%= c.hidden_field(:latitude, :value => @crumb.latitude) %>
+    <%= c.hidden_field(:longitude, :value => @crumb.longitude) %>
   <%= c.submit "Edit Crumb" %>
 <% end %>
