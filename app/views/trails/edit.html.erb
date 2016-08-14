@@ -1,16 +1,6 @@
 
 <h2><%=@trail.name%></h2>
-<% if @trail.priv%>
-[PRIVATE]<br>
-<%else%>
-[PUBLIC]<br>
-<%end%>
-<p><%=@trail.description%></p>
-<% if @trail.sequential%>
-<div>To be followed in sequence.</div>
-<%end%>
 
-<%if @trail.crumbs%>
   <%@trail.crumbs.each do |c|%>
     <%= c.name %><br>
     <%= c.description %><br>
@@ -18,7 +8,18 @@
       <%= f.submit "Delete Crumb" %>
       <% end %>
   <% end %>
-<% end %>
+
+<br><td><%= link_to "New Crumb", new_trail_crumb_path(@trail) %></td>
+
+  <% if @trail.priv%>
+  [PRIVATE]<br>
+  <%else%>
+  [PUBLIC]<br>
+  <%end%>
+  <p><%=@trail.description%></p>
+  <% if @trail.sequential%>
+  <div>To be followed in sequence.</div>
+  <%end%>
 
 Select up to three (3) Tags:
  <%= select_tag(:tag1, options_for_select( @tags )) %>
@@ -27,4 +28,4 @@ Select up to three (3) Tags:
 
  <br><div>Image upload here</div><br>
 
-<br><td><%= link_to "New Crumb", new_trail_crumb_path(@trail) %></td>
+<br><td><%= link_to "Publish", "/trails/#{@trail.id}/publish" %></td>

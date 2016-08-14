@@ -1,5 +1,5 @@
 class TrailsController < ApplicationController
-before_action :current_trail, only: [:edit, :update, :destroy, :show]
+before_action :current_trail, only: [:edit, :update, :destroy, :show, :publish]
 before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
 
@@ -14,6 +14,7 @@ before_action :redirect, only: [:edit, :update, :destroy]
 
   def create
   @trail = current_user.created_trails.new(trail_params)
+
     if @trail.save
       redirect_to "/trails/#{@trail.id}/edit"
     else
@@ -43,17 +44,14 @@ before_action :redirect, only: [:edit, :update, :destroy]
   end
 
   def publish
-    if @trail.all_true == true
-      @trail.published = true
-      redirect_to current_user
-    else
-      redirect_to root
-      #make error handling
-    end
+    @trail.update_attribute(:published, true)
+    @trail.order_crumbs
+    redirect_to current_user
   end
 
   def destroy
     @trail.destroy
+    @trail.destroy_related
     redirect_to current_user
   end
 

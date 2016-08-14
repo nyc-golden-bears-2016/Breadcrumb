@@ -1,0 +1,14 @@
+<h2><%=@trail.name%></h2>
+<%=@crumb.name%>
+<% if @trail.sequential%>
+  (#<%=@crumb.order_number%>)
+<%end%>
+
+<div>Image and text</div>
+
+<% if @crumb.requires_answer%>
+<%= form_for @active, url: "/actives/#{@active.id}/crumb/#{@crumb.id}", method:'post' do |t| %>
+    Answer: <%= t.text_field(:entered_password) %><br>
+    <%= t.submit "Enter" %>
+  <% end %>
+<%end%>
