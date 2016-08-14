@@ -34,12 +34,22 @@ function initialize(mapdetails) {
 
 
     for (i = 0; i < numberOfCrumbs; i++) { 
-      var xPath = asset_path("x.png");
 
-      var markerImage = new google.maps.MarkerImage( String(xPath),
+      if (i < mapdetails.currentCrumb) {
+      var greenX = asset_path("xgreen.png");
+      var markerImage = new google.maps.MarkerImage( String(greenX),
                 new google.maps.Size(40, 40),
                 new google.maps.Point(0, 0),
                 new google.maps.Point(20, 20));
+      }
+      else {
+      var redX = asset_path("xred.png");
+      var markerImage = new google.maps.MarkerImage( String(redX),
+          new google.maps.Size(40, 40),
+          new google.maps.Point(0, 0),
+          new google.maps.Point(20, 20));
+      };
+
 
       var crumbLatLng = {lat: mapdetails.crumbs[i].latitude, lng: mapdetails.crumbs[i].longitude};
 
@@ -78,12 +88,11 @@ function initialize(mapdetails) {
 
     userMarker.setMap(map);
     // marker.setPosition();
-    if (mapdetails.crumbs.length > 1 ) { $("#current").html("<p> </p>") }
-    else { $("#current").html("<p>Calculating distance...</p>")  } 
+   $("#current").html("<p>Calculating distance...</p>");
 
     // find crumb position
-  
-      var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[0].latitude, mapdetails.crumbs[0].longitude);
+
+      var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[mapdetails.currentCrumb].latitude, mapdetails.crumbs[mapdetails.currentCrumb].longitude);
 
     // find current user position
 
@@ -94,17 +103,15 @@ function initialize(mapdetails) {
           };
         map.setCenter(pos);
         userMarker.setPosition(pos);
-      if (mapdetails.crumbs.length == 1 ) {
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
-        debugger;
         $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb</p>" ) 
-       }
       }, options);
 
     function calcDistance(userPosition, crumbPosition){
       var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, crumbPosition));
-      if (distance > 1000) {return String(distance/1000) + " km"}
-      else { return String(distance) + " meters"};
+      var feet = distance * 3.28084;
+      if (distance > 2000) {return String(Math.round( (distance/5280) * 100) / 100) + " miles"}
+      else { return String(distance) + " feet"};
     };
 
     // Draw circle around the Marker

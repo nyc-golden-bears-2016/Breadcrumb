@@ -58,11 +58,12 @@ before_action :which_trail, only: [:joined, :join]
   end
 
   def mapdetails
-    render :json => {crumbs: current_trail.crumbs, 
+    sorted_crumbs = current_trail.crumbs.sort{|x,y| x.created_at <=> x.created_at}
+    render :json => {crumbs: sorted_crumbs, 
                      zoom: calculate_zoom, 
                      initialLat: current_trail.latitude,
                      initialLng: current_trail.longitude,
-                     currentCrumb: sdf}
+                     currentCrumb: current_active.last_crumb_reached}
                     
   end
 
@@ -135,17 +136,17 @@ private
     else
       biggest_distance = lat_distance
     end
-    if biggest_distance < 0.0125
+    if biggest_distance < 0.02
       return 18
-    elsif biggest_distance < 0.05
+    elsif biggest_distance < 0.04
       return 16
-    elsif biggest_distance < 0.2  
+    elsif biggest_distance < 0.06  
       return 14
-    elsif biggest_distance < 0.8  
+    elsif biggest_distance < 0.08  
       return 12
-    elsif biggest_distance < 3.2 
+    elsif biggest_distance < 2 
       return 10
-    elsif biggest_distance < 12.8 
+    elsif biggest_distance < 5
       return 8
     else  
       return 4
