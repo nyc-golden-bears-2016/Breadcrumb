@@ -1,31 +1,28 @@
-
 <h2><%=@trail.name%></h2>
 
-<<<<<<< 6384d62a3720858a85dba56027f062fd2d0d2762
-  <%@trail.crumbs.each do |c|%>
-=======
 <%if @trail.crumbs %>
   <%@trail.crumbs.each do |c| %>
->>>>>>> Resolve merge conflict
     <%= c.name %><br>
     <%= c.description %><br>
-
     <%= link_to "Edit Crumb", "/trails/#{@trail.id}/crumbs/#{c.id}/edit" %>
-    <%=form_for([@trail, c], :html => { :method => :delete }) do |f|%>
-      <%= f.submit "Delete Crumb" %>
-    <% end %>
+      <%=form_for([@trail, c], :html => { :method => :delete }) do |f|%>
+        <%= f.submit "Delete Crumb" %>
+      <% end %>
   <% end %>
-
-<br><td><%= link_to "New Crumb", new_trail_crumb_path(@trail) %></td>
+<% end %>
+  <br>
+  <td><%= link_to "New Crumb", new_trail_crumb_path(@trail) %></td>
 
   <% if @trail.priv%>
-  [PRIVATE]<br>
+    [PRIVATE]<br>
   <%else%>
-  [PUBLIC]<br>
+    [PUBLIC]<br>
   <%end%>
+
   <p><%=@trail.description%></p>
+  
   <% if @trail.sequential%>
-  <div>To be followed in sequence.</div>
+    <div>To be followed in sequence.</div>
   <%end%>
 
 Select up to three (3) Tags:

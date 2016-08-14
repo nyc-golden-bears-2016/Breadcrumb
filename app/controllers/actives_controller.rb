@@ -151,7 +151,6 @@ private
     else  
       return 4
     end
->>>>>>> Resolve merge conflicts
   end
 
 end
