@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 20160812041345) do
     t.string   "answer"
     t.integer  "trail_id",                        null: false
     t.integer  "order_number"
-    t.string   "crumg_image"
+    t.string   "crumb_image"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end

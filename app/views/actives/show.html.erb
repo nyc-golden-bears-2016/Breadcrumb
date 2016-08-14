@@ -7,8 +7,7 @@
 
 <p><%=@trail.description%></p><br>
 
-
-<p><% @crumbs.each do |c| %>
-<%=link_to c.name, [@active, c]%>
+<p><%@crumbs.each do |c|%>
+<%=link_to c.name, [@trail, c]%>
 <%end%>
 </p><br>

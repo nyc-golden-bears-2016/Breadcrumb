@@ -9,7 +9,7 @@ class CreateCrumbs < ActiveRecord::Migration[5.0]
       t.string :answer, default: nil
       t.integer :trail_id, null: false
       t.integer :order_number, default: nil
-      t.string :crumg_image
+      t.string :crumb_image
 
       t.timestamps
     end
