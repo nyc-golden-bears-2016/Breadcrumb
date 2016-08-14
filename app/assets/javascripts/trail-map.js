@@ -112,6 +112,9 @@ function initialize() {
         // Update Marker based on Search Result
         marker.setPosition( place.geometry.location );
 
+      $("#trail_latitude").val(marker.position.lat().toFixed(8));
+      $("#trail_longitude").val(marker.position.lng().toFixed(8));
+
         if (place.geometry.viewport) {
           // Only geocodes have viewport.
           bounds.union(place.geometry.viewport);

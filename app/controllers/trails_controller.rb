@@ -15,7 +15,6 @@ before_action :redirect, only: [:edit, :update, :destroy]
 
   def create
   @trail = current_user.created_trails.new(trail_params)
-
     if @trail.save
       redirect_to "/trails/#{@trail.id}/edit"
     else

@@ -13,7 +13,6 @@ function initialize() {
 
     var initalLat = $("#crumb_latitude").val();
     var initialLong = $("#crumb_longitude").val();
-    debugger;
     // Set Initial Map Properties
     var mapProps = {
         center:new google.maps.LatLng(initalLat, initialLong),
@@ -41,7 +40,7 @@ function initialize() {
                       icon: markerImage
                       });
 
-    
+
 
     // // Print current coordinates of the Marker to the Form
     google.maps.event.addListener(marker, 'dragend', function(evt){
@@ -116,7 +115,7 @@ function initialize() {
 }
 // Close Initialize Function
 
-if ( $('.crumbs').length ){ 
+if ( $('.crumbs').length ){
     // Initialize Map
   google.maps.event.addDomListener(window, 'load', initialize);
 };
