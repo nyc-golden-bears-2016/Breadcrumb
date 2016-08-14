@@ -21,11 +21,6 @@ before_action :current_trail, :redirect, only: [:add, :remove]
     end
   end
 
-  def destroy
-    @trail.destroy
-    redirect_to current_user
-  end
-
 private
 
     def current_trail
@@ -34,7 +29,7 @@ private
 
     def redirect
      if !current_user
-       redirect_to new_user_session_path, notice: 'You are not logged in.'
+       redirect_to new_user_session_path
      end
     end
 

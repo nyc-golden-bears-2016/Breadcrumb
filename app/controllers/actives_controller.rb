@@ -1,7 +1,9 @@
 class ActivesController < ApplicationController
 before_action :log_in
+before_action :redirect, except: [:joined, :join]
 before_action :current_trail, except: [:join, :joined, :crumb]
-before_action :current_active, :correct_password, only: [:show, :crumb, :update]
+before_action :current_active, :correct_password, only: [:show, :crumb, :update, :destroy]
+before_action :correct_password, only: [:show, :crumb, :update]
 before_action :which_trail, only: [:joined, :join]
 
   def join
@@ -94,6 +96,12 @@ private
     else
       true
     end
+  end
+
+  def redirect
+   unless current_user == @active.creator
+     redirect_to new_user_session_path
+   end
   end
 
 end
