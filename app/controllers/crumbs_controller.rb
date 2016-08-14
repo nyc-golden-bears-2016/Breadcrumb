@@ -16,10 +16,8 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
     end
   end
 
-
-
   def edit
-    # @crumb = Crumb.find(params[:id])
+
   end
 
   def update
@@ -43,7 +41,7 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
 
   def trail_creator
     if !(current_user == @trail.creator)
-      redirect_to_root, flash[:notice] = 'You are not the creator of this trail.'
+      redirect_to_root
     end
   end
 

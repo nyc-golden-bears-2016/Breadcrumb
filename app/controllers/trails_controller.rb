@@ -1,6 +1,6 @@
 class TrailsController < ApplicationController
 before_action :current_trail, only: [:edit, :update, :destroy, :show]
-before_action :log_in, only: [:new ]
+before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
 
   def index
@@ -74,7 +74,7 @@ private
   end
 
   def redirect
-   if !(current_user = @trail.creator)
+   unless current_user == @trail.creator
      redirect_to new_user_session_path
    end
   end

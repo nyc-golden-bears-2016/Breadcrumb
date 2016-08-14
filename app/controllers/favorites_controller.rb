@@ -4,7 +4,7 @@ before_action :current_trail, :redirect, only: [:add, :remove]
   def add
     if !Favorite.find_by(user: current_user, trail: @trail)
       Favorite.create(user: current_user, trail: @trail)
-      redirect_to_current_user
+      redirect_to current_user
     else
       redirect_to current_user
       #make error handling
@@ -14,10 +14,16 @@ before_action :current_trail, :redirect, only: [:add, :remove]
   def remove
     if Favorite.find_by(user: current_user, trail: @trail)
       Favorite.find_by(user: current_user, trail: @trail).destroy
-    else
       redirect_to current_user
+    else
+      redirect_to root_path
       #make error handling
     end
+  end
+
+  def destroy
+    @trail.destroy
+    redirect_to current_user
   end
 
 private

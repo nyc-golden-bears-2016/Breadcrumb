@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   get '/actives/:id/leave' => 'actives#leave'
   get '/actives/:id' => 'actives#show'
   get '/actives/:id/update' => 'actives#update'
-
+  delete '/actives/:id' => 'actives#destroy'
 
   get '/users/:id' => 'users#show', :as => :user
 
