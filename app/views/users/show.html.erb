@@ -28,7 +28,9 @@
     <%else%>
       [PUBLIC]<br>
     <%end%>
+    <%if current_user.username == @page%>
     <%=link_to "Remove from Saved", "/users/#{current_user.id}/remove/#{t.trail.id}" %>
+    <%end%>
 <%end%>
 
 </div>
@@ -48,9 +50,12 @@
       YOU WON!!!
     <%end%>
   <%end%>
-  <%=form_for(t, :html => { :method => :delete }) do |f|%>
-    <%= f.submit "Remove from History" %>
-    <% end %><br>
+  <%if current_user.username == @page%>
+  <%= form_tag("/actives/#{t.id}", method: "delete") do %>
+    <%= submit_tag("Delete from History") %>
+  <% end %>
+  <%end%>
+
 <%end%>
 </div>
 
