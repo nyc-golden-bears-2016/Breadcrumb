@@ -4,7 +4,9 @@ before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
 
   def index
-    @trails = Trail.where(published: true, priv: false).page params[:page]
+    # byebug
+    @trails = current_user.nearby_trails.page params[:page]
+    byebug
     # available_trails.nearby.order(created_at: :desc)
   end
 
@@ -56,6 +58,8 @@ before_action :redirect, only: [:edit, :update, :destroy]
   end
 
 private
+
+
 
   def trail_params
     params.require(:trail).permit(:name, :description, :latitude, :longitude, :private, :sequential, :published, :password)

@@ -10,6 +10,8 @@ class Trail < ApplicationRecord
   has_many :used_trails, through: :active, source: :user
   has_and_belongs_to_many :tags
 
+  reverse_geocoded_by :latitude, :longitude
+  after_validation :geocode
 
   def all_true
     if self.latitude && self.longitude
