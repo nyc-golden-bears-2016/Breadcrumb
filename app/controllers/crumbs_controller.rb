@@ -25,6 +25,7 @@ before_action :trail_creator, only: [:show]
 
   def update
     @crumb.update_attributes(crumb_params)
+    redirect_to "/trails/#{@trail.id}/edit"
   end
 
   def destroy

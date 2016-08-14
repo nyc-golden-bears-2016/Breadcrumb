@@ -54,6 +54,9 @@ p {
   margin:0 auto;
 }
 
+#active-id {
+  display: none;
+}
 
 #display-map {
   width: 760px;

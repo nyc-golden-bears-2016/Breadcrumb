@@ -57,6 +57,16 @@ before_action :which_trail, only: [:joined, :join]
     end
   end
 
+  def mapdetails
+    sorted_crumbs = current_trail.crumbs.sort{|x,y| x.created_at <=> x.created_at}
+    render :json => {crumbs: sorted_crumbs, 
+                     zoom: calculate_zoom, 
+                     initialLat: current_trail.latitude,
+                     initialLng: current_trail.longitude,
+                     currentCrumb: current_active.last_crumb_reached}
+                    
+  end
+
   def update
   #update number of available bullets
     unless @active.last_crumb_reached == @active.trail.crumbs.length
@@ -105,6 +115,7 @@ private
     end
   end
 
+
   def active_redirect
     if Active.find(params[:active_id]).last_crumb_reached >= Crumb.find(params[:id])
         true
@@ -113,6 +124,33 @@ private
     else
       redirect_to "/actives/#{params[:active_id]}/join"
      end
+  end
+
+  def calculate_zoom
+    latitudes = current_trail.crumbs.map {|crumb| crumb.latitude}
+    longitudes = current_trail.crumbs.map {|crumb| crumb.longitude}
+    lat_distance = latitudes.sort[-1] - latitudes.sort[0]
+    lng_distance = longitudes.sort[-1] - longitudes.sort[0]
+    if (lng_distance / 3) >= (lat_distance / 2) 
+      biggest_distance = lng_distance
+    else
+      biggest_distance = lat_distance
+    end
+    if biggest_distance < 0.02
+      return 18
+    elsif biggest_distance < 0.04
+      return 16
+    elsif biggest_distance < 0.06  
+      return 14
+    elsif biggest_distance < 0.08  
+      return 12
+    elsif biggest_distance < 2 
+      return 10
+    elsif biggest_distance < 5
+      return 8
+    else  
+      return 4
+    end
   end
 
 end

@@ -24,63 +24,68 @@
           <%= f.submit "Delete Trail" %>
           <% end %><br>
       <%end%>
-<%end%>
-<h5>Saved Trails<h5>
-<%current_user.favorites.each do |t|%>
-  <%=link_to t.trail.name, t.trail%>
-    <%if t.trail.priv%>
-      [PRIVATE]<br>
-    <%else%>
-      [PUBLIC]<br>
     <%end%>
-    <%if current_user.username == @page%>
-    <%=link_to "Remove from Saved", "/users/#{current_user.id}/remove/#{t.trail.id}" %>
-    <%end%>
-<%end%>
 
-</div>
-
-<div>
-<h5>Past Trails<h5>
-<%current_user.actives.each do |t|%>
-  <%=link_to t.trail.name, t.trail%>
-  <%if t.trail.priv%>
-    [PRIVATE]
-  <%else%>
-    [PUBLIC]
-  <%end%>
-  <%if t.completed%>
-    Completed!
-    <%if t.winner%>
-      YOU WON!!!
+    <% if current_user.favorites %>
+      <h5>Saved Trails<h5>
+      <%current_user.favorites.each do |t|%>
+        <%=link_to t.trail.name, t.trail%>
+        <%if t.trail.priv%>
+          [PRIVATE]<br>
+        <%else%>
+          [PUBLIC]<br>
+        <%end%>
+        <%if current_user.username == @page%>
+          <%=link_to "Remove from Saved", "/users/#{current_user.id}/remove/#{t.trail.id}" %>
+        <%end%>
+      <%end%>
     <%end%>
+  </div>
+
+
+  <% if current_user.actives %>
+    <div>
+      <h5>Past Trails<h5>
+      <% current_user.actives.each do |t| %>
+        <% trail = Trail.find(t.trail_id) %>
+        <%=link_to trail.name, trail %>
+        <%if trail.priv%>
+          [PRIVATE]
+        <%else%>
+          [PUBLIC]
+        <%end%>
+        <%if t.completed%>
+          Completed!
+          <%if t.winner%>
+            YOU WON!!!
+          <%end%>
+        <%end%>
+        <%if current_user.username == @page %>
+          <%= form_tag("/actives/#{t.id}", method: "delete") do %>
+            <%= submit_tag("Delete from History") %>
+          <% end %>
+        <%end%>
+      <%end%>
+    </div>
   <%end%>
+
   <%if current_user.username == @page%>
-  <%= form_tag("/actives/#{t.id}", method: "delete") do %>
-    <%= submit_tag("Delete from History") %>
-  <% end %>
+    <div>
+      <h4>Explore </h4>
+        <%@trails.each do |t|%>
+        <%=link_to t.name, t%>
+          <%if t.priv%>
+            [PRIVATE]
+          <%else%>
+            [PUBLIC]
+          <%end%>
+        by <%=link_to t.creator.username, t.creator%><br>
+        <%=t.description%><br><br>
+        <%end%>
+    </div>
   <%end%>
 
-<%end%>
-</div>
-
-<%if current_user.username == @page%>
-<div>
-<h4>Explore </h4>
-  <%@trails.each do |t|%>
-  <%=link_to t.name, t%>
-    <%if t.priv%>
-      [PRIVATE]
-    <%else%>
-      [PUBLIC]
-    <%end%>
-  by <%=link_to t.creator.username, t.creator%><br>
-  <%=t.description%><br><br>
-  <%end%>
-<%end%>
-</div>
-
-<%= link_to_previous_page @trails, 'Previous' %>
-<%= paginate @trails, :window => 1, :remote => true %>
-<%= link_to_next_page @trails, 'Next' %>
+    <%= link_to_previous_page @trails, 'Previous' %>
+    <%= paginate @trails, :window => 1, :remote => true %>
+    <%= link_to_next_page @trails, 'Next' %>
 </div>
