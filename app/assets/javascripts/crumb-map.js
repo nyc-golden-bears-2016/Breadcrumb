@@ -28,7 +28,7 @@ function initialize() {
     // Create new Map
     var map = new google.maps.Map(document.getElementById("display-map"),mapProps);
 
-    var xPath = asset_path("x.png");
+    var xPath = asset_path("xred.png");
 
     var markerImage = new google.maps.MarkerImage( String(xPath),
               new google.maps.Size(40, 40),

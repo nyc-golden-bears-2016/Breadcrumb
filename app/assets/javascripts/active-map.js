@@ -35,7 +35,7 @@ function initialize(mapdetails) {
 
     for (i = 0; i < numberOfCrumbs; i++) { 
 
-      if (i < mapdetails.currentCrumb) {
+      if (i < mapdetails.currentCrumb - 1) {
       var greenX = asset_path("xgreen.png");
       var markerImage = new google.maps.MarkerImage( String(greenX),
                 new google.maps.Size(40, 40),
