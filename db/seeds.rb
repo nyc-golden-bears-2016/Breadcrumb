@@ -13,17 +13,22 @@ marco = User.create!(username: "codingmarco", email:"marco@gmail.com", password:
 
 prajay = User.create!(username: "codingprajay", email:"prajay@gmail.com", password: "devbootcampallstar")
 
-order_priv = marco.created_trails.create!(name: "Walk in the Park", description: "The best places in Prospect Park", sequential: true, priv: true, published: true, password: "Brooklyn")
+order_priv = mason.created_trails.create!(name: "Walk in the Park", description: "The best places in Prospect Park", sequential: true, priv: true, published: true, password: "Brooklyn", latitude: 40.745, longitude: -73.993,)
 
-unorder_priv = marco.created_trails.create!(name: "Pier Challenge", description: "Find clues along the West Side Piers", sequential: false, priv: true, published: true, password: "Chelsea")
+unorder_priv = mason.created_trails.create!(name: "Pier Challenge", description: "Find clues along the West Side Piers", sequential: false, priv: true, published: true, password: "Chelsea", latitude: 40.745, longitude: -73.993,)
 
-order_public = prajay.created_trails.create!(name: "Hidden Gems in Alphabet City", sequential: true, description: "Some of the best places you've never heard of.", priv: false, published: true)
+order_public = mason.created_trails.create!(name: "Hidden Gems in Alphabet City", sequential: true, description: "Some of the best places you've never heard of.", priv: false, published: true, latitude: 40.745, longitude: -73.993,)
 
-unorder_public = prajay.created_trails.create!(name: "Rubin Museum", sequential: false, description: "Educate yourself on the 3rd floor exhibition", priv: false, published: true)
+unorder_public = mason.created_trails.create!(name: "Rubin Museum", sequential: false, description: "Educate yourself on the 3rd floor exhibition", latitude: 40.745, longitude: -73.993, priv: false, published: true)
 
-locked_crumb = unorder_public.crumbs.create!(name: "Nepalese Sculpture", description: "Which author discusses this story in Siddhartha?", requires_answer: true, latitude: 34.006, longitude: 546.27, answer: "Herman Hesse", order_number: 3)
+locked_crumb = unorder_public.crumbs.create!(name: "Nepalese Sculpture", description: "Which author discusses this story in Siddhartha?", requires_answer: true, latitude: 40.74, longitude: -73.9973, answer: "Herman Hesse", order_number: 3)
 
-unlocked_crumb = order_public.crumbs.create!(name: "The Counter", requires_answer: false, description: "Great burgers!", latitude: 34.006, longitude: 546.27, order_number: 1)
+unlocked_crumb = order_public.crumbs.create!(name: "The Counter", requires_answer: false, description: "Great burgers!", latitude: 40.72, longitude: -73.96, order_number: 1)
+                 order_public.crumbs.create!(name: "The Speakeasy", requires_answer: false, description: "Great drinks!", latitude: 40.725, longitude: -73.9, order_number: 2)
+                 order_public.crumbs.create!(name: "The Bistro", requires_answer: false, description: "Great Scott!!!", latitude: 40.725, longitude: -73.964, order_number: 3)
+
+
+
 
 erica.favorites.create!(trail: unorder_public)
 

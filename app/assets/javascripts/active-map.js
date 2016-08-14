@@ -11,12 +11,11 @@ function initialize(mapdetails) {
       };
       
 
-    var lat = mapdetails.initialLat;
-    var lng = mapdetails.initialLng;
-
+    var trailCenter = new google.maps.LatLng(mapdetails.initialLat, mapdetails.initialLng)
     // Set Initial Map Properties
+
     var mapProps = {
-        center:new google.maps.LatLng(lat, lng),
+        center: trailCenter,
         zoom: mapdetails.zoom,
         streetViewControl: false,
         mapTypeId:google.maps.MapTypeId.ROADMAP,
@@ -69,12 +68,24 @@ function initialize(mapdetails) {
             },
           });
 
+
+
+
+
+
+
     // Set Map styles and marker
 
     userMarker.setMap(map);
     // marker.setPosition();
     if (mapdetails.crumbs.length > 1 ) { $("#current").html("<p> </p>") }
     else { $("#current").html("<p>Calculating distance...</p>")  } 
+
+    // find crumb position
+  
+      var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[0].latitude, mapdetails.crumbs[0].longitude);
+
+    // find current user position
 
       navigator.geolocation.watchPosition(function(position) {
         var pos = {
@@ -85,11 +96,16 @@ function initialize(mapdetails) {
         userMarker.setPosition(pos);
       if (mapdetails.crumbs.length == 1 ) {
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
-        $("#current").html("<p>You're roughly " + Math.floor( google.maps.geometry.spherical.computeDistanceBetween (userPosition, mapProps.center)) + " meters away.</p>" ) 
+        debugger;
+        $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb</p>" ) 
        }
       }, options);
 
-
+    function calcDistance(userPosition, crumbPosition){
+      var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, crumbPosition));
+      if (distance > 1000) {return String(distance/1000) + " km"}
+      else { return String(distance) + " meters"};
+    };
 
     // Draw circle around the Marker
     var circle = new google.maps.Circle({

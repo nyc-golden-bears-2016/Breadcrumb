@@ -61,7 +61,8 @@ before_action :which_trail, only: [:joined, :join]
     render :json => {crumbs: current_trail.crumbs, 
                      zoom: calculate_zoom, 
                      initialLat: current_trail.latitude,
-                     initialLng: current_trail.longitude}
+                     initialLng: current_trail.longitude,
+                     currentCrumb: sdf}
                     
   end
 
