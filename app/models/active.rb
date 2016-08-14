@@ -7,7 +7,7 @@ class Active < ApplicationRecord
       self.trail.crumbs
     else
       num = self.last_crumb_reached
-      self.trail.crumbs[0..(num-1)]
+      self.trail.crumbs[0..(num)]
     end
   end
 

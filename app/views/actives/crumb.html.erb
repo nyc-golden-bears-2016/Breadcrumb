@@ -7,9 +7,9 @@
 <div>Image and text</div>
 
 <% if @crumb.requires_answer%>
-<%= form_tag url: "/actives/#{@active.id}/crumbs/#{@crumb.id}", method:'post'%>
+<%= form_tag "/actives/#{@active.id}/crumbs/#{@crumb.id}", method:'post'%>
     Answer: <%= text_field_tag(:entered_answer) %><br>
     <%= submit_tag "Enter" %>
 <%end%>
-
+<br><br>
 <%=link_to "Trail", "/actives/#{@active.id}"%>
