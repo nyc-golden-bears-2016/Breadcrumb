@@ -1,4 +1,4 @@
-function initialize() {
+function initialize(mapdetails) {
 
     // Create an antique treasure-map style of Map
      var styledMapType = new google.maps.StyledMapType(
@@ -9,49 +9,51 @@ function initialize() {
         enableHighAccuracy: true;
         maximumAge: 30000;
       };
+      
 
-
-    var initalLat = 40.70690094223122;
-    var initialLong = -74.00895144247752;
+    var lat = mapdetails.initialLat;
+    var lng = mapdetails.initialLng;
 
     // Set Initial Map Properties
     var mapProps = {
-        center:new google.maps.LatLng(initalLat, initialLong),
-        zoom:15,
+        center:new google.maps.LatLng(lat, lng),
+        zoom: mapdetails.zoom,
         streetViewControl: false,
         mapTypeId:google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         mapTypeControlOptions: {vmapTypeIds: ['styled_map'] },
-        maxZoom: 17
+        maxZoom: 18
       };
 
     // Create new Map
     var map = new google.maps.Map(document.getElementById("display-map"),mapProps);
-
-    var xPath = asset_path("x.png");
-
-    var markerImage = new google.maps.MarkerImage( String(xPath),
-              new google.maps.Size(40, 40),
-              new google.maps.Point(0, 0),
-              new google.maps.Point(20, 20));
-
-    var marker = new google.maps.Marker({
-                      position:mapProps.center,
-                      draggable:true,
-                      icon: markerImage
-                      });
-
-    
-
-    // // Print current coordinates of the Marker to the 'Current' Div
-    // document.getElementById('current').innerHTML = '<p>Latitude: ' + marker.position.lat().toFixed(8) + '</p><br><p>Longitude: ' + marker.position.lng().toFixed(8) + '</p>';
-
-    $("#crumb_latitude").val(marker.position.lat().toFixed(8));
-    $("#crumb_longitude").val(marker.position.lng().toFixed(8));
-    // Set Map styles and marker
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
-    marker.setMap(map);
+
+
+    var numberOfCrumbs = mapdetails.crumbs.length
+
+
+    for (i = 0; i < numberOfCrumbs; i++) { 
+      var xPath = asset_path("x.png");
+
+      var markerImage = new google.maps.MarkerImage( String(xPath),
+                new google.maps.Size(40, 40),
+                new google.maps.Point(0, 0),
+                new google.maps.Point(20, 20));
+
+      var crumbLatLng = {lat: mapdetails.crumbs[i].latitude, lng: mapdetails.crumbs[i].longitude};
+
+      var marker = new google.maps.Marker({
+                        position: crumbLatLng,
+                        draggable:false,
+                        icon: markerImage
+                        });
+
+    // Set Map styles and marker
+      marker.setMap(map);
+    }
+
 
     // Create a User Marker
      var userMarker = new google.maps.Marker({
@@ -60,20 +62,19 @@ function initialize() {
           icon: {
             path: google.maps.SymbolPath.CIRCLE,
             scale: 6,
-            fillColor: '#de3d21',
+            fillColor: '#105c5c',
             fillOpacity: 1,
-            strokeColor: '#de3d21',
+            strokeColor: '#105c5c',
             strokeWeight: 4
             },
           });
 
     // Set Map styles and marker
-    map.mapTypes.set('styled_map', styledMapType);
-    map.setMapTypeId('styled_map');
-    marker.setMap(map);
+
     userMarker.setMap(map);
     // marker.setPosition();
-
+    if (mapdetails.crumbs.length > 1 ) { $("#current").html("<p> </p>") }
+    else { $("#current").html("<p>Calculating distance...</p>")  } 
 
       navigator.geolocation.watchPosition(function(position) {
         var pos = {
@@ -82,10 +83,10 @@ function initialize() {
           };
         map.setCenter(pos);
         userMarker.setPosition(pos);
-
+      if (mapdetails.crumbs.length == 1 ) {
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
         $("#current").html("<p>You're roughly " + Math.floor( google.maps.geometry.spherical.computeDistanceBetween (userPosition, mapProps.center)) + " meters away.</p>" ) 
-
+       }
       }, options);
 
 
@@ -94,10 +95,10 @@ function initialize() {
     var circle = new google.maps.Circle({
       center:mapProps.center,
       radius:50,
-      strokeColor:"#de3d21",
+      strokeColor:"#105c5c",
       strokeOpacity:0.3,
       strokeWeight:3,
-      fillColor:"#de3d21",
+      fillColor:"#105c5c",
       fillOpacity:0.1
       });
 
@@ -114,7 +115,7 @@ function initialize() {
       var centerControlDiv = $("#recenter-button")[0];
       centerControlDiv.index = 1;
       $(centerControlDiv).on('click', function() {
-        map.setCenter(marker.position);
+        map.setCenter(userMarker.position);
         });
       map.controls[google.maps.ControlPosition.TOP_RIGHT].push($(centerControlDiv).show()[0]);
     }
@@ -123,8 +124,14 @@ function initialize() {
     var centerControl = new CenterControl(map);
 }
 // Close Initialize Function
-$(".active.show").ready(function() {
-      // Initialize Map
-  google.maps.event.addDomListener(window, 'load', initialize);
+$("document").ready(function() {
+  var activeId = $("#active-id").text();
+  $.ajax({
+      url: '/actives/' + activeId + '/mapdetails',
+      method: 'get',
+    })
+    .done((mapdetails) => {
+      google.maps.event.addDomListener(window, 'load', initialize(mapdetails));
+    });
 });
 

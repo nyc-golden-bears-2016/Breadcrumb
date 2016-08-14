@@ -43,11 +43,12 @@ function initialize() {
 
     
 
-    // // Print current coordinates of the Marker to the 'Current' Div
-    // document.getElementById('current').innerHTML = '<p>Latitude: ' + marker.position.lat().toFixed(8) + '</p><br><p>Longitude: ' + marker.position.lng().toFixed(8) + '</p>';
+    // // Print current coordinates of the Marker to the Form
+    google.maps.event.addListener(marker, 'dragend', function(evt){
+      $("#crumb_latitude").val(marker.position.lat().toFixed(8));
+      $("#crumb_longitude").val(marker.position.lng().toFixed(8));
+    });
 
-    $("#crumb_latitude").val(marker.position.lat().toFixed(8));
-    $("#crumb_longitude").val(marker.position.lng().toFixed(8));
     // Set Map styles and marker
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');

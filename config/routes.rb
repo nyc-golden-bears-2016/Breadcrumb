@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   get '/trails/:id/publish' => 'trails#publish'
+  get '/actives/:active_id/crumb/:id' => 'actives#crumb', :as => :active_crumb
 
   get '/actives/:id/join' => 'actives#join'
   post '/actives/:id/joined' => 'actives#joined'
@@ -20,5 +21,6 @@ Rails.application.routes.draw do
   get '/actives/:id' => 'actives#show'
   get '/actives/:id/update' => 'actives#update'
   delete '/actives/:id' => 'actives#destroy'
+  get '/actives/:id/mapdetails' => 'actives#mapdetails', :as => :active_mapdetails
 
 end
