@@ -1,8 +1,9 @@
 class ActivesController < ApplicationController
 before_action :log_in
-before_action :current_trail, except: [:join, :joined, :crumb]
-before_action :current_active, :correct_password, only: [:show, :crumb, :update, :destroy]
-before_action :correct_password, only: [:show, :crumb, :update]
+before_action :current_trail, except: [:join, :joined, :crumb, :answered]
+before_action :correct_password, only: [:show, :crumb, :update, :destroy]
+before_action :current_active, only: [:show, :update, :destroy]
+before_action :correct_password, only: [:show, :update]
 before_action :which_trail, only: [:joined, :join]
 
   def join
@@ -36,23 +37,34 @@ before_action :which_trail, only: [:joined, :join]
   def show
     @active ||= Active.create(user: current_user, trail: @trail)
     @crumbs = @active.crumbs_available
-    #can we call the last crumb they hit and mark it as a save point?
-    # made a new column in the experience model to hold that info
+
+    if @active.trail.sequential && (@trail.crumbs.length < @active.last_crumb_reached) && (@trail.crumbs.length > 1)
+      @message = "Ya finished, bro"
+    end
+  end
+
+  def finished
   end
 
   def crumb
     #this route is nested, finding the trail is different
-    @trail = Active.find(params[:active_id]).trail
+    @active = Active.find(params[:active_id])
+    @trail = @active.trail
     @crumb = Crumb.find(params[:id])
+    if @trail.sequential && (@crumb.requires_answer == false)
+      @active.update_attribute(:last_crumb_reached, @crumb.order_number += 1)
+    end
   end
 
   def answered
+    @active = Active.find(params[:active_id])
+    @crumb = Crumb.find(params[:id])
     entered = locked_crumb_params[:entered_answer]
     if entered == @crumb.answer
-      @active = Active.update_attribute(entered_answer: entered, last_crumb_reached: @crumb.order_number + 1)
+      @active.update_attribute(:last_crumb_reached, @crumb.order_number += 1)
       redirect_to "/actives/#{@active.id}"
     else
-      redirect_to "/actives/#{@active.id}"
+      redirect_to "/actives/#{@active.id}/crumbs/#{@crumb.id}"
       #make error handling
     end
   end
@@ -97,6 +109,10 @@ private
    if !current_user
      redirect_to new_user_session_path
    end
+  end
+
+  def locked_crumb_params
+    params.permit(:entered_answer)
   end
 
   def priv_trail_params
