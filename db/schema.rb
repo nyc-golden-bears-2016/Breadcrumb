@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 20160812041345) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "images", force: :cascade do |t|
+    t.string   "name"
+    t.string   "avatar"
+    t.string   "imageable_type"
+    t.integer  "imageable_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
+  end
+
   create_table "sounds", force: :cascade do |t|
     t.integer  "crumb_id",   null: false
     t.datetime "created_at", null: false
@@ -76,7 +86,6 @@ ActiveRecord::Schema.define(version: 20160812041345) do
     t.boolean  "published",   default: false
     t.integer  "creator_id"
     t.string   "password"
-    t.string   "trail_image"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
@@ -86,7 +95,6 @@ ActiveRecord::Schema.define(version: 20160812041345) do
     t.string   "email"
     t.float    "latitude"
     t.float    "longitude"
-    t.string   "user_image"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "encrypted_password",     default: "", null: false

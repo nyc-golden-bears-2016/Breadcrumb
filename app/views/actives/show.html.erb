@@ -1,9 +1,17 @@
 
-<h2><%=@trail.name%></h2>
+<div class="text-container">
+  <h2><%=@active.trail.name%></h2>
+  <% if @active.trail.sequential%>
+    <p>To be followed in sequence.</p>
+  <%end%>
+</div>
+
 
 <% if @trail.sequential%>
     To be followed in sequence.
 <%end%>
+
+<%= render "maps/active-map" %>
 
 <p><%=@trail.description%></p><br>
 
@@ -11,3 +19,16 @@
 <%=link_to c.name, [@trail, c]%>
 <%end%>
 </p><br>
+
+
+
+<div class="text-container">
+  <p><%=@active.trail.description%></p>
+  <br>
+  <p><%@active.trail.crumbs.each do |c|%>
+      <%=link_to c.name, [c.trail, c]%>
+    <%end%>
+  </p>
+  <br>
+</div>
+
