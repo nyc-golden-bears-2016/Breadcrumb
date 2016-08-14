@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812041345) do
+ActiveRecord::Schema.define(version: 20160813231750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_crumbs", force: :cascade do |t|
+    t.integer  "active_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "actives", force: :cascade do |t|
     t.integer  "user_id",                            null: false
@@ -35,6 +41,7 @@ ActiveRecord::Schema.define(version: 20160812041345) do
     t.string   "answer"
     t.integer  "trail_id",                        null: false
     t.integer  "order_number"
+    t.string   "crumg_image"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
@@ -44,16 +51,6 @@ ActiveRecord::Schema.define(version: 20160812041345) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "images", force: :cascade do |t|
-    t.string   "name"
-    t.string   "avatar"
-    t.string   "imageable_type"
-    t.integer  "imageable_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["imageable_type", "imageable_id"], name: "index_images_on_imageable_type_and_imageable_id", using: :btree
   end
 
   create_table "sounds", force: :cascade do |t|
@@ -85,6 +82,7 @@ ActiveRecord::Schema.define(version: 20160812041345) do
     t.boolean  "published",   default: false
     t.integer  "creator_id"
     t.string   "password"
+    t.string   "trail_image"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
   end
@@ -94,6 +92,7 @@ ActiveRecord::Schema.define(version: 20160812041345) do
     t.string   "email"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "user_image"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "encrypted_password",     default: "", null: false

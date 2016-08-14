@@ -1,6 +1,6 @@
 class CrumbsController < ApplicationController
 before_action :current_trail
-before_action :current_crumb, only: [:edit, :update, :destroy]
+before_action :current_crumb, only: [:edit, :update, :destroy, :show]
 
   def new
     @crumb = @trail.crumbs.new
@@ -9,7 +9,7 @@ before_action :current_crumb, only: [:edit, :update, :destroy]
   def create
     @crumb = @trail.crumbs.new(crumb_params)
     if @crumb.save
-      redirect_to "/trails/#{@trail.id}/crumbs/#{@crumb.id}/edit"
+      redirect_to "/trails/#{@trail.id}/edit"
     else
       redirect_to current_user
       #make error handling
@@ -17,7 +17,7 @@ before_action :current_crumb, only: [:edit, :update, :destroy]
   end
 
   def edit
-    @crumb = Crumb.find(params[:id])
+
   end
 
   def update
@@ -26,6 +26,7 @@ before_action :current_crumb, only: [:edit, :update, :destroy]
 
   def destroy
     @crumb.destroy
+    redirect_to "/trails/#{@crumb.trail.id}/edit"
   end
 
   private
@@ -40,7 +41,7 @@ before_action :current_crumb, only: [:edit, :update, :destroy]
 
   def trail_creator
     if !(current_user == @trail.creator)
-      redirect_to_root, flash[:notice] = 'You are not the creator of this trail.'
+      redirect_to_root
     end
   end
 

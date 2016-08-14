@@ -55,6 +55,11 @@ before_action :which_trail, only: [:joined, :join]
   end
   end
 
+  def destroy
+    @active.destroy
+    redirect_to current_user
+  end
+
 private
 
   def current_trail

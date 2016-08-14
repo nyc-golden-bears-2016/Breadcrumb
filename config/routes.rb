@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
+  devise_for :users
 
   get '/users/:user_id/add/:id' => 'favorites#add'
   get '/users/:user_id/remove/:id' => 'favorites#remove'
 
   resources :trails do
-    resources :crumbs, except: [:index ]
+    resources :crumbs, except: [:index, :show ]
   end
 
   get '/trails/:id/publish' => 'trails#publish'
@@ -17,9 +18,8 @@ Rails.application.routes.draw do
   get '/actives/:id/leave' => 'actives#leave'
   get '/actives/:id' => 'actives#show'
   get '/actives/:id/update' => 'actives#update'
-
-  devise_for :users
+  delete '/actives/:id' => 'actives#destroy'
 
   get '/users/:id' => 'users#show', :as => :user
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
 end

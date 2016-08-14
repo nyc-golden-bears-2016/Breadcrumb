@@ -1,6 +1,6 @@
 class TrailsController < ApplicationController
 before_action :current_trail, only: [:edit, :update, :destroy, :show]
-before_action :log_in, only: [:new ]
+before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
 
   def index
@@ -25,7 +25,6 @@ before_action :redirect, only: [:edit, :update, :destroy]
   def edit
     # if !@trail.published
       @tags = Tag.all.map {|t| t.subject }
-      @image = Image.new
     # else
     #   redirect_to current_user
     #   #make error handling - you cannot edit a published trail
@@ -54,6 +53,8 @@ before_action :redirect, only: [:edit, :update, :destroy]
   end
 
   def destroy
+    @trail.destroy
+    redirect_to current_user
   end
 
 private
@@ -73,7 +74,7 @@ private
   end
 
   def redirect
-   if !(current_user = @trail.creator)
+   unless current_user == @trail.creator
      redirect_to new_user_session_path
    end
   end

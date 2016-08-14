@@ -6,7 +6,6 @@ class User < ApplicationRecord
   has_many :favorite_trails, through: :favorites, source: :trail
   has_many :actives, dependent: :destroy
   has_many :walked_trails, through: :actives, source: :trail
-  has_many :images, as: :imageable, dependent: :destroy
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
