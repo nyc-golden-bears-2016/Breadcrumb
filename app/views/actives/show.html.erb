@@ -6,20 +6,7 @@
   <%end%>
 </div>
 
-
-<% if @trail.sequential%>
-    To be followed in sequence.
-<%end%>
-
 <%= render "maps/active-map" %>
-
-<p><%=@trail.description%></p><br>
-
-<p><%@crumbs.each do |c|%>
-<%=link_to c.name, [@trail, c]%>
-<%end%>
-</p><br>
-
 
 
 <div class="text-container">

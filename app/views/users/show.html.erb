@@ -61,11 +61,11 @@
             YOU WON!!!
           <%end%>
         <%end%>
-      <%end%>
-      <%if current_user.username == @page %>
-        <%= form_tag("/actives/#{t.id}", method: "delete") do %>
-          <%= submit_tag("Delete from History") %>
-        <% end %>
+        <%if current_user.username == @page %>
+          <%= form_tag("/actives/#{t.id}", method: "delete") do %>
+            <%= submit_tag("Delete from History") %>
+          <% end %>
+        <%end%>
       <%end%>
     </div>
   <%end%>
