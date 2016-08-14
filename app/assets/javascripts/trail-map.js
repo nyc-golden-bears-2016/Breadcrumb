@@ -65,15 +65,22 @@ function initialize() {
     circle.bindTo('center', marker, 'position');
 
 
-    // // Print current coordinates of the Marker to the 'Current' Div
-    // document.getElementById('current').innerHTML = '<p>Latitude: ' + marker.position.lat().toFixed(8) + '</p><br><p>Longitude: ' + marker.position.lng().toFixed(8) + '</p>';
 
-    $("#trail_latitude").val(marker.position.lat().toFixed(8));
-    $("#trail_longitude").val(marker.position.lng().toFixed(8));
     // Set Map styles and marker
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
     marker.setMap(map);
+
+
+    google.maps.event.addListener(marker, 'dragend', function(evt){
+      var pos = {
+          lat: evt.latLng.lat().toFixed(8),
+          lng: evt.latLng.lng().toFixed(8)
+          };
+      marker.setPosition(pos);
+      $("#trail_latitude").val(marker.position.lat().toFixed(8));
+      $("#trail_longitude").val(marker.position.lng().toFixed(8));
+    });
 
         // Set Initial Coordinates
      navigator.geolocation.getCurrentPosition(function(position) {
@@ -85,6 +92,7 @@ function initialize() {
         marker.setPosition(pos);
 
       }, options);
+
 
 
   ////// SEARCH BOX //////
