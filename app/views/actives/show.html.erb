@@ -8,16 +8,18 @@
 
 <%= render "maps/active-map" %>
 
-
 <div class="text-container">
   <p><%=@active.trail.description%></p>
   <br>
-  <p><%@active.trail.crumbs.each do |c|%>
-      <%=link_to c.name, [c.trail, c]%>
-    <%end%>
+  <p><%@crumbs.each do |c|%>
+  <%=link_to c.name, "/actives/#{@active.id}/crumbs/#{c.id}"%>
+  <%end%>
   </p>
   <br>
 </div>
 
 <div id="active-id"><%= @active.id %></div>
 
+<% if @message%>
+<%=@message%>
+<%end%>

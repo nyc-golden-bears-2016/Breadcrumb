@@ -16,7 +16,8 @@ Rails.application.routes.draw do
 
   get '/actives/:id/join' => 'actives#join'
   post '/actives/:id/joined' => 'actives#joined'
-  post '/actives/:active_id/crumb/:id' => 'actives#answered'
+  get '/actives/:active_id/crumbs/:id' => 'actives#crumb'
+  post '/actives/:active_id/crumbs/:id' => 'actives#answered'
   get '/actives/:id/leave' => 'actives#leave'
   get '/actives/:id' => 'actives#show'
   get '/actives/:id/update' => 'actives#update'
