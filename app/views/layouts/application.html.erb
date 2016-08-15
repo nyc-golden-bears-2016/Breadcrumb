@@ -8,16 +8,16 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-<<<<<<< da46aeb62eb0df29fa1a0e2467d6ee795b1085bf
+
   <body class="<%= controller_name %> <%= action_name %>">
-=======
+
   <body>
 <%= form_tag root_path, method: :get do %>
   <%= text_field_tag :query, params[:query], placeholder: "Search Trails" %>
   <%= submit_tag "GO", name: nil %>
 <% end %>	
 
->>>>>>> get basic search to work on console
+
 			  <p class="navbar">
 			  	<%= link_to 'Home', root_path, :class => 'navbar-link' %> |
 			  	<%= link_to 'Tags', tags_path, :class => 'navbar-link' %> |
