@@ -33,48 +33,43 @@ function initialize(mapdetails) {
 
       if (i < currentCrumbIndex) {
 
+        var greenX = asset_path("xgreen.png");
+        var markerImage = new google.maps.MarkerImage( String(greenX),
+                  new google.maps.Size(40, 40),
+                  new google.maps.Point(0, 0),
+                  new google.maps.Point(20, 20));
 
-      var greenX = asset_path("xgreen.png");
-      var markerImage = new google.maps.MarkerImage( String(greenX),
-                new google.maps.Size(40, 40),
-                new google.maps.Point(0, 0),
-                new google.maps.Point(20, 20));
+        var crumbLatLng = {lat: mapdetails.crumbs[i].latitude, lng: mapdetails.crumbs[i].longitude};
 
-      var crumbLatLng = {lat: mapdetails.crumbs[i].latitude, lng: mapdetails.crumbs[i].longitude};
-
-      var marker = new google.maps.Marker({
-                        position: crumbLatLng,
-                        draggable:false,
-                        icon: markerImage
-                        });
+        var marker = new google.maps.Marker({
+                          position: crumbLatLng,
+                          draggable:false,
+                          icon: markerImage
+                          });
       
-      var crumbIdLink = i + 1
+        var crumbIdLink = i + 1;
  
-      marker.addListener('click', function(activeId, crumbId) {
-          return function() {window.location = "/actives/" + activeIdLink + "/active_crumbs/" + crumbIdLink;
-        }
-      }(marker));
-
+        marker.addListener('click', function(activeId, crumbId) {
+          return function() {window.location = "/actives/" + activeIdLink + "/active_crumbs/" + crumbIdLink; }
+          }(marker));
       }
 
 
-     if (i == currentCrumbIndex) {
-      var redX = asset_path("xred.png");
-      var markerImage = new google.maps.MarkerImage( String(redX),
-          new google.maps.Size(40, 40),
-          new google.maps.Point(0, 0),
-          new google.maps.Point(20, 20));
+       if (i == currentCrumbIndex) {
+        var redX = asset_path("xred.png");
+        var markerImage = new google.maps.MarkerImage( String(redX),
+            new google.maps.Size(40, 40),
+            new google.maps.Point(0, 0),
+            new google.maps.Point(20, 20));
 
-      }
+        var crumbLatLng = {lat: mapdetails.crumbs[i].latitude, lng: mapdetails.crumbs[i].longitude};
 
-      var crumbLatLng = {lat: mapdetails.crumbs[i].latitude, lng: mapdetails.crumbs[i].longitude};
-
-      var marker = new google.maps.Marker({
-                        position: crumbLatLng,
-                        draggable:false,
-                        icon: markerImage
-                        });
-      };
+        var marker = new google.maps.Marker({
+                          position: crumbLatLng,
+                          draggable:false,
+                          icon: markerImage
+                          });
+    };
 
 
     // Set Map styles and marker
@@ -139,16 +134,16 @@ function initialize(mapdetails) {
         userMarker.setPosition(pos);
         userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
-        var distance = calcDistance(userPosition, currentCrumbPosition); 
-
-        if (distance < 30) { 
-          
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition); 
+        debugger;
+        if (distance < 40) { 
+          console.log("hit");
           activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id 
           var xhr = new XMLHttpRequest();
           xhr.open('PUT', activeCrumbPath, false);
           xhr.send();
           window.location = activeCrumbPath;
-        };
+        }
 
         $("#current").html("<p>You're roughly " + distance + " away from the next Crumb</p>" );
         $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, currentCrumbPosition)});
@@ -186,7 +181,6 @@ function initialize(mapdetails) {
       map.controls[google.maps.ControlPosition.TOP_RIGHT].push($(centerControlDiv).show()[0]);
     }
 
-
     var centerControl = new CenterControl(map);
 }
 // Close Initialize Function
@@ -195,8 +189,7 @@ $("document").ready(function() {
   $.ajax({
       url: '/actives/' + activeId + '/mapdetails',
       method: 'get',
-    })
-    .done((mapdetails) => {
-      google.maps.event.addDomListener(window, 'load', initialize(mapdetails));
-    });
+      }).done((mapdetails) => {
+        google.maps.event.addDomListener(window, 'load', initialize(mapdetails));
+      });
 });

@@ -2,7 +2,7 @@ class TrailsController < ApplicationController
 before_action :current_trail, only: [:edit, :update, :destroy, :show, :publish, :addtag, :removetag]
 before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
-before_action :published, only: [:edit, :update]
+# before_action :published, only: [:edit, :update]
 
   def index
     @trails = current_user.nearby_trails.page params[:page]
@@ -87,8 +87,8 @@ private
    end
   end
 
-  def redirect
-    redirect_to current_user if @trail.published
-  end
+  # def redirect
+  #   # redirect_to current_user if @trail.publish
+  # end
 
 end
