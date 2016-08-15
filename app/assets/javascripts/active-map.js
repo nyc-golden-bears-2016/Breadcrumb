@@ -5,11 +5,6 @@ function initialize(mapdetails) {
       [{"featureType":"administrative","elementType":"geometry.stroke","stylers":[{"visibility":"on"},{"color":"#63391d"},{"weight":"0.30"},{"saturation":"-75"},{"lightness":"5"},{"gamma":"1"}]},{"featureType":"administrative","elementType":"labels.text.fill","stylers":[{"color":"#63391d"},{"saturation":"-75"},{"lightness":"5"}]},{"featureType":"administrative","elementType":"labels.text.stroke","stylers":[{"color":"#ffd9b3"},{"visibility":"on"},{"weight":"6"},{"saturation":"-28"},{"lightness":"0"}]},{"featureType":"administrative","elementType":"labels.icon","stylers":[{"visibility":"on"},{"color":"#ffd9b3"},{"weight":"1"}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#ffd9b3"},{"saturation":"-28"},{"lightness":"0"}]},{"featureType":"poi","elementType":"all","stylers":[{"visibility":"off"}]},{"featureType":"road","elementType":"all","stylers":[{"color":"#63391d"},{"visibility":"simplified"},{"saturation":"-75"},{"lightness":"5"},{"gamma":"1"}]},{"featureType":"road","elementType":"labels.text","stylers":[{"visibility":"on"},{"color":"#ffd9b3"},{"weight":8},{"saturation":"-28"},{"lightness":"0"}]},{"featureType":"road","elementType":"labels.text.fill","stylers":[{"visibility":"on"},{"color":"#63391d"},{"weight":8},{"lightness":"5"},{"gamma":"1"},{"saturation":"-75"}]},{"featureType":"road","elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"featureType":"transit","elementType":"all","stylers":[{"visibility":"off"},{"color":"#63391d"},{"saturation":"-75"},{"lightness":"5"},{"gamma":"1"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"visibility":"on"},{"color":"#63391d"},{"saturation":"-75"},{"lightness":"5"},{"gamma":"1"}]},{"featureType":"water","elementType":"labels.text","stylers":[{"visibility":"simplified"},{"color":"#ffd9b3"},{"saturation":"-28"},{"lightness":"0"}]},{"featureType":"water","elementType":"labels.icon","stylers":[{"visibility":"off"}]}], {name: 'Styled Map'}
      );
 
-      function options(){
-        enableHighAccuracy: true;
-        maximumAge: 30000;
-      };
-
 
     var trailCenter = new google.maps.LatLng(mapdetails.initialLat, mapdetails.initialLng)
     // Set Initial Map Properties
@@ -29,13 +24,13 @@ function initialize(mapdetails) {
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
-
+    var currentCrumbIndex = mapdetails.currentCrumb - 1
     var numberOfCrumbs = mapdetails.crumbs.length
 
 
     for (i = 0; i < numberOfCrumbs; i++) {
 
-      if (i < mapdetails.currentCrumb - 1) {
+      if (i < currentCrumbIndex) {
       var greenX = asset_path("xgreen.png");
       var markerImage = new google.maps.MarkerImage( String(greenX),
                 new google.maps.Size(40, 40),
@@ -80,21 +75,41 @@ function initialize(mapdetails) {
 
 
 
-
-
-
-
     // Set Map styles and marker
 
-    userMarker.setMap(map);
+    
     // marker.setPosition();
    $("#current").html("<p>Calculating distance...</p>");
 
     // find crumb position
 
-      var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[mapdetails.currentCrumb].latitude, mapdetails.crumbs[mapdetails.currentCrumb].longitude);
+      var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[currentCrumbIndex].latitude, mapdetails.crumbs[currentCrumbIndex].longitude);
 
-    // find current user position
+  // Find current user position
+      
+      function calcDistance(userPosition, crumbPosition){
+        var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, crumbPosition));
+        var feet = distance * 3.28084;
+        if (distance > 2000) {return String(Math.round( (distance/5280) * 100) / 100) + " miles"}
+        else { return String(distance) + " feet"};
+      };
+
+      function calcHeading(userPosition, crumbPosition){
+        return google.maps.geometry.spherical.computeHeading(userPosition, crumbPosition);
+      };
+
+      function errorHandler(err) {
+          if (err.code == 1) 
+            {  alert("Error: Access is denied!"); }
+          else if( err.code == 2) 
+            { alert("Error: Position is unavailable!"); }
+      };
+
+      var options = {
+        enableHighAccuracy: true,
+        maximumAge: 5000,
+        timeout: 60000
+      };
 
       navigator.geolocation.watchPosition(function(position) {
         var pos = {
@@ -103,17 +118,15 @@ function initialize(mapdetails) {
           };
         map.setCenter(pos);
         userMarker.setPosition(pos);
+        userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
-        $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb</p>" )
-      }, options);
+        $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb heading</p>" );
+        $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, crumbPosition)});
+        $("#blank-map-overlay").fadeOut(3500);
+        
+      }, errorHandler, options);
 
-    function calcDistance(userPosition, crumbPosition){
-      var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, crumbPosition));
-      var feet = distance * 3.28084;
-      if (distance > 2000) {return String(Math.round( (distance/5280) * 100) / 100) + " miles"}
-      else { return String(distance) + " feet"};
-    };
-
+      
     // Draw circle around the Marker
     var circle = new google.maps.Circle({
       center:mapProps.center,

@@ -65,6 +65,7 @@ function initialize() {
     circle.bindTo('center', marker, 'position');
 
 
+
     // // Print current coordinates of the Marker to the 'Current' Div
  google.maps.event.addListener(marker, 'dragend', function(evt){
       var pos = {
@@ -75,10 +76,12 @@ function initialize() {
       $("#trail_latitude").val(marker.position.lat().toFixed(8));
       $("#trail_longitude").val(marker.position.lng().toFixed(8));
     });
+
     // Set Map styles and marker
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
     marker.setMap(map);
+
 
   ////// SEARCH BOX //////
 
