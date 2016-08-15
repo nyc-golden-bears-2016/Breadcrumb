@@ -4,7 +4,8 @@ before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
 
   def index
-    @trails = Trail.where(published: true, priv: false).page params[:page]
+    # byebug
+    @trails = current_user.nearby_trails.page params[:page]
     # available_trails.nearby.order(created_at: :desc)
   end
 
@@ -14,7 +15,6 @@ before_action :redirect, only: [:edit, :update, :destroy]
 
   def create
   @trail = current_user.created_trails.new(trail_params)
-
     if @trail.save
       redirect_to "/trails/#{@trail.id}/edit"
     else
@@ -56,6 +56,8 @@ before_action :redirect, only: [:edit, :update, :destroy]
   end
 
 private
+
+
 
   def trail_params
     params.require(:trail).permit(:name, :description, :latitude, :longitude, :private, :sequential, :published, :password)

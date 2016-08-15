@@ -9,7 +9,7 @@ function initialize(mapdetails) {
         enableHighAccuracy: true;
         maximumAge: 30000;
       };
-      
+
 
     var trailCenter = new google.maps.LatLng(mapdetails.initialLat, mapdetails.initialLng)
     // Set Initial Map Properties
@@ -33,7 +33,7 @@ function initialize(mapdetails) {
     var numberOfCrumbs = mapdetails.crumbs.length
 
 
-    for (i = 0; i < numberOfCrumbs; i++) { 
+    for (i = 0; i < numberOfCrumbs; i++) {
 
       if (i < mapdetails.currentCrumb - 1) {
       var greenX = asset_path("xgreen.png");
@@ -104,7 +104,7 @@ function initialize(mapdetails) {
         map.setCenter(pos);
         userMarker.setPosition(pos);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
-        $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb</p>" ) 
+        $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb</p>" )
       }, options);
 
     function calcDistance(userPosition, crumbPosition){
