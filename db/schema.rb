@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160815160853) do
     t.integer  "user_id",                            null: false
     t.integer  "trail_id",                           null: false
     t.boolean  "completed",          default: false
-    t.integer  "last_crumb_reached", default: 1
+    t.integer  "last_crumb_reached", default: 0
     t.boolean  "winner",             default: false
     t.string   "entered_password"
     t.datetime "created_at",                         null: false
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160815160853) do
     t.string   "answer"
     t.integer  "trail_id",                         null: false
     t.integer  "order_number"
-    t.string   "crumg_image"
+    t.string   "crumb_image"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "img_file_name"
@@ -59,6 +59,15 @@ ActiveRecord::Schema.define(version: 20160815160853) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text     "content"
+    t.string   "searchable_type"
+    t.integer  "searchable_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
   end
 
   create_table "sounds", force: :cascade do |t|

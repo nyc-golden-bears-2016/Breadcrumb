@@ -4,9 +4,16 @@ before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
 
   def index
+<<<<<<< da46aeb62eb0df29fa1a0e2467d6ee795b1085bf
     # byebug
     @trails = current_user.nearby_trails.page params[:page]
     # available_trails.nearby.order(created_at: :desc)
+=======
+    @trails = Trail.where(published: true, private: false).page params[:page]
+    # @trails = Trail.text_search(params[:query]).page(params[:page]).per_page(1)
+    # available_trails.nearby
+    # available_trails.order(created_at: :desc)
+>>>>>>> get basic search to work on console
   end
 
   def new
