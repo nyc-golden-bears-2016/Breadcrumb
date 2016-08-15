@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815102008) do
+ActiveRecord::Schema.define(version: 20160815160853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20160815102008) do
     t.integer  "user_id",                            null: false
     t.integer  "trail_id",                           null: false
     t.boolean  "completed",          default: false
-    t.integer  "last_crumb_reached", default: 0
+    t.integer  "last_crumb_reached", default: 1
     t.boolean  "winner",             default: false
     t.string   "entered_password"
     t.datetime "created_at",                         null: false
@@ -37,17 +37,21 @@ ActiveRecord::Schema.define(version: 20160815102008) do
   end
 
   create_table "crumbs", force: :cascade do |t|
-    t.string   "name",                            null: false
+    t.string   "name",                             null: false
     t.text     "description"
     t.float    "latitude"
     t.float    "longitude"
-    t.boolean  "requires_answer", default: false
+    t.boolean  "requires_answer",  default: false
     t.string   "answer"
-    t.integer  "trail_id",                        null: false
+    t.integer  "trail_id",                         null: false
     t.integer  "order_number"
-    t.string   "crumb_image"
-    t.datetime "created_at",                      null: false
-    t.datetime "updated_at",                      null: false
+    t.string   "crumg_image"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -77,18 +81,22 @@ ActiveRecord::Schema.define(version: 20160815102008) do
   end
 
   create_table "trails", force: :cascade do |t|
-    t.string   "name",                        null: false
+    t.string   "name",                             null: false
     t.text     "description"
     t.float    "latitude"
     t.float    "longitude"
-    t.boolean  "priv",        default: false
-    t.boolean  "sequential",  default: false
-    t.boolean  "published",   default: false
+    t.boolean  "priv",             default: false
+    t.boolean  "sequential",       default: false
+    t.boolean  "published",        default: false
     t.integer  "creator_id"
     t.string   "password"
     t.string   "trail_image"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

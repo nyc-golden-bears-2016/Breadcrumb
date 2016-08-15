@@ -9,23 +9,16 @@ class Trail < ApplicationRecord
   has_many :trail_users, through: :actives, source: :user
   has_many :used_trails, through: :actives, source: :user
   has_and_belongs_to_many :tags
+  has_attached_file :img, styles: {
+    thumb: '100x100>',
+    square: '200x200#',
+    medium: '300x300>'
+  }
+
+  validates_attachment_content_type :img, :content_type => /\Aimage\/.*\Z/
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode
-
-  def all_true
-    if self.latitude && self.longitude
-      incomplete = self.crumbs.keep_if {|c| c.latitude && c.longitude }
-      if incomplete.empty?
-        true
-      else
-        names = incomplete.map { |c| c.name }
-        "All crumbs require latitude and longitude. Please return to #{names}"
-      end
-    else
-      "A trail requires a base latitude and longitude."
-    end
-  end
 
 def order_crumbs
   ordered = self.crumbs.sort {|a,b| a.created_at <=> b.created_at}

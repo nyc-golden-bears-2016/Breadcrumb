@@ -5,6 +5,8 @@
     Locked? <%= c.check_box(:requires_answer) %><br>
     If locked, inlcude question in description and add answer below.
     <%= c.text_area(:answer) %><br>
+    <%= c.label :img %>
+    <%= c.file_field :img %>
     <%= c.hidden_field(:latitude, value: @trail.latitude) %>
     <%= c.hidden_field(:longitude, value: @trail.longitude) %>
   <%= c.submit "Add Crumb" %>

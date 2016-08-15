@@ -59,7 +59,7 @@ private
 
 
   def trail_params
-    params.require(:trail).permit(:name, :description, :latitude, :longitude, :private, :sequential, :published, :password)
+    params.require(:trail).permit(:name, :description, :latitude, :longitude, :private, :sequential, :published, :password, :img)
   end
 
   def current_trail

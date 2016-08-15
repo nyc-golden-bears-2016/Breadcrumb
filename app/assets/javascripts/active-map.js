@@ -37,13 +37,13 @@ function initialize(mapdetails) {
                 new google.maps.Point(0, 0),
                 new google.maps.Point(20, 20));
       }
-      else {
+      else if (i ==   currentCrumbIndex) {
       var redX = asset_path("xred.png");
       var markerImage = new google.maps.MarkerImage( String(redX),
           new google.maps.Size(40, 40),
           new google.maps.Point(0, 0),
           new google.maps.Point(20, 20));
-      };
+      }
 
 
       var crumbLatLng = {lat: mapdetails.crumbs[i].latitude, lng: mapdetails.crumbs[i].longitude};

@@ -40,7 +40,7 @@ before_action :which_trail, only: [:joined, :join]
   end
 
   def mapdetails
-    sorted_crumbs = current_trail.crumbs.sort{|x,y| x.created_at <=> x.created_at}
+    sorted_crumbs = current_trail.crumbs.sort{|x,y| x.order_number <=> x.order_number}
     render :json => {crumbs: sorted_crumbs,
                      zoom: calculate_zoom,
                      initialLat: current_trail.latitude,
