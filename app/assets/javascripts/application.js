@@ -6,7 +6,6 @@
 $(document).ready(function() {
   $("#password_confirmation").keyup(validate);
 
-<<<<<<< 5d6fdd0a3c5f488505c49ea0f073eea91f9d66fe
   function options(){
     enableHighAccuracy: true;
     maximumAge: 30000;
@@ -27,12 +26,6 @@ $(document).ready(function() {
     }, options);
   }
 
-=======
-  var form = document.getElementById("#tag-search-form");
-form.reset();
-// $("#tag-search-form").val("");
-// debugger
->>>>>>> add search functions for Trails and Tags
 });
 
 

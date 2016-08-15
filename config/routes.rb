@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#index'
-<<<<<<< 20c7c669fa6b7f7d11d1c9dfc064e3a4f43fa9b0
+
   get '/faq' => 'welcome#faq'
-=======
-
-  resources :tags
-
->>>>>>> create trails search and tags search with corresponding routes, controllers, model updates
+  resources :tags, only: [:index]
   devise_for :users
 
   get '/users/:user_id/add/:id' => 'favorites#add'
