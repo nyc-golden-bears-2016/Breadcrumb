@@ -8,13 +8,15 @@ class Active < ApplicationRecord
       self.active_crumbs
     else
       num = self.last_crumb_reached
-      self.active_crumbs[0..(num)]
+      available = self.active_crumbs[0..(num)]
+      # available.pop
+      # available
     end
   end
 
   def copy_crumbs
     self.trail.crumbs.each do |copy|
-      ActiveCrumb.create(active: self, crumb: copy, order_number: copy.order_number)
+      ActiveCrumb.create(active: self, crumb: copy, order_number: copy.order_number, latitude: copy.latitude, longitude: copy.longitude)
     end
   end
 

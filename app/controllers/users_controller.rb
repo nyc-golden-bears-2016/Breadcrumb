@@ -8,7 +8,7 @@ before_action :redirect
     #walked trails
     #perhaps tags that are interests?
     @trails = Trail.where(published: true).page params[:page]
-    @page = User.find(params[:id]).username
+    @page = User.find(params[:id])
   end
 
   def set_user_coords

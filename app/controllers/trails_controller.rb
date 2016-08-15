@@ -1,7 +1,8 @@
 class TrailsController < ApplicationController
-before_action :current_trail, only: [:edit, :update, :destroy, :show, :publish]
+before_action :current_trail, only: [:edit, :update, :destroy, :show, :publish, :addtag, :removetag]
 before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
+before_action :published, only: [:edit, :update]
 
   def index
     # byebug
@@ -15,6 +16,7 @@ before_action :redirect, only: [:edit, :update, :destroy]
 
   def create
   @trail = current_user.created_trails.new(trail_params)
+  @trail.too_many_crumbs
     if @trail.save
       redirect_to "/trails/#{@trail.id}/edit"
     else
@@ -24,12 +26,8 @@ before_action :redirect, only: [:edit, :update, :destroy]
   end
 
   def edit
-    # if !@trail.published
-      @tags = Tag.all.map {|t| t.subject }
-    # else
-    #   redirect_to current_user
-    #   #make error handling - you cannot edit a published trail
-    # end
+      @your_tags = TagTrail.where(trail: @trail)
+      @other_tags = Tag.all
   end
 
   def show
@@ -38,9 +36,22 @@ before_action :redirect, only: [:edit, :update, :destroy]
   end
 
   def update
-    @tag = @trail.tags.new
-    #creates and redirects user to user show page with new trail
-    #if trail is private and user is creator, the password should appear next to the trail so that they can easily send it out & we don't have to handle missing passwords
+
+  end
+
+  def removetag
+    tag = Tag.find(params[:tag_id])
+    t = TagTrail.find_by(trail: @trail, tag: tag)
+    t.destroy
+    redirect_to request.referer
+  end
+
+  def addtag
+    tag = Tag.find(params[:tag_id])
+    if !TagTrail.find_by(trail: @trail, tag: tag)
+      TagTrail.create(trail: @trail, tag: tag)
+    end
+    redirect_to request.referer
   end
 
   def publish
@@ -76,6 +87,10 @@ private
    unless current_user == @trail.creator
      redirect_to new_user_session_path
    end
+  end
+
+  def redirect
+    redirect_to current_user if @trail.published
   end
 
 end

@@ -24,12 +24,18 @@
   <% if @trail.sequential%>
     <div>To be followed in sequence.</div>
   <%end%>
+<br>
+Remove tags
+<br>
+<%@your_tags.each do |t|%>
+<%= link_to t.tag.subject, "/trails/#{@trail.id}/remove/#{t.tag.id}" %> |
+<%end%>
+<br><br>
+Add tags
+<br>
+<%@other_tags.each do |tag|%>
+<%= link_to tag.subject, "/trails/#{@trail.id}/add/#{tag.id}" %> |
+<%end%>
 
-Select up to three (3) Tags:
- <%= select_tag(:tag1, options_for_select( @tags )) %>
- <%= select_tag(:tag2, options_for_select( @tags )) %>
- <%= select_tag(:tag3, options_for_select( @tags )) %>
-
- <br><div>Image upload here</div><br>
 
 <br><td><%= link_to "Publish", "/trails/#{@trail.id}/publish" %></td>

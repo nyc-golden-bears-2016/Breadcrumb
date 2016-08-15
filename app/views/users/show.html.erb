@@ -1,9 +1,14 @@
-<%=link_to 'Create Trail', new_trail_path%>
 <div>
-<%=@page.upcase%>
+<%if current_user == @page%>
+<%=link_to 'Create Trail', new_trail_path%>
+<%else%>
+<%=@page.username.upcase%>'S PROFILE
+<%end%>
+</div>
+
 <div>
 <h5>Created Trails<h5>
-<%current_user.created_trails.each do |t|%>
+<%@page.created_trails.each do |t|%>
   <%=link_to t.name, t%>
     <%if t.priv%>
       [PRIVATE]<br>
@@ -13,12 +18,12 @@
     <%else%>
       [PUBLIC]<br>
     <%end%>
-    <%if (current_user == t.creator) && (t.published == false)%>
+    <%if (current_user == t.creator) && !t.published%>
       <%=link_to 'Edit/Publish', "/trails/#{t.id}/edit"%><br>
       <%=form_for(t, :html => { :method => :delete }) do |f|%>
         <%= f.submit "Delete Trail" %>
         <% end %><br>
-      <%elsif (current_user == t.creator) && (t.published == true)%>
+      <%elsif (current_user == t.creator) && t.published%>
         <div>*Published*</div><br>
         <%=form_for(t, :html => { :method => :delete }) do |f|%>
           <%= f.submit "Delete Trail" %>
@@ -26,16 +31,16 @@
       <%end%>
     <%end%>
 
-    <% if current_user.favorites %>
+    <% if @page.favorites %>
       <h5>Saved Trails<h5>
-      <%current_user.favorites.each do |t|%>
+      <%@page.favorites.each do |t|%>
         <%=link_to t.trail.name, t.trail%>
         <%if t.trail.priv%>
           [PRIVATE]<br>
         <%else%>
           [PUBLIC]<br>
         <%end%>
-        <%if current_user.username == @page%>
+        <%if current_user == @page%>
           <%=link_to "Remove from Saved", "/users/#{current_user.id}/remove/#{t.trail.id}" %>
         <%end%>
       <%end%>
@@ -43,10 +48,10 @@
   </div>
 
 
-  <% if current_user.actives %>
+  <% if @page.actives %>
     <div>
       <h5>Past Trails<h5>
-      <% current_user.actives.each do |t| %>
+      <% @page.actives.each do |t| %>
         <% trail = Trail.find(t.trail_id) %>
         <%=link_to trail.name, trail %>
         <%if trail.priv%>
@@ -60,7 +65,7 @@
             YOU WON!!!
           <%end%>
         <%end%>
-        <%if current_user.username == @page %>
+        <%if current_user == @page %>
           <%= form_tag("/actives/#{t.id}", method: "delete") do %>
             <%= submit_tag("Delete from History") %>
           <% end %>
@@ -69,7 +74,7 @@
     </div>
   <%end%>
 
-  <%if current_user.username == @page%>
+  <%if current_user == @page%>
     <div>
       <h4>Explore </h4>
         <%@trails.each do |t|%>
