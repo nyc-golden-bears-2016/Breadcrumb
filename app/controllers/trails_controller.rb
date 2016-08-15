@@ -5,9 +5,7 @@ before_action :redirect, only: [:edit, :update, :destroy]
 before_action :published, only: [:edit, :update]
 
   def index
-    # byebug
     @trails = current_user.nearby_trails.page params[:page]
-    # available_trails.nearby.order(created_at: :desc)
   end
 
   def new

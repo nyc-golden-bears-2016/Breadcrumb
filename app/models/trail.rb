@@ -1,5 +1,7 @@
 class Trail < ApplicationRecord
-  paginates_per 15
+	include PgSearch
+  multisearchable :against => [:name, :description]
+
 
   belongs_to :creator, class_name: 'User'
   has_many :crumbs, dependent: :destroy

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#index'
+
   get '/faq' => 'welcome#faq'
+  resources :tags, only: [:index]
   devise_for :users
 
   get '/users/:user_id/add/:id' => 'favorites#add'
@@ -24,5 +26,6 @@ Rails.application.routes.draw do
   post '/actives/:id/joined' => 'actives#joined'
   delete '/actives/:id' => 'actives#destroy'
   get '/actives/:id/mapdetails' => 'actives#mapdetails', :as => :active_mapdetails
+
 
 end
