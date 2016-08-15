@@ -1,10 +1,8 @@
 class ActivesController < ApplicationController
 before_action :log_in
-before_action :current_trail, except: [:join, :joined, :crumb, :answered]
-before_action :correct_password, only: [:show, :crumb, :update, :destroy]
-before_action :current_active, only: [:show, :update, :destroy]
+before_action :new_trail, only: [:joined, :join]
 before_action :correct_password, only: [:show, :update]
-before_action :which_trail, only: [:joined, :join]
+before_action :current_active, :current_trail ,only: [:show, :update, :destroy]
 
   def join
     if !Active.find_by(user: current_user, trail: @newtrail)
@@ -24,6 +22,7 @@ before_action :which_trail, only: [:joined, :join]
     entered = priv_trail_params[:entered_password]
     if entered == @newtrail.password
       @active = Active.create(user: current_user, trail: @newtrail, entered_password: entered)
+      @active.copy_crumbs
       redirect_to "/actives/#{@active.id}"
     else
       redirect_to current_user
@@ -39,23 +38,19 @@ before_action :which_trail, only: [:joined, :join]
     end
   end
 
+  def destroy
+    @active.destroy
+    redirect_to current_user
+  end
+
   def mapdetails
-
     sorted_crumbs = current_active.active_crumbs.sort{|x,y| x.order_number <=> x.order_number}
-
     render :json => {crumbs: sorted_crumbs,
                      zoom: calculate_zoom,
                      initialLat: current_trail.latitude,
                      initialLng: current_trail.longitude,
                      currentCrumbIndex: current_active.last_crumb_reached,
                      activeId: current_active.id}
-
-  end
-
-
-  def destroy
-    @active.destroy
-    redirect_to current_user
   end
 
 private
@@ -64,7 +59,7 @@ private
     @trail ||= Active.find(params[:id]).trail
   end
 
-  def which_trail
+  def new_trail
     @newtrail = Trail.find(params[:id])
   end
 
@@ -92,21 +87,9 @@ private
         true
       else
         redirect_to new_user_session_path
+        #error handling
       end
-    else
-      true
     end
-  end
-
-
-  def active_redirect
-    if Active.find(params[:active_id]).last_crumb_reached >= Crumb.find(params[:id])
-        true
-    elsif trail_creator
-      true
-    else
-      redirect_to "/actives/#{params[:active_id]}/join"
-     end
   end
 
   def calculate_zoom
@@ -135,5 +118,4 @@ private
       return 4
     end
   end
-
 end

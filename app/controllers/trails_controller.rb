@@ -2,7 +2,7 @@ class TrailsController < ApplicationController
 before_action :current_trail, only: [:edit, :update, :destroy, :show, :publish, :addtag, :removetag]
 before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
-# before_action :published, only: [:edit, :update]
+before_action :already_published, only: [:edit, :update]
 
   def index
     @trails = current_user.nearby_trails.page params[:page]
@@ -65,10 +65,8 @@ before_action :redirect, only: [:edit, :update, :destroy]
 
 private
 
-
-
   def trail_params
-    params.require(:trail).permit(:name, :description, :latitude, :longitude, :private, :sequential, :published, :password, :img)
+    params.require(:trail).permit(:name, :description, :latitude, :longitude, :priv, :published, :password, :img)
   end
 
   def destroy_params
@@ -91,8 +89,8 @@ private
    end
   end
 
-  # def redirect
-  #   # redirect_to current_user if @trail.publish
-  # end
+  def already_published
+    redirect_to current_user if @trail.published
+  end
 
 end

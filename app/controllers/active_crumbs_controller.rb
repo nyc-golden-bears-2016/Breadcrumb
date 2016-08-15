@@ -4,15 +4,15 @@ before_action :current_active, :current_active_crumb, :related_crumb
 
   def show
     @trail = @active.trail
-    if !@crumb.requires_answer && (@crumb.order_number > @active.last_crumb_reached)
-      @active.update_attribute(:last_crumb_reached, @crumb.order_number)
+    if !@crumb.requires_answer && (@active_crumb.order_number > @active.last_crumb_reached)
+      @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
     end
   end
 
   def update
     entered = active_crumb_params[:entered_answer]
-    if entered == @crumb.answer && (@crumb.order_number > @active.last_crumb_reached)
-      @active.update_attribute(:last_crumb_reached, @crumb.order_number)
+    if entered == @crumb.answer && (@active_crumb.order_number > @active.last_crumb_reached)
+      @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
       redirect_to "/actives/#{@active.id}"
     else
       redirect_to "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}"
@@ -35,9 +35,8 @@ before_action :current_active, :current_active_crumb, :related_crumb
   end
 
   # def redirect
-  #   #placeholder until there is some marker that you have reached geofence
-  #   if @crumb.order_number > @active.last_crumb_reached
-  #     redirect_to root
+  #   if @active_crumb.order_number > @active.last_crumb_reached
+  #     redirect_to @active
   #   end
   # end
 
