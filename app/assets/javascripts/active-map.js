@@ -121,7 +121,7 @@ function initialize(mapdetails) {
         userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
         $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb heading</p>" );
-        $("#compass_hands").rotate({animateTo:calcHeading(userPosition, crumbPosition)});
+        $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, crumbPosition)});
         $("#blank-map-overlay").fadeOut(3500);
         
       }, errorHandler, options);
