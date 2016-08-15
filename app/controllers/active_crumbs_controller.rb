@@ -1,6 +1,6 @@
 class ActiveCrumbsController < ApplicationController
 before_action :current_active, :current_active_crumb, :related_crumb
-before_action :redirect, only: [:show]
+# before_action :redirect, only: [:show]
 
   def show
     @trail = @active.trail
@@ -34,12 +34,12 @@ before_action :redirect, only: [:show]
     @crumb = @active_crumb.crumb
   end
 
-  def redirect
-    #placeholder until there is some marker that you have reached geofence
-    if @crumb.order_number > (@active.last_crumb_reached + 1)
-      redirect_to root
-    end
-  end
+  # def redirect
+  #   #placeholder until there is some marker that you have reached geofence
+  #   if @crumb.order_number > @active.last_crumb_reached
+  #     redirect_to root
+  #   end
+  # end
 
   def active_crumb_params
     params.require(:active_crumb).permit(:entered_answer)
