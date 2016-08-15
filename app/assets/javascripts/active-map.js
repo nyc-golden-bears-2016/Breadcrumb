@@ -24,13 +24,13 @@ function initialize(mapdetails) {
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
-
+    var currentCrumbIndex = mapdetails.currentCrumb - 1
     var numberOfCrumbs = mapdetails.crumbs.length
 
 
     for (i = 0; i < numberOfCrumbs; i++) {
 
-      if (i < mapdetails.currentCrumb - 1) {
+      if (i < currentCrumbIndex) {
       var greenX = asset_path("xgreen.png");
       var markerImage = new google.maps.MarkerImage( String(greenX),
                 new google.maps.Size(40, 40),
@@ -77,13 +77,13 @@ function initialize(mapdetails) {
 
     // Set Map styles and marker
 
-    userMarker.setMap(map);
+    
     // marker.setPosition();
    $("#current").html("<p>Calculating distance...</p>");
 
     // find crumb position
 
-      var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[mapdetails.currentCrumb].latitude, mapdetails.crumbs[mapdetails.currentCrumb].longitude);
+      var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[currentCrumbIndex].latitude, mapdetails.crumbs[currentCrumbIndex].longitude);
 
   // Find current user position
       
@@ -118,9 +118,11 @@ function initialize(mapdetails) {
           };
         map.setCenter(pos);
         userMarker.setPosition(pos);
+        userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
         $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb heading</p>" );
         $("#compass_hands").rotate({animateTo:calcHeading(userPosition, crumbPosition)});
+        $("#blank-map-overlay").fadeOut(3500);
         
       }, errorHandler, options);
 

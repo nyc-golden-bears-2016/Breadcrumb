@@ -62,7 +62,22 @@ p {
   width: 760px;
   height: 484px;
   margin: 0px auto;
+  background: #ffd9b3;
 }
+
+#blank-map-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  margin:auto;
+  pointer-events: none;
+  max-width: 100%;
+  height: auto;
+  width: auto\9;
+}
+
+
 
 #map-overlay {
   position: absolute;
