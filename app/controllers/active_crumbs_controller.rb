@@ -14,7 +14,7 @@ before_action :current_active, :current_active_crumb, :related_crumb
       @active.update_attribute(:last_crumb_reached, @crumb.order_number)
       redirect_to "/actives/#{@active.id}"
     else
-      redirect_to "/actives/#{@active.id}/crumbs/#{@crumb.id}"
+      redirect_to "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}"
       #make error handling
     end
   end
