@@ -24,8 +24,9 @@ function initialize(mapdetails) {
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
-    var currentCrumbIndex = mapdetails.currentCrumb
-    var numberOfCrumbs = mapdetails.crumbs.length
+    var currentCrumbIndex = mapdetails.currentCrumbIndex;
+    var currentCrumb = mapdetails.crumbs[currentCrumbIndex]
+    var numberOfCrumbs = mapdetails.crumbs.length;
 
 
     for (i = 0; i < numberOfCrumbs; i++) {
@@ -36,15 +37,31 @@ function initialize(mapdetails) {
                 new google.maps.Size(40, 40),
                 new google.maps.Point(0, 0),
                 new google.maps.Point(20, 20));
+
+      var marker = new google.maps.Marker({
+                        position: crumbLatLng,
+                        draggable:false,
+                        icon: markerImage
+                        });
+
+      var activeIdLink = mapdetails.activeId;
+      var crumbIdLink = mapdetails.crumbs[i].id;
+      marker.addListener('click', function(activeId, crumbId) {
+          return function() {window.location = "/actives/" + activeIdLink + "/active_crumbs/" + crumbIdLink;
+        }
+      }(marker));
+
       }
-      else if (i ==   currentCrumbIndex) {
+
+
+     if (i == currentCrumbIndex) {
       var redX = asset_path("xred.png");
       var markerImage = new google.maps.MarkerImage( String(redX),
           new google.maps.Size(40, 40),
           new google.maps.Point(0, 0),
           new google.maps.Point(20, 20));
-      }
 
+      }
 
       var crumbLatLng = {lat: mapdetails.crumbs[i].latitude, lng: mapdetails.crumbs[i].longitude};
 
@@ -53,6 +70,8 @@ function initialize(mapdetails) {
                         draggable:false,
                         icon: markerImage
                         });
+      };
+
 
     // Set Map styles and marker
       marker.setMap(map);
@@ -74,35 +93,31 @@ function initialize(mapdetails) {
           });
 
 
-
-    // Set Map styles and marker
-
-
     // marker.setPosition();
    $("#current").html("<p>Calculating distance...</p>");
 
     // find crumb position
 
-      var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[currentCrumbIndex].latitude, mapdetails.crumbs[currentCrumbIndex].longitude);
+    var currentCrumbPosition = new google.maps.LatLng(currentCrumb.latitude, currentCrumb.longitude);
 
   // Find current user position
 
-      function calcDistance(userPosition, crumbPosition){
-        var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, crumbPosition));
+      function calcDistance(userPosition, currentCrumbPosition){
+        var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition));
         var feet = distance * 3.28084;
         if (distance > 2000) {return String(Math.round( (distance/5280) * 100) / 100) + " miles"}
         else { return String(distance) + " feet"};
       };
 
-      function calcHeading(userPosition, crumbPosition){
-        return google.maps.geometry.spherical.computeHeading(userPosition, crumbPosition);
+      function calcHeading(userPosition, currentCrumbPosition){
+        return google.maps.geometry.spherical.computeHeading(userPosition, currentCrumbPosition);
       };
 
       function errorHandler(err) {
           if (err.code == 1)
             {  alert("Error: Access is denied!"); }
           else if( err.code == 2)
-            { alert("Error: Position is unavailable!"); }
+            { alert("Error: The geolocation request has timed out"); }
       };
 
       var options = {
@@ -120,8 +135,12 @@ function initialize(mapdetails) {
         userMarker.setPosition(pos);
         userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
-        $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb heading</p>" );
-        $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, crumbPosition)});
+        var distance = calcDistance(userPosition, currentCrumbPosition); 
+        if (distance < 30) 
+          { window.location.replace("/") };
+
+        $("#current").html("<p>You're roughly " + distance + " away from the next Crumb heading</p>" );
+        $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, currentCrumbPosition)});
         $("#blank-map-overlay").fadeOut(3500);
 
       }, errorHandler, options);
