@@ -140,8 +140,17 @@ function initialize(mapdetails) {
         userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
         var distance = calcDistance(userPosition, currentCrumbPosition); 
-        if (distance < 30) 
-          { window.location = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id };
+
+        if (distance < 30) { 
+
+          activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id 
+          var xhr = new XMLHttpRequest();
+          xhr.open('PUT', activeCrumbPath, false);
+          xhr.send();
+          window.location = activeCrumbPath;
+          
+        };
+
         $("#current").html("<p>You're roughly " + distance + " away from the next Crumb</p>" );
         $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, currentCrumbPosition)});
         $("#blank-map-overlay").fadeOut(3500);
