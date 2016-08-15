@@ -75,10 +75,6 @@ function initialize(mapdetails) {
 
 
 
-
-
-
-
     // Set Map styles and marker
 
     userMarker.setMap(map);
@@ -89,12 +85,30 @@ function initialize(mapdetails) {
 
       var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[mapdetails.currentCrumb].latitude, mapdetails.crumbs[mapdetails.currentCrumb].longitude);
 
-    // find current user position
+  // Find current user position
+      
+      function calcDistance(userPosition, crumbPosition){
+        var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, crumbPosition));
+        var feet = distance * 3.28084;
+        if (distance > 2000) {return String(Math.round( (distance/5280) * 100) / 100) + " miles"}
+        else { return String(distance) + " feet"};
+      };
 
-    
+      function calcHeading(userPosition, crumbPosition){
+        return google.maps.geometry.spherical.computeHeading(userPosition, crumbPosition);
+      };
+
+      function errorHandler(err) {
+          if (err.code == 1) 
+            {  alert("Error: Access is denied!"); }
+          else if( err.code == 2) 
+            { alert("Error: Position is unavailable!"); }
+      };
+
       var options = {
         enableHighAccuracy: true,
-        maximumAge: 30000
+        maximumAge: 5000,
+        timeout: 60000
       };
 
       navigator.geolocation.watchPosition(function(position) {
@@ -105,16 +119,12 @@ function initialize(mapdetails) {
         map.setCenter(pos);
         userMarker.setPosition(pos);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
-        $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb</p>" )
-      }, options);
+        $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb heading</p>" );
+        $("#compass_hands").rotate({animateTo:calcHeading(userPosition, crumbPosition)});
+        
+      }, errorHandler, options);
 
-    function calcDistance(userPosition, crumbPosition){
-      var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, crumbPosition));
-      var feet = distance * 3.28084;
-      if (distance > 2000) {return String(Math.round( (distance/5280) * 100) / 100) + " miles"}
-      else { return String(distance) + " feet"};
-    };
-
+      
     // Draw circle around the Marker
     var circle = new google.maps.Circle({
       center:mapProps.center,
