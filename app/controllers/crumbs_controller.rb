@@ -52,7 +52,7 @@ before_action :trail_creator, only: [:show]
   end
 
   def crumb_params
-    params.require(:crumb).permit(:name, :description, :latitude, :longitude, :requires_answer, :answer, :order_number)
+    params.require(:crumb).permit(:name, :description, :latitude, :longitude, :requires_answer, :answer, :order_number, :img)
   end
 
 end

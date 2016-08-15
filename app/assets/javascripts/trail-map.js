@@ -69,13 +69,13 @@ function initialize() {
     // // Print current coordinates of the Marker to the 'Current' Div
  google.maps.event.addListener(marker, 'dragend', function(evt){
       var pos = {
-          lat: evt.latLng.lat().toFixed(8),
-          lng: evt.latLng.lng().toFixed(8)
+          lat: parseFloat(evt.latLng.lat().toFixed(8)),
+          lng: parseFloat(evt.latLng.lng().toFixed(8))
           };
       marker.setPosition(pos);
       $("#trail_latitude").val(marker.position.lat().toFixed(8));
       $("#trail_longitude").val(marker.position.lng().toFixed(8));
-    });
+});
 
     // Set Map styles and marker
     map.mapTypes.set('styled_map', styledMapType);
@@ -97,7 +97,6 @@ function initialize() {
     // Listen for the event fired when the user selects a prediction and retrieve
     // more details for that place.
     searchBox.addListener('places_changed', function() {
-
         var places = searchBox.getPlaces();
         if (places.length == 0) {
           return;
@@ -115,8 +114,8 @@ function initialize() {
         // Update Marker based on Search Result
         marker.setPosition( place.geometry.location );
 
-      $("#trail_latitude").val(marker.position.lat().toFixed(8));
-      $("#trail_longitude").val(marker.position.lng().toFixed(8));
+        $("#trail_latitude").val(marker.position.lat().toFixed(8));
+        $("#trail_longitude").val(marker.position.lng().toFixed(8));
 
         if (place.geometry.viewport) {
           // Only geocodes have viewport.

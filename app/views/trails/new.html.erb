@@ -4,6 +4,8 @@
 <%= form_for(@trail) do |t| %>
 		Title: <%= t.text_field(:name) %><br>
     Description: <%= t.text_area(:description) %><br>
+    <%= t.label :img %>
+    <%= t.file_field :img %>
     Private? <%= t.check_box(:priv) %><br>
     Ordered Trail? <%= t.check_box(:sequential) %><br><br>
     <%= t.hidden_field(:latitude, :value => current_user.latitude)  %>
