@@ -8,7 +8,7 @@
 	<% @trail_search.each do |trail| %>
 	 <span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
 	<% end %>
-
+  <div class="hidden"></div>
 
   <div class="nearby">
     <%= link_to 'Trails near you!', trails_path%>

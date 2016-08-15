@@ -135,8 +135,7 @@ function initialize(mapdetails) {
         userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
         var distance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition); 
-        debugger;
-        if (distance < 40) { 
+        if (distance < 30) { 
           console.log("hit");
           activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id 
           var xhr = new XMLHttpRequest();
