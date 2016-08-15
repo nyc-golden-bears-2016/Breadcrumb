@@ -83,7 +83,7 @@ function initialize(mapdetails) {
           draggable:false,
           icon: {
             path: google.maps.SymbolPath.CIRCLE,
-            scale: 6,
+            scale: 4,
             fillColor: '#105c5c',
             fillOpacity: 1,
             strokeColor: '#105c5c',
