@@ -10,6 +10,7 @@ before_action :which_trail, only: [:joined, :join]
     if !Active.find_by(user: current_user, trail: @newtrail)
       if @newtrail.priv == false
         @active = Active.create(user: current_user, trail: @newtrail)
+        @active.copy_crumbs
         redirect_to "/actives/#{@active.id}"
       else
         @active = Active.new
@@ -30,44 +31,13 @@ before_action :which_trail, only: [:joined, :join]
     end
   end
 
-  def leave
-
-  end
-
   def show
     @active ||= Active.create(user: current_user, trail: @trail)
     @crumbs = @active.crumbs_available
-
-    if @trail.sequential && (@trail.crumbs.length == @active.last_crumb_reached) && (@trail.crumbs.length > 1)
-      @message = "Ya finished, bro"
-    end
-  end
-
-  def finished
-  end
-
-  def crumb
-    #this route is nested, finding the trail is different
-    @active = Active.find(params[:active_id])
-    @trail = @active.trail
-    @crumb = Crumb.find(params[:id])
-    if @trail.sequential && (@crumb.requires_answer == false)
-      @active.update_attribute(:last_crumb_reached, @crumb.order_number)
-    end
-  end
-
-  def answered
-    #this route is nested, finding the trail is different
-    @active = Active.find(params[:active_id])
-    @crumb = Crumb.find(params[:id])
-    entered = locked_crumb_params[:entered_answer]
-    if entered == @crumb.answer
-      @active.update_attribute(:last_crumb_reached, @crumb.order_number)
-      redirect_to "/actives/#{@active.id}"
-    else
-      redirect_to "/actives/#{@active.id}/crumbs/#{@crumb.id}"
-      #make error handling
-    end
+    # 
+    # if @trail.sequential && (@trail.crumbs.length == @active.last_crumb_reached) && (@trail.crumbs.length > 1)
+    #   @message = "Ya finished, bro"
+    # end
   end
 
   def mapdetails

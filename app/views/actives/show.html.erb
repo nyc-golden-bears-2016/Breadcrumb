@@ -11,8 +11,8 @@
 <div class="text-container">
   <p><%=@active.trail.description%></p>
   <br>
-  <p><%@crumbs.each do |c|%>
-  <%=link_to c.name, "/actives/#{@active.id}/crumbs/#{c.id}"%>
+  <p><%@active.active_crumbs.each do |c|%>
+  <%=link_to c.crumb.name, "/actives/#{@active.id}/active_crumbs/#{c.id}"%>
   <%end%>
   </p>
   <br>

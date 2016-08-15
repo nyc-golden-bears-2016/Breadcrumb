@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160812041345) do
+ActiveRecord::Schema.define(version: 20160815102008) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_crumbs", force: :cascade do |t|
+    t.boolean  "reached",        default: false
+    t.string   "entered_answer"
+    t.integer  "active_id"
+    t.integer  "crumb_id"
+    t.integer  "order_number"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+  end
 
   create_table "actives", force: :cascade do |t|
     t.integer  "user_id",                            null: false

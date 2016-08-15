@@ -3,11 +3,11 @@ class Trail < ApplicationRecord
 
   belongs_to :creator, class_name: 'User'
   has_many :crumbs, dependent: :destroy
-  has_many :favorites
+  has_many :favorites, dependent: :destroy
   has_many :followers, through: :favorites, source: :user
-  belongs_to :active, required: false, dependent: :destroy
-  has_many :trail_users, through: :active, source: :user
-  has_many :used_trails, through: :active, source: :user
+  has_many :actives, dependent: :destroy
+  has_many :trail_users, through: :actives, source: :user
+  has_many :used_trails, through: :actives, source: :user
   has_and_belongs_to_many :tags
 
   reverse_geocoded_by :latitude, :longitude
@@ -34,15 +34,15 @@ def order_crumbs
     end
 end
 
-def destroy_related
-  relations = Active.where(trail: self)
-  relations.each do |t|
-    t.destroy
-  end
-  relations = Favorite.where(trail: self)
-  relations.each do |t|
-    t.destroy
-  end
-end
+# def destroy_related
+#   relations = Active.where(trail: self)
+#   relations.each do |t|
+#     t.destroy
+#   end
+#   relations = Favorite.where(trail: self)
+#   relations.each do |t|
+#     t.destroy
+#   end
+# end
 
 end
