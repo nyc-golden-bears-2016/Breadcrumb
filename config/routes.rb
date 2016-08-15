@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'welcome#index'
 
+  resources :tags
+
   devise_for :users
 
   get '/users/:user_id/add/:id' => 'favorites#add'

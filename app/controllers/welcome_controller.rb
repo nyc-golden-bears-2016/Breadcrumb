@@ -4,13 +4,13 @@ class WelcomeController < ApplicationController
     #static page with creators/logo/brief description/register/login
         # logic for search 
     if params[:query] != nil
-      results = PgSearch.multisearch params[:query]
-      @results = []
-      results.each do |result|
-        @results << Trail.find(result.searchable_id)
-        # binding.pry
+      search = PgSearch.multisearch params[:query]
+      # binding.pry
+      @trail_search = []
+      search.each do |trail|
+        	@trail_search << Trail.find(trail.searchable_id)
       end
-      redirect_to root_path
+
     end
   end
 

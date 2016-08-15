@@ -13,20 +13,21 @@
 =======
   <body>
 <%= form_tag root_path, method: :get do %>
-  <%= text_field_tag :query, params[:query] %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search Trails" %>
   <%= submit_tag "GO", name: nil %>
 <% end %>	
 
 >>>>>>> get basic search to work on console
 			  <p class="navbar">
 			  	<%= link_to 'Home', root_path, :class => 'navbar-link' %> |
+			  	<%= link_to 'Tags', tags_path, :class => 'navbar-link' %> |
 				<% if user_signed_in? %>
 				  <strong><%=link_to current_user.username, current_user %></strong> |
 				  <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
 				  <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
 				<% else %>
 				  <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-				  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+				  <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %> |
 				<% end %>
 
 
