@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/faq' => 'welcome#faq'
-  resources :tags, only: [:index]
+  resources :tags, only: [:index, :show]
   devise_for :users
 
   get '/users/:user_id/add/:id' => 'favorites#add'
