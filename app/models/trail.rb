@@ -3,12 +3,17 @@ class Trail < ApplicationRecord
 
   belongs_to :creator, class_name: 'User'
   has_many :crumbs, dependent: :destroy
+
   has_many :favorites, dependent: :destroy
   has_many :followers, through: :favorites, source: :user
+
   has_many :actives, dependent: :destroy
   has_many :trail_users, through: :actives, source: :user
   has_many :used_trails, through: :actives, source: :user
-  has_and_belongs_to_many :tags
+  has_many :tag_trails
+  has_many :tags, through: :tag_trails
+
+
   has_attached_file :img, styles: {
     thumb: '100x100>',
     square: '200x200#',
@@ -25,17 +30,14 @@ def order_crumbs
   ordered.each_with_index do |t, i|
     t.update_attribute(:order_number, i + 1)
     end
+ end
+
+def too_many_crumbs
+  if self.crumbs.length < 1 || self.crumbs.length > 20
+    self.errors.full_messages << "Trails must have between 1 and 20 crumbs."
+  end
 end
 
-# def destroy_related
-#   relations = Active.where(trail: self)
-#   relations.each do |t|
-#     t.destroy
-#   end
-#   relations = Favorite.where(trail: self)
-#   relations.each do |t|
-#     t.destroy
-#   end
-# end
+
 
 end

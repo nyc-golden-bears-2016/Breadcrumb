@@ -7,15 +7,10 @@
     <%= t.label :img %>
     <%= t.file_field :img %>
     Private? <%= t.check_box(:priv) %><br>
-    Ordered Trail? <%= t.check_box(:sequential) %><br><br>
+		  If private, please enter a password:<%= t.text_field(:password)%>
     <%= t.hidden_field(:latitude, :value => current_user.latitude)  %>
     <%= t.hidden_field(:longitude, :value => current_user.longitude)  %>
-
+<br>
 <%= t.submit "Save Trail" %>
 <% end %>
 </div>
-<!-- <#% form_for(@image) do |i| %>
-  <#%= i.hidden_field(:imageable_type, :value => Trail) %>
-<#%= f.password_field :password %> -->
-  <!-- <#%= i.submit "Add Photo" %>
-<#% end %> -->
