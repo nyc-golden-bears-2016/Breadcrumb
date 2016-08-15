@@ -2,6 +2,7 @@ class ActiveCrumbsController < ApplicationController
 before_action :current_active, :current_active_crumb, :related_crumb
 
   def show
+
     @trail = @active.trail
     if !@crumb.requires_answer && (@crumb.order_number >= @active.last_crumb_reached)
       @active.update_attribute(:last_crumb_reached, @crumb.order_number)
