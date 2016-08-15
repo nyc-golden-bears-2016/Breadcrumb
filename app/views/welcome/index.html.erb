@@ -1,9 +1,6 @@
+  
   <div class="image-parent">
     <%= image_tag("forest-children.jpg", :class => "style_image") %>
-  </div>
-
-  <div class="nearby">
-    <%= link_to 'Trails near you!', trails_path%>
   </div>
 
 <% if @trail_search != [] && !@trail_search.nil? %>
@@ -11,8 +8,11 @@
 	<% @trail_search.each do |trail| %>
 	 <span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
 	<% end %>
-<<<<<<< 489a20e1ed8e3f4ecd1504c9b2ee099791a40c6f
 
-=======
+
+  <div class="nearby">
+    <%= link_to 'Trails near you!', trails_path%>
+  </div>
+
+
 <% end %>
->>>>>>> create trails search and tags search with corresponding routes, controllers, model updates
