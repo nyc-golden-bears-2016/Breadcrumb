@@ -142,13 +142,12 @@ function initialize(mapdetails) {
         var distance = calcDistance(userPosition, currentCrumbPosition); 
 
         if (distance < 30) { 
-
+          
           activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id 
           var xhr = new XMLHttpRequest();
           xhr.open('PUT', activeCrumbPath, false);
           xhr.send();
           window.location = activeCrumbPath;
-          
         };
 
         $("#current").html("<p>You're roughly " + distance + " away from the next Crumb</p>" );
