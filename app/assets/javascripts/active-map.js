@@ -24,7 +24,7 @@ function initialize(mapdetails) {
     map.mapTypes.set('styled_map', styledMapType);
     map.setMapTypeId('styled_map');
 
-    var currentCrumbIndex = mapdetails.currentCrumb - 1
+    var currentCrumbIndex = mapdetails.currentCrumb
     var numberOfCrumbs = mapdetails.crumbs.length
 
 
@@ -77,7 +77,7 @@ function initialize(mapdetails) {
 
     // Set Map styles and marker
 
-    
+
     // marker.setPosition();
    $("#current").html("<p>Calculating distance...</p>");
 
@@ -86,7 +86,7 @@ function initialize(mapdetails) {
       var crumbPosition = new google.maps.LatLng(mapdetails.crumbs[currentCrumbIndex].latitude, mapdetails.crumbs[currentCrumbIndex].longitude);
 
   // Find current user position
-      
+
       function calcDistance(userPosition, crumbPosition){
         var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, crumbPosition));
         var feet = distance * 3.28084;
@@ -99,9 +99,9 @@ function initialize(mapdetails) {
       };
 
       function errorHandler(err) {
-          if (err.code == 1) 
+          if (err.code == 1)
             {  alert("Error: Access is denied!"); }
-          else if( err.code == 2) 
+          else if( err.code == 2)
             { alert("Error: Position is unavailable!"); }
       };
 
@@ -123,10 +123,10 @@ function initialize(mapdetails) {
         $("#current").html("<p>You're roughly " + calcDistance(userPosition, crumbPosition) + " away from the next Crumb heading</p>" );
         $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, crumbPosition)});
         $("#blank-map-overlay").fadeOut(3500);
-        
+
       }, errorHandler, options);
 
-      
+
     // Draw circle around the Marker
     var circle = new google.maps.Circle({
       center:mapProps.center,
@@ -170,4 +170,3 @@ $("document").ready(function() {
       google.maps.event.addDomListener(window, 'load', initialize(mapdetails));
     });
 });
-
