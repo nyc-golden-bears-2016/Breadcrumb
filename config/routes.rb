@@ -31,4 +31,5 @@ Rails.application.routes.draw do
   delete '/actives/:id' => 'actives#destroy'
   get '/actives/:id/mapdetails' => 'actives#mapdetails', :as => :active_mapdetails
 
+
 end
