@@ -46,9 +46,9 @@ function initialize(mapdetails) {
                           draggable:false,
                           icon: markerImage
                           });
-      
+
         var crumbIdLink = i + 1;
- 
+
         marker.addListener('click', function(activeId, crumbId) {
           return function() {window.location = "/actives/" + activeIdLink + "/active_crumbs/" + crumbIdLink; }
           }(marker));
@@ -134,10 +134,10 @@ function initialize(mapdetails) {
         userMarker.setPosition(pos);
         userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
-        var distance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition); 
-        if (distance < 30) { 
+        var distance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition);
+        if (distance < 30) {
           console.log("hit");
-          activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id 
+          activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id
           var xhr = new XMLHttpRequest();
           xhr.open('PUT', activeCrumbPath, false);
           xhr.send();
@@ -188,7 +188,7 @@ $("document").ready(function() {
   $.ajax({
       url: '/actives/' + activeId + '/mapdetails',
       method: 'get',
-      }).done((mapdetails) => {
+      }).done( function(mapdetails) {
         google.maps.event.addDomListener(window, 'load', initialize(mapdetails));
       });
 });
