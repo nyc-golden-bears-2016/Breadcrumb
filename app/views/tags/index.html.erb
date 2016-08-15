@@ -1,0 +1,15 @@
+<br><br>
+<span>Type to find tags:</span>
+
+<%= form_tag(tags_path, method: :"get", id: "tag-search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Tags" %>
+<%= submit_tag "Search" %>
+<% end %>
+
+
+<% if @tags.present? %>
+  <h1>Tags:</h1>
+	<% @tags.each do |tag| %>
+	 <span><%= link_to "#{tag.subject}", tag_path(tag), class: 'link'  %><br></span>
+	<% end %>
+<% end %>
