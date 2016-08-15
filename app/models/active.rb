@@ -5,10 +5,10 @@ class Active < ApplicationRecord
 
   def crumbs_available
     if !self.trail.sequential
-      self.trail.crumbs
+      self.active_crumbs
     else
       num = self.last_crumb_reached
-      self.trail.crumbs[0..(num)]
+      self.active_crumbs[0..(num)]
     end
   end
 

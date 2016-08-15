@@ -7,9 +7,10 @@
 <div>Image and text</div>
 
 <% if @crumb.requires_answer%>
-<%=form_for([@active, @active_crumb]) do |c| %>
+
+<%=form_for(@active_crumb, url: "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}") do |c| %>
   This crumb is locked, you must answer correctly to move on.
-  <%= c.text_area(:answer) %><br>
+  <%= c.text_area(:entered_answer) %><br>
   <%= c.submit "Enter" %>
 <% end %>
 <%end%>

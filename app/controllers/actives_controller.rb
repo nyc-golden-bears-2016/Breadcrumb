@@ -34,10 +34,9 @@ before_action :which_trail, only: [:joined, :join]
   def show
     @active ||= Active.create(user: current_user, trail: @trail)
     @crumbs = @active.crumbs_available
-    # 
-    # if @trail.sequential && (@trail.crumbs.length == @active.last_crumb_reached) && (@trail.crumbs.length > 1)
-    #   @message = "Ya finished, bro"
-    # end
+    if @trail.sequential && (@trail.crumbs.length == @active.last_crumb_reached) && (@trail.crumbs.length > 1)
+      @message = "Ya finished, bro"
+    end
   end
 
   def mapdetails

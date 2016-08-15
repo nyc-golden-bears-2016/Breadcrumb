@@ -11,7 +11,7 @@
 <div class="text-container">
   <p><%=@active.trail.description%></p>
   <br>
-  <p><%@active.active_crumbs.each do |c|%>
+  <p><%@crumbs.each do |c|%>
   <%=link_to c.crumb.name, "/actives/#{@active.id}/active_crumbs/#{c.id}"%>
   <%end%>
   </p>
@@ -19,6 +19,7 @@
 </div>
 
 <div id="active-id"><%= @active.id %></div>
+
 
 <% if @message%>
 <%=@message%>
