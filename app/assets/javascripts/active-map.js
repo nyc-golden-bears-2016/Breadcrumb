@@ -101,16 +101,17 @@ function initialize(mapdetails) {
 
   // Find current user position
 
-      function calcDistance(userPosition, currentCrumbPosition){
-        var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition));
-        var feet = distance * 3.28084;
-        if (distance > 2000) {return String(Math.round( (distance/5280) * 100) / 100) + " miles"}
-        else { return String(distance) + " feet"};
-      };
 
       function calcHeading(userPosition, currentCrumbPosition){
         return google.maps.geometry.spherical.computeHeading(userPosition, currentCrumbPosition);
       };
+
+      function printDistance(distance){
+            var feet = Math.floor((distance * 3.28084) - 65);
+            if (feet > 2000) {return String(Math.round( (feet/5280) * 100) / 100) + " miles"}
+            else { return String(feet) + " feet" };
+      };
+
 
       function errorHandler(err) {
           if (err.code == 1)
@@ -130,11 +131,15 @@ function initialize(mapdetails) {
           lat: position.coords.latitude,
           lng: position.coords.longitude
           };
-        map.setCenter(pos);
         userMarker.setPosition(pos);
         userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
+
         var distance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition); 
+
+          
+
+
         if (distance < 30) { 
           console.log("hit");
           activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id 
@@ -144,7 +149,7 @@ function initialize(mapdetails) {
           window.location = activeCrumbPath;
         }
 
-        $("#current").html("<p>You're roughly " + distance + " away from the next Crumb</p>" );
+        $("#current").html("<p>You're roughly " + printDistance(distance) + " away from the next Crumb</p>" );
         $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, currentCrumbPosition)});
         $("#blank-map-overlay").fadeOut(3500);
 
@@ -188,7 +193,7 @@ $("document").ready(function() {
   $.ajax({
       url: '/actives/' + activeId + '/mapdetails',
       method: 'get',
-      }).done((mapdetails) => {
+      }).done( function (mapdetails) {
         google.maps.event.addDomListener(window, 'load', initialize(mapdetails));
       });
 });
