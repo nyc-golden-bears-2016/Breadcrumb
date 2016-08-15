@@ -27,25 +27,29 @@ function initialize(mapdetails) {
     var currentCrumbIndex = mapdetails.currentCrumbIndex;
     var currentCrumb = mapdetails.crumbs[currentCrumbIndex]
     var numberOfCrumbs = mapdetails.crumbs.length;
-
+    var activeIdLink = mapdetails.activeId;
 
     for (i = 0; i < numberOfCrumbs; i++) {
 
       if (i < currentCrumbIndex) {
+
+
       var greenX = asset_path("xgreen.png");
       var markerImage = new google.maps.MarkerImage( String(greenX),
                 new google.maps.Size(40, 40),
                 new google.maps.Point(0, 0),
                 new google.maps.Point(20, 20));
 
+      var crumbLatLng = {lat: mapdetails.crumbs[i].latitude, lng: mapdetails.crumbs[i].longitude};
+
       var marker = new google.maps.Marker({
                         position: crumbLatLng,
                         draggable:false,
                         icon: markerImage
                         });
-
-      var activeIdLink = mapdetails.activeId;
-      var crumbIdLink = mapdetails.crumbs[i].id;
+      
+      var crumbIdLink = i + 1
+ 
       marker.addListener('click', function(activeId, crumbId) {
           return function() {window.location = "/actives/" + activeIdLink + "/active_crumbs/" + crumbIdLink;
         }
@@ -115,9 +119,9 @@ function initialize(mapdetails) {
 
       function errorHandler(err) {
           if (err.code == 1)
-            {  alert("Error: Access is denied!"); }
+            {  alert("Access is denied!"); }
           else if( err.code == 2)
-            { alert("Error: The geolocation request has timed out"); }
+            { alert("The geolocation request has timed out"); }
       };
 
       var options = {
@@ -137,9 +141,8 @@ function initialize(mapdetails) {
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
         var distance = calcDistance(userPosition, currentCrumbPosition); 
         if (distance < 30) 
-          { window.location.replace("/") };
-
-        $("#current").html("<p>You're roughly " + distance + " away from the next Crumb heading</p>" );
+          { window.location = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id };
+        $("#current").html("<p>You're roughly " + distance + " away from the next Crumb</p>" );
         $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, currentCrumbPosition)});
         $("#blank-map-overlay").fadeOut(3500);
 
