@@ -11,13 +11,14 @@ $(document).ready(function() {
     maximumAge: 30000;
   };
 
-  if ($('.hidden').length) {
+  if ($('.hidden').length == 0) {
+
     navigator.geolocation.getCurrentPosition(function(position) {
       this.pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
         };
-      // debugger;
+
       $.ajax({
         url: '/set_coords',
         method: 'get',
