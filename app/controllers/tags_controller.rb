@@ -8,6 +8,7 @@ class TagsController < ApplicationController
       @tags = Tag.order('created_at DESC')
       #where published is true
     end
+
   end
 
   def show

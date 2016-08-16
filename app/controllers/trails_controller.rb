@@ -1,11 +1,24 @@
 class TrailsController < ApplicationController
 before_action :current_trail, only: [:edit, :update, :destroy, :show, :publish, :addtag, :removetag]
-before_action :log_in
+# before_action :log_in
 before_action :redirect, only: [:edit, :update, :destroy]
 before_action :already_published, only: [:edit, :update]
 
   def index
     @trails = current_user.nearby_trails.page params[:page]
+    if params[:query] != nil
+      search = PgSearch.multisearch params[:query]
+      @found_trails_or_tags = []
+      search.each do |found_trail_or_tag|
+        if found_trail_or_tag.searchable_type == "Trail"
+          @found_trails_or_tags << Trail.find(found_trail_or_tag.searchable_id)
+        else 
+          @found_trails_or_tags << Tag.find(found_trail_or_tag.searchable_id)
+        end
+        
+      end
+
+    end    
   end
 
   def new

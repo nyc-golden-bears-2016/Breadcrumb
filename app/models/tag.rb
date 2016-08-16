@@ -1,4 +1,8 @@
 class Tag < ApplicationRecord
+
+	include PgSearch
+  multisearchable :against => [:subject]
+
   has_many :tag_trails
   has_many :trails, through: :tag_trails
 

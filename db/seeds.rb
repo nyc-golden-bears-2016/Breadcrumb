@@ -15,6 +15,7 @@ marco = User.create!(username: "codingmarco", email:"marco@gmail.com", password:
 
 prajay = User.create!(username: "codingprajay", email:"prajay@gmail.com", password: "bootcamp")
 
+
 e1 = Tag.create!(subject: "Bars/Alcohol")
 e2 = Tag.create!(subject: "Outdoor")
 e3 = Tag.create!(subject: "Wine Tour")
@@ -33,6 +34,7 @@ Tag.create!(subject: "Ghost Tour")
 Tag.create!(subject: "Food")
 Tag.create!(subject: "Holiday")
 Tag.create!(subject: "Music")
+
 
 fidi = mason.created_trails.create!(name: "Places we can test!", description: "A lovely walk in the oppresive heat.", priv: false, published: true, latitude: 40.706417, longitude: -74.009082)
 

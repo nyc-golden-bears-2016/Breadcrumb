@@ -10,6 +10,22 @@ $(document).ready(function() {
     enableHighAccuracy: true;
     maximumAge: 30000;
   };
+  $('#tag-search-form').submit(function(e){
+    e.preventDefault();
+
+    var target = e.target
+    
+    $.ajax({
+      url:$(this).attr('action'),
+      method:'GET'
+    })
+
+    .done(function(response){
+      $('.tag').html(response);
+      // debugger
+    })
+  });
+
 
   // if ($('.hidden').length == 0) {
 
