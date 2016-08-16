@@ -60,9 +60,12 @@ p {
 
 #signup-login{
   position: absolute;
-  top: 40%;
-  right: 50%;
-  font-size: 2vmin;
+  top: 43%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 3vmin;
 }
 
 
