@@ -41,8 +41,9 @@
 
 <div>
 <%if @page.favorites %>
-  <h5>Saved Trails<h5>
+  <h5>Saved Trails</h5>
   <%@page.favorites.each do |t|%>
+  <div class="each-trail-saved">
     <%=link_to t.trail.name, t.trail%>
     <%if t.trail.priv%>
       [PRIVATE]
@@ -54,14 +55,16 @@
     <%if current_user == @page%>
       <%=link_to "Remove from Saved", "/users/#{current_user.id}/remove/#{t.trail.id}"%>
     <%end%>
+  </div>
   <%end%>
 <%end%>
 </div>
 
 <div>
 <%if @page.actives%>
-  <h5>Past Trails<h5>
+  <h5>Past Trails</h5>
   <%@page.actives.each do |t|%>
+  <div class="each-trail-active">
     <%=link_to t.trail.name, t.trail %>
     <%if t.trail.priv%>
       [PRIVATE]
@@ -76,6 +79,7 @@
       <%=submit_tag("Delete from History")%>
       <%end%>
     <%end%>
+  </div>
   <%end%>
 <%end%>
 </div>
