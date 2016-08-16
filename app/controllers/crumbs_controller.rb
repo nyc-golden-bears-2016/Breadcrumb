@@ -55,7 +55,6 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
       invalid_crumbs = @trail.crumbs[0..-2].select do | crumb |
          Haversine.distance(crumb.latitude, crumb.longitude, new_crumb.latitude, new_crumb.longitude).to_meters < 30
       end
-      byebug
       if invalid_crumbs.empty?
         return false
       else
