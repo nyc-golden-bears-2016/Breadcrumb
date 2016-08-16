@@ -10,8 +10,8 @@ class Active < ApplicationRecord
     else
       num = self.last_crumb_reached
       available = self.active_crumbs[0..(num)]
-      available.pop
-      available
+      # available.pop
+      # available
     end
   end
 

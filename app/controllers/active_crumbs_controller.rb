@@ -11,12 +11,12 @@ before_action :current_active, :current_active_crumb, :related_crumb
 
   def update
     entered = active_crumb_params[:entered_answer]
-    if entered == @crumb.answer && (@active_crumb.order_number > @active.last_crumb_reached)
+    if entered.downcase == @crumb.answer.downcase && (@active_crumb.order_number > @active.last_crumb_reached)
       @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
       redirect_to "/actives/#{@active.id}"
     else
-      redirect_to "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}"
-      #make error handling
+      redirect_to "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}",
+      alert: "You are wrong! You get nothing!"
     end
   end
 
