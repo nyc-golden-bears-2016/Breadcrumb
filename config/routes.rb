@@ -18,9 +18,12 @@ Rails.application.routes.draw do
   get '/trails/:id/remove/:tag_id' => 'trails#removetag'
   get '/trails/:id/add/:tag_id' => 'trails#addtag'
 
+
+  get '/actives/:id/reached' => 'actives#reached'
   resources :actives, only: [:show] do
     resources :active_crumbs, only: [:show, :update]
   end
+
 
   get '/actives/:id/join' => 'actives#join'
   post '/actives/:id/joined' => 'actives#joined'

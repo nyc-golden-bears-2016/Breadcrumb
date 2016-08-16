@@ -1,7 +1,7 @@
 class ActivesController < ApplicationController
 before_action :log_in
 before_action :new_trail, only: [:joined, :join]
-before_action :current_active, only: [:show, :update, :destroy]
+before_action :current_active, only: [:show, :update, :destroy, :reached]
 before_action :current_trail, :correct_password, only: [:show, :update]
 
   def join
@@ -38,12 +38,20 @@ before_action :current_trail, :correct_password, only: [:show, :update]
     end
   end
 
+  def reached
+    num = reached_params[:id]
+    @active.last_crumb_reached = num.to_i
+    @active.save
+    render json: {route: "/actives/#{@active.id}/active_crumbs/"}
+  end
+
   def destroy
     @active.destroy
     render json: params[:id]
   end
 
   def mapdetails
+    # byebug
     sorted_crumbs = current_active.active_crumbs.sort{|x,y| x.order_number <=> x.order_number}
     render :json => {crumbs: sorted_crumbs,
                      zoom: calculate_zoom,
@@ -54,6 +62,10 @@ before_action :current_trail, :correct_password, only: [:show, :update]
   end
 
 private
+
+  def reached_params
+    params.require(:crumb).permit(:id)
+  end
 
   def destroy_params
     params.require(:params).permit(:id)

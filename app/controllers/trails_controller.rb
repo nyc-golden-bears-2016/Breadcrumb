@@ -28,15 +28,6 @@ before_action :already_published, only: [:edit, :update]
       @other_tags = Tag.all
   end
 
-  def show
-    #initialize map with user and either first crumb or all crumbs
-    #links for each crumb on the page appear but do not work until you enter the area
-  end
-
-  def update
-
-  end
-
   def removetag
     tag = Tag.find(params[:tag_id])
     t = TagTrail.find_by(trail: @trail, tag: tag)
@@ -63,7 +54,7 @@ before_action :already_published, only: [:edit, :update]
     render json: params[:id]
   end
 
-def placed_crumbs
+  def placed_crumbs
     render :json => {crumbs: current_trail.crumbs }
   end
 
