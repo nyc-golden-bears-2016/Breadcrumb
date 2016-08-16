@@ -9,6 +9,12 @@ class User < ApplicationRecord
   has_many :actives, dependent: :destroy
   has_many :walked_trails, through: :actives, source: :trail
 
+  has_attached_file :img
+
+  validates_attachment_size :img , :less_than => 3.megabytes
+
+  validates_attachment_content_type :img , :content_type => ['image/jpeg','image/jpg','image/png']
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
@@ -19,6 +25,7 @@ class User < ApplicationRecord
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode
+
 
   def self.find_first_by_auth_conditions(warden_conditions)
     conditions = warden_conditions.dup

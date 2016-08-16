@@ -10,6 +10,12 @@
 
 <img src=<%= @crumb.img %>>
 
+
+<audio controls>
+  <source src=<%= @crumb.sound %>>
+</audio>
+
+
 <% if @crumb.requires_answer%>
   <%=form_for(@active_crumb, url: "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}") do |c| %>
     This crumb is locked. You must answer correctly to move on.

@@ -15,13 +15,12 @@ class Trail < ApplicationRecord
   has_many :tag_trails
   has_many :tags, through: :tag_trails
 
-  has_attached_file :img, styles: {
-    thumb: '100x100>',
-    square: '200x200#',
-    medium: '300x300>'
-  }
+  has_attached_file :img, required: false
 
-  validates_attachment_content_type :img, :content_type => /\Aimage\/.*\Z/
+  validates_attachment_content_type :img,
+                                    :content_type => /^image\/(png|gif|jpeg)/,
+                                    :message => 'only (png/gif/jpeg) images',
+                                    :size => { in: 0..2.megabytes }
 
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode
