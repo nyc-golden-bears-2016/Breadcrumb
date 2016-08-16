@@ -144,7 +144,7 @@ function initialize(mapdetails) {
 
          google.maps.event.addListener(map, 'zoom_changed', function() {
 
-          var pixelSizeAtZoom0 = 6; 
+          var pixelSizeAtZoom0 = 5; 
           var maxPixelSize = 90; 
 
 
