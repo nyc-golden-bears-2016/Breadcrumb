@@ -1,20 +1,30 @@
-<br><%=link_to 'Save for Later', "/users/#{current_user.id}/add/#{@trail.id}"%><br>
-
-
 <h2><%=@trail.name%></h2>
-
-<% if @trail.priv%>
-[PRIVATE]
+<%if @trail.priv%>
+  [PRIVATE]
 <%else%>
-[PUBLIC]
+  [PUBLIC]
 <%end%>
 
-<% if @trail.sequential%>
-To be followed in sequence.
+<%if @trail.sequential%>
+  <span>To be followed in sequence.</span>
 <%end%>
 
-<p><%=@trail.description%></p><br>
-<img src="<%= @trail.img %>">
+<img src="<%=@trail.img%>">
 
+<div>
+  <%if @trail.tags%>
+  <br>Tags:
+    <%@trail.tags.each do |tag|%>
+      <%=tag.subject%>
+    <%end%>
+  <br>
+  <%end%>
+</div>
 
-<%=link_to 'Start!', "/actives/#{@trail.id}/join"%>
+<p><%=@trail.description%></p>
+<br>
+<br>
+<%=link_to 'Save for Later?', "/users/#{current_user.id}/add/#{@trail.id}"%>
+<br>
+<br>
+<%=link_to 'Start Now!', "/actives/#{@trail.id}/join"%>

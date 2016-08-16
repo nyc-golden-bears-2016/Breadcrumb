@@ -1,20 +1,23 @@
 <h2><%=@trail.name%></h2>
+
 <%=@crumb.name%>
+
 <% if @trail.sequential%>
-  (#<%=@crumb.order_number%>)
+  #<%=@crumb.order_number%>
 <%end%>
 
-<div>Image and text</div>
+<%=@crumb.description%>
+
 <img src=<%= @crumb.img %>>
 
 <% if @crumb.requires_answer%>
-
-<%=form_for(@active_crumb, url: "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}") do |c| %>
-  This crumb is locked, you must answer correctly to move on.
-  <%= c.text_area(:entered_answer) %><br>
-  <%= c.submit "Enter" %>
-<% end %>
+  <%=form_for(@active_crumb, url: "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}") do |c| %>
+    This crumb is locked. You must answer correctly to move on.
+    <%= c.text_area(:entered_answer) %><br>
+    <%= c.submit "Enter" %>
+  <% end %>
 <%end%>
 
-<br><br>
+<br>
+<br>
 <%=link_to "Trail", "/actives/#{@active.id}"%>

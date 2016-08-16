@@ -3,57 +3,56 @@ Trail.delete_all
 Crumb.delete_all
 Favorite.delete_all
 Active.delete_all
+ActiveCrumb.delete_all
 Tag.delete_all
+TagTrail.delete_all
 
-erica = User.create!(username: "codingerica", email:"erica@gmail.com", password: "devbootcampallstar")
+erica = User.create!(username: "codingerica", email:"erica@gmail.com", password: "bootcamp")
 
-mason = User.create!(username: "codingmason", email:"mason@gmail.com", password: "devbootcampallstar")
+mason = User.create!(username: "codingmason", email:"mason@gmail.com", password: "bootcamp")
 
-marco = User.create!(username: "codingmarco", email:"marco@gmail.com", password: "devbootcampallstar")
+marco = User.create!(username: "codingmarco", email:"marco@gmail.com", password: "bootcamp")
 
-prajay = User.create!(username: "codingprajay", email:"prajay@gmail.com", password: "devbootcampallstar")
+prajay = User.create!(username: "codingprajay", email:"prajay@gmail.com", password: "bootcamp")
 
-order_priv = mason.created_trails.create!(name: "Walk in the Park", description: "The best places in Prospect Park", sequential: true, priv: true, published: true, password: "Brooklyn", latitude: 40.745, longitude: -73.993,)
-
-unorder_priv = mason.created_trails.create!(name: "Pier Challenge", description: "Find clues along the West Side Piers", sequential: false, priv: true, published: true, password: "Chelsea", latitude: 40.745, longitude: -73.993,)
-
-order_public = mason.created_trails.create!(name: "Hidden Gems in Alphabet City", sequential: true, description: "Some of the best places you've never heard of.", priv: false, published: true, latitude: 40.745, longitude: -73.993,)
-
-unorder_public = mason.created_trails.create!(name: "Rubin Museum", sequential: false, description: "Educate yourself on the 3rd floor exhibition", latitude: 40.745, longitude: -73.993, priv: false, published: true)
-
-locked_crumb = unorder_public.crumbs.create!(name: "Nepalese Sculpture", description: "Which author discusses this story in Siddhartha?", requires_answer: true, latitude: 40.74, longitude: -73.9973, answer: "Herman Hesse", order_number: 3)
-
-unlocked_crumb = order_public.crumbs.create!(name: "The Counter", requires_answer: false, description: "Great burgers!", latitude: 40.72, longitude: -73.96, order_number: 1)
-                 order_public.crumbs.create!(name: "The Speakeasy", requires_answer: false, description: "Great drinks!", latitude: 40.725, longitude: -73.9, order_number: 2)
-                 order_public.crumbs.create!(name: "The Bistro", requires_answer: false, description: "Great Scott!!!", latitude: 40.725, longitude: -73.964, order_number: 3)
-
-
-
-
-erica.favorites.create!(trail: unorder_public)
-
-mason.actives.create!(trail: order_public)
-
-Tag.create!(subject: "History")
-Tag.create!(subject: "Food")
+e1 = Tag.create!(subject: "Bars/Alcohol")
+e2 = Tag.create!(subject: "Outdoor")
+e3 = Tag.create!(subject: "Wine Tour")
+m1 = Tag.create!(subject: "Culture")
+m2 = Tag.create!(subject: "History")
 Tag.create!(subject: "Education")
 Tag.create!(subject: "Vacation")
 Tag.create!(subject: "Kid-Friendly")
-Tag.create!(subject: "Bars/Alcohol")
 Tag.create!(subject: "Art")
 Tag.create!(subject: "Romantic")
 Tag.create!(subject: "Competition")
-Tag.create!(subject: "Outdoor")
 Tag.create!(subject: "Indoor")
+Tag.create!(subject: "Celebration")
 Tag.create!(subject: "Scavenger Hunt")
 Tag.create!(subject: "Ghost Tour")
-Tag.create!(subject: "Wine Tour")
-Tag.create!(subject: "Culture")
-Tag.create!(subject: "Celebration")
+Tag.create!(subject: "Food")
 Tag.create!(subject: "Holiday")
 Tag.create!(subject: "Music")
 
-# mason.images.create!(http://s3.amazonaws.com/bucketname/filename)
-# order_priv.images.create!()
-# unlocked_crumb.images.create!()
-# unlocked_crumb.sounds.create!()
+fidi = mason.created_trails.create!(name: "Places we can test!", description: "A lovely walk in the oppresive heat.", priv: false, published: true, latitude: 40.706417, longitude: -74.009082)
+
+TagTrail.create!(trail: fidi, tag: m1)
+TagTrail.create!(trail: fidi, tag: m2)
+
+fidi.crumbs.create!(name: "New York Stock Exchange", description: "High-tech home of one of the world's leading financial markets.", requires_answer: false, latitude: 40.706417, longitude: -74.009082, order_number: 1)
+
+fidi.crumbs.create!(name: "The Charging Bull", description: "Charging Bull, which is sometimes referred to as the Wall Street Bull or the Bowling Green Bull is a bronze sculpture, that stands in Bowling Green Park. What is the name of the sculptor?", requires_answer: true, latitude: 40.705496, longitude: -74.013326, answer: "Arturo Di Modica", order_number: 2)
+
+fidi.crumbs.create!(name: "Federal Hall", description: "Federal Hall, built in 1700 as New York's City Hall, later served as the first capitol building of the United States of America under the Constitution, as well as the site of George Washington's inauguration as the first President of the United States.", requires_answer: false, latitude: 40.707130, longitude: -74.010397, order_number: 3)
+
+longisland = erica.created_trails.create!(name: "North Shore Wine Tour", description: "Find clues along the West Side Piers", sequential: false, priv: true, published: true, password: "vino", latitude: 40.991211, longitude: -72.534255)
+
+TagTrail.create!(trail: longisland, tag: e1)
+TagTrail.create!(trail: longisland, tag: e2)
+TagTrail.create!(trail: longisland, tag: e3)
+
+longisland.crumbs.create!(name: "Macari Vineyards", requires_answer: false, latitude: 40.986174, longitude: -72.567444, order_number: 1)
+
+longisland.crumbs.create!(name: "Shinn Estate Vineyards and Farmhouse", requires_answer: false, latitude: 41.013866, longitude: -72.532554, order_number: 2)
+
+longisland.crumbs.create!(name: "Castello di Borghese Vineyard", requires_answer: false, latitude: 41.016651, longitude: -72.506247, order_number: 3)

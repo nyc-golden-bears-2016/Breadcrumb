@@ -14,7 +14,7 @@ before_action :already_published, only: [:edit, :update]
 
   def create
   @trail = current_user.created_trails.new(trail_params)
-  @trail.too_many_crumbs
+  # @trail.too_many_crumbs
     if @trail.save
       redirect_to "/trails/#{@trail.id}/edit"
     else

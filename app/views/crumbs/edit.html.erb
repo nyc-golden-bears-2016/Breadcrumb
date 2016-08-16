@@ -1,17 +1,12 @@
-<%= render "maps/crumb-map" %>
+<!-- <%= render "maps/crumb-map" %>
 
 <%=form_for([@trail, @crumb]) do |c| %>
     Name: <%= c.text_field(:name) %><br>
-<%if @trail.sequential%>
-    Number in Sequence: <%= c.text_field :order_number, placeholder: @trail.crumbs.length%><br>
-<%else%>
-    <%= c.hidden_field :order_number, value: @trail.crumbs.length %>
-<%end%>
     Description: <%= c.text_area(:description) %><br>
     Locked? <%= c.check_box(:requires_answer) %><br>
     If locked, inlcude question in description and add answer below.
     <%= c.text_area(:answer) %><br>
     <%= c.hidden_field(:latitude, :value => @crumb.latitude) %>
     <%= c.hidden_field(:longitude, :value => @crumb.longitude) %>
-  <%= c.submit "Edit Crumb" %>
-<% end %>
+    <%= c.submit "Edit Crumb" %>
+  <%end %> -->

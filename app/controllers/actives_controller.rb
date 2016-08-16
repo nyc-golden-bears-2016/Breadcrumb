@@ -1,8 +1,8 @@
 class ActivesController < ApplicationController
 before_action :log_in
 before_action :new_trail, only: [:joined, :join]
-before_action :correct_password, only: [:show, :update]
-before_action :current_active, :current_trail ,only: [:show, :update, :destroy]
+before_action :current_active, only: [:show, :update, :destroy]
+before_action :current_trail, :correct_password, only: [:show, :update]
 
   def join
     if !Active.find_by(user: current_user, trail: @newtrail)

@@ -1,4 +1,5 @@
 <%= render "maps/crumb-map" %>
+
 <%=form_for([@trail, @crumb]) do |c| %>
     Name: <%= c.text_field(:name) %><br>
     Description: <%= c.text_area(:description) %><br>
@@ -9,5 +10,5 @@
     <%= c.file_field :img %>
     <%= c.hidden_field(:latitude, value: @trail.latitude) %>
     <%= c.hidden_field(:longitude, value: @trail.longitude) %>
-  <%= c.submit "Add Crumb" %>
+   <%= c.submit "Add Crumb" %>
 <% end %>
