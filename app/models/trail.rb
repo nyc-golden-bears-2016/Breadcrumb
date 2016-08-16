@@ -2,7 +2,6 @@ class Trail < ApplicationRecord
 	include PgSearch
   multisearchable :against => [:name, :description]
 
-
   belongs_to :creator, class_name: 'User'
   has_many :crumbs, dependent: :destroy
 
@@ -12,9 +11,9 @@ class Trail < ApplicationRecord
   has_many :actives, dependent: :destroy
   has_many :trail_users, through: :actives, source: :user
   has_many :used_trails, through: :actives, source: :user
+
   has_many :tag_trails
   has_many :tags, through: :tag_trails
-
 
   has_attached_file :img, styles: {
     thumb: '100x100>',
@@ -34,12 +33,9 @@ def order_crumbs
     end
  end
 
-def too_many_crumbs
-  if self.crumbs.length < 1 || self.crumbs.length > 20
-    self.errors.full_messages << "Trails must have between 1 and 20 crumbs."
-  end
-end
-
-
-
+# def too_many_crumbs
+#   if self.crumbs.length < 1 || self.crumbs.length > 20
+#     self.errors.full_messages << "Trails must have between 1 and 20 crumbs."
+#   end
+# end
 end

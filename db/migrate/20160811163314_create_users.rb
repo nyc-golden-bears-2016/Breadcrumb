@@ -5,7 +5,6 @@ class CreateUsers < ActiveRecord::Migration[5.0]
       t.string :email
       t.float :latitude
       t.float :longitude
-      t.string :user_image
 
       t.timestamps
     end

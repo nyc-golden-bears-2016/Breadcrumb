@@ -2,8 +2,10 @@ class User < ApplicationRecord
   attr_accessor :login
 
   has_many :created_trails, class_name: 'Trail', foreign_key: :creator_id, dependent: :destroy
+
   has_many :favorites, dependent: :destroy
   has_many :favorite_trails, through: :favorites, source: :trail
+
   has_many :actives, dependent: :destroy
   has_many :walked_trails, through: :actives, source: :trail
 
@@ -30,7 +32,6 @@ class User < ApplicationRecord
       end
     end
   end
-
 
   def validate_username
     if User.where(email: username).exists?

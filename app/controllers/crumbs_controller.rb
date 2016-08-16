@@ -1,16 +1,14 @@
 class CrumbsController < ApplicationController
-before_action :current_trail
+before_action :current_trail, :trail_creator
 before_action :current_crumb, only: [:edit, :update, :destroy, :show]
-before_action :trail_creator, only: [:show]
 
   def new
     @crumb = @trail.crumbs.new
   end
 
   def create
-    @crumb = @trail.crumbs.new(crumb_params.merge(order_number: @trail.crumbs.length))
+    @crumb = @trail.crumbs.new(crumb_params)
     if invalid_crumb_spacing(@crumb)
-      byebug
       redirect_to current_user
       #make error handling
     elsif @crumb.save
@@ -19,12 +17,6 @@ before_action :trail_creator, only: [:show]
       redirect_to current_user
       #make error handling
     end
-  end
-
-  def show
-  end
-
-  def edit
   end
 
   def update
@@ -48,9 +40,7 @@ before_action :trail_creator, only: [:show]
   end
 
   def trail_creator
-    if current_user == @trail.creator
-      true
-    else
+    unless current_user == @trail.creator
       redirect_to_root
     end
   end
