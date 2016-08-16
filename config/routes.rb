@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   get '/users/:user_id/add/:id' => 'favorites#add'
-  get '/users/:user_id/remove/:id' => 'favorites#remove'
+  delete '/users/:user_id/remove/:id' => 'favorites#remove'
   get '/users/:id' => 'users#show', :as => :user
   get '/set_coords' => 'users#set_user_coords'
 

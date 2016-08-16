@@ -53,7 +53,9 @@
       <br>
     <%end%>
     <%if current_user == @page%>
-      <%=link_to "Remove from Saved", "/users/#{current_user.id}/remove/#{t.trail.id}"%>
+      <%=form_tag("/users/#{current_user.id}/remove/#{t.trail.id}", method: "delete") do %>
+      <%=submit_tag("Remove from Saved")%>
+      <%end%>
     <%end%>
   </div>
   <%end%>
@@ -104,7 +106,7 @@
           <%end%>
         <%end%>
         <br>
-        <%end%>
       </div>
+        <%end%>
       <%end%>
     </div>

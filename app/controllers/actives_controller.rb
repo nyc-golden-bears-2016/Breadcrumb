@@ -39,7 +39,6 @@ before_action :current_trail, :correct_password, only: [:show, :update]
   end
 
   def destroy
-    # byebug
     @active.destroy
     render json: params[:id]
   end

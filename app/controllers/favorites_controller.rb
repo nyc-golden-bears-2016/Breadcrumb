@@ -14,7 +14,8 @@ before_action :current_trail, :redirect, only: [:add, :remove]
   def remove
     if Favorite.find_by(user: current_user, trail: @trail)
       Favorite.find_by(user: current_user, trail: @trail).destroy
-      redirect_to current_user
+      render json: params[:id]
+
     else
       redirect_to root_path
       #make error handling
@@ -22,6 +23,10 @@ before_action :current_trail, :redirect, only: [:add, :remove]
   end
 
 private
+
+    def remove_params
+      params.require(:saved_params).permit(:id)
+    end
 
     def current_trail
       @trail = Trail.find(params[:id])
