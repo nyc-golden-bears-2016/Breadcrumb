@@ -76,7 +76,7 @@ function initialize(mapdetails) {
     }
     var child = asset_path("child.png");
     var userMarkerImage = new google.maps.MarkerImage( String(child),
-              new google.maps.Size(90, 90),
+              new google.maps.Size(75, 75),
               new google.maps.Point(0, 0),
               new google.maps.Point(45, 45));
 
