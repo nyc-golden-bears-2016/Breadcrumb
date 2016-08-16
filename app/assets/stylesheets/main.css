@@ -39,6 +39,7 @@ p {
 
 .image-parent {
  text-align: center;
+ max-height: 100vh;
 
 }
 
@@ -55,6 +56,16 @@ p {
   margin:0 auto;
   max-height: 100vh;
 }
+
+
+#signup-login{
+  position: absolute;
+  top: 40%;
+  right: 50%;
+  font-size: 2vmin;
+}
+
+
 
 #active-id {
   display: none;

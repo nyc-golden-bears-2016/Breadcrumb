@@ -1,5 +1,6 @@
 <div class="image-parent">
   <%=image_tag("forest-children.jpg", :class => "main_image")%>
+
   <% unless user_signed_in? %>
     <div id="signup-login">
       <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
