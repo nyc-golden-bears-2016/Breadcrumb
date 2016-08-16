@@ -16,7 +16,7 @@ function initialize(mapdetails) {
         mapTypeId:google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         mapTypeControlOptions: {vmapTypeIds: ['styled_map'] },
-        maxZoom: 18
+        maxZoom: 17
       };
 
     // Create new Map
@@ -69,26 +69,22 @@ function initialize(mapdetails) {
                           draggable:false,
                           icon: markerImage
                           });
-    };
-
+        };
 
     // Set Map styles and marker
       marker.setMap(map);
     }
-
+    var child = asset_path("child.png");
+    var userMarkerImage = new google.maps.MarkerImage( String(child),
+              new google.maps.Size(90, 90),
+              new google.maps.Point(0, 0),
+              new google.maps.Point(45, 45));
 
     // Create a User Marker
      var userMarker = new google.maps.Marker({
           position:mapProps.center,
           draggable:false,
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 4,
-            fillColor: '#105c5c',
-            fillOpacity: 1,
-            strokeColor: '#105c5c',
-            strokeWeight: 4
-            },
+          icon: userMarkerImage
           });
 
 
@@ -101,16 +97,17 @@ function initialize(mapdetails) {
 
   // Find current user position
 
-      function calcDistance(userPosition, currentCrumbPosition){
-        var distance = Math.floor( google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition));
-        var feet = distance * 3.28084;
-        if (distance > 2000) {return String(Math.round( (distance/5280) * 100) / 100) + " miles"}
-        else { return String(distance) + " feet"};
-      };
 
       function calcHeading(userPosition, currentCrumbPosition){
         return google.maps.geometry.spherical.computeHeading(userPosition, currentCrumbPosition);
       };
+
+      function printDistance(distance){
+            var feet = Math.floor((distance * 3.28084) - 65);
+            if (feet > 2000) {return String(Math.round( (feet/5280) * 100) / 100) + " miles"}
+            else { return String(feet) + " feet" };
+      };
+
 
       function errorHandler(err) {
           if (err.code == 1)
@@ -130,11 +127,40 @@ function initialize(mapdetails) {
           lat: position.coords.latitude,
           lng: position.coords.longitude
           };
-        map.setCenter(pos);
         userMarker.setPosition(pos);
         userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
+
+
+         google.maps.event.addListener(map, 'zoom_changed', function() {
+
+          var pixelSizeAtZoom0 = 6; 
+          var maxPixelSize = 90; 
+
+
+          var zoom = map.getZoom();
+          var relativePixelSize = pixelSizeAtZoom0 * zoom ;
+
+          if(relativePixelSize > maxPixelSize) 
+              relativePixelSize = maxPixelSize;
+
+
+          //change the size of the icon
+          userMarker.setIcon(
+              new google.maps.MarkerImage(
+                  userMarker.getIcon( String(child) ).url, //marker's same icon graphic
+                  null,//size
+                  null,//origin
+                  new google.maps.Point(relativePixelSize/2, relativePixelSize/2), //anchor
+                  new google.maps.Size(relativePixelSize, relativePixelSize) //changes the scale
+              )
+          );        
+      });
+
+
         var distance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition); 
+
+          
         if (distance < 30) { 
           console.log("hit");
           activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id 
@@ -144,27 +170,12 @@ function initialize(mapdetails) {
           window.location = activeCrumbPath;
         }
 
-        $("#current").html("<p>You're roughly " + distance + " away from the next Crumb</p>" );
+        $("#current").html("<p>You're roughly " + printDistance(distance) + " away from the next Crumb</p>" );
         $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, currentCrumbPosition)});
         $("#blank-map-overlay").fadeOut(3500);
 
       }, errorHandler, options);
 
-
-    // Draw circle around the Marker
-    var circle = new google.maps.Circle({
-      center:mapProps.center,
-      radius:50,
-      strokeColor:"#105c5c",
-      strokeOpacity:0.3,
-      strokeWeight:3,
-      fillColor:"#105c5c",
-      fillOpacity:0.1
-      });
-
-    // Bind Circle to Marker's current location
-    circle.setMap(map);
-    circle.bindTo('center', userMarker, 'position');
 
 
     ////// RECENTER BUTTON //////
@@ -188,7 +199,7 @@ $("document").ready(function() {
   $.ajax({
       url: '/actives/' + activeId + '/mapdetails',
       method: 'get',
-      }).done((mapdetails) => {
+      }).done( function (mapdetails) {
         google.maps.event.addDomListener(window, 'load', initialize(mapdetails));
       });
 });
