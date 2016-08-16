@@ -1,6 +1,6 @@
 require_relative 'boot'
 
-config.paths['app/views'] << "app/views/devise"
+# config.paths['app/views'] << "app/views/devise"
 
 require "rails"
 # Pick the frameworks you want:

@@ -10,14 +10,28 @@ before_action :already_published, only: [:edit, :update]
       search = PgSearch.multisearch params[:query]
       @found_trails_or_tags = []
       search.each do |found_trail_or_tag|
+            # binding.pry
         if found_trail_or_tag.searchable_type == "Trail"
           @found_trails_or_tags << Trail.find(found_trail_or_tag.searchable_id)
-        else 
+        elsif found_trail_or_tag.searchable_type == "Tag"
           @found_trails_or_tags << Tag.find(found_trail_or_tag.searchable_id)
+        else
+          @error = []
         end
-        
+      end
+      @found_tags = []
+      @found_trails = []
+      @found_trails_or_tags.each do |thing|
+        if thing.class == Tag
+          @found_tags << Tag.find(thing.id)
+        else thing.class == Trail
+          @found_trails << Trail.find(thing.id)
+           # binding.pry
+        end
+
       end
 
+     
     end    
   end
 
