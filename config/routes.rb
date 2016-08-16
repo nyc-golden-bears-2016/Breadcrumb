@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   get '/faq' => 'welcome#faq'
   resources :tags, only: [:index, :show]
-  devise_for :users
+  devise_for :users, controllers: { registrations: "registrations" }
 
   get '/users/:user_id/add/:id' => 'favorites#add'
   delete '/users/:user_id/remove/:id' => 'favorites#remove'
