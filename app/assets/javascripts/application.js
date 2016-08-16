@@ -29,8 +29,6 @@ $(document).ready(function() {
 
   $('.edit_trail').on('click', function(event){
     event.preventDefault();
-    // debugger;
-    var that = this;
     $.ajax({
       url: $(this).attr('action'),
       method: 'delete',
@@ -39,6 +37,32 @@ $(document).ready(function() {
     .done(function(response){
       $('.each-trail').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
       $('.each-trail-desc').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
+      $('.each-trail-saved').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
+      $('.each-trail-active').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
+    });
+  })
+
+  $('.each-trail-active').on('click', 'form', function(event){
+    event.preventDefault();
+    $.ajax({
+      url: $(this).attr('action'),
+      method: 'delete',
+      data: $(this).serialize()
+    })
+    .done(function(response){
+      $('.each-trail-active').find('form[action="/actives/' + response + '"'+ ']').parent().remove();
+    });
+  })
+
+  $('.each-trail-saved').on('click', 'form', function(event){
+    event.preventDefault();
+    $.ajax({
+      url: $(this).attr('action'),
+      method: 'delete',
+      data: $(this).serialize()
+    })
+    .done(function(response){
+      $('.each-trail-saved').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
     });
   })
 

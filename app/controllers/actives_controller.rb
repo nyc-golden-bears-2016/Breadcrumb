@@ -40,7 +40,7 @@ before_action :current_trail, :correct_password, only: [:show, :update]
 
   def destroy
     @active.destroy
-    redirect_to current_user
+    render json: params[:id]
   end
 
   def mapdetails
@@ -54,6 +54,10 @@ before_action :current_trail, :correct_password, only: [:show, :update]
   end
 
 private
+
+  def destroy_params
+    params.require(:params).permit(:id)
+  end
 
   def current_trail
     @trail ||= Active.find(params[:id]).trail

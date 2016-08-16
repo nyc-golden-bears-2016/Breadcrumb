@@ -20,7 +20,7 @@ before_action :redirect
   end
 
   def user_coord_params
-    params.require(:user_position).permit(:lat, :lng)
+    params.require(:user_position).permit(:lat, :lng, :sound)
   end
 
 end

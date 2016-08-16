@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160815171159) do
+ActiveRecord::Schema.define(version: 20160816194953) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,20 +37,24 @@ ActiveRecord::Schema.define(version: 20160815171159) do
   end
 
   create_table "crumbs", force: :cascade do |t|
-    t.string   "name",                             null: false
+    t.string   "name",                               null: false
     t.text     "description"
     t.float    "latitude"
     t.float    "longitude"
-    t.boolean  "requires_answer",  default: false
+    t.boolean  "requires_answer",    default: false
     t.string   "answer"
-    t.integer  "trail_id",                         null: false
+    t.integer  "trail_id",                           null: false
     t.integer  "order_number"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "img_file_name"
     t.string   "img_content_type"
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
+    t.string   "sound_file_name"
+    t.string   "sound_content_type"
+    t.integer  "sound_file_size"
+    t.datetime "sound_updated_at"
   end
 
   create_table "favorites", force: :cascade do |t|
@@ -129,6 +133,10 @@ ActiveRecord::Schema.define(version: 20160815171159) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
