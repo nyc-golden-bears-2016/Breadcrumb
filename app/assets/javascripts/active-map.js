@@ -76,7 +76,7 @@ function initialize(mapdetails) {
     }
     var child = asset_path("child.png");
     var userMarkerImage = new google.maps.MarkerImage( String(child),
-              new google.maps.Size(90, 90),
+              new google.maps.Size(75, 75),
               new google.maps.Point(0, 0),
               new google.maps.Point(45, 45));
 
@@ -144,7 +144,7 @@ function initialize(mapdetails) {
 
          google.maps.event.addListener(map, 'zoom_changed', function() {
 
-          var pixelSizeAtZoom0 = 6; 
+          var pixelSizeAtZoom0 = 5; 
           var maxPixelSize = 90; 
 
 

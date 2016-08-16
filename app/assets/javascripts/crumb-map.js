@@ -1,4 +1,4 @@
-function initialize() {
+function initialize(placed_crumbs) {
 
     // Create an antique treasure-map style of Map
      var styledMapType = new google.maps.StyledMapType(
@@ -40,8 +40,6 @@ function initialize() {
                       icon: markerImage
                       });
 
-
-
     // // Print current coordinates of the Marker to the Form
     google.maps.event.addListener(marker, 'dragend', function(evt){
       $("#crumb_latitude").val(marker.position.lat().toFixed(8));
@@ -53,7 +51,77 @@ function initialize() {
     map.setMapTypeId('styled_map');
     marker.setMap(map);
 
-        // Set Initial Coordinates
+    var crumbs = placed_crumbs.crumbs
+    var numberOfCrumbs = crumbs.length;
+
+    for (i = 0; i < numberOfCrumbs; i++) {
+
+        var crumbLatLng = {lat: crumbs[i].latitude, lng: crumbs[i].longitude};
+
+        var crumbMarker = new google.maps.Marker({
+                          position: crumbLatLng,
+                          draggable:false,
+                          icon: {
+                            path: google.maps.SymbolPath.CIRCLE,
+                            scale: 1,
+                            fillColor: 'black',
+                            fillOpacity: 0.0,
+                            strokeColor: 'black',
+                            strokeWeight: 1,
+                            strokeOpacity: 0.0,
+                            }
+                          });
+        
+        crumbMarker.setMap(map);
+
+
+        var circle = new google.maps.Circle({
+            center:mapProps.center,
+            radius:17,
+            strokeColor:"black",
+            strokeOpacity:0.8,
+            strokeWeight:4,
+            fillColor:"black",
+            fillOpacity:0.3,
+            editable: false
+          });
+
+          // Bind Circle to Marker's current location
+          circle.setMap(map);
+          circle.bindTo('center', crumbMarker, 'position');
+
+
+        var xMarkerCoordinates = [
+          {lat: (crumbs[i].latitude + 0.00011), lng: (crumbs[i].longitude + 0.00011)},
+          {lat: (crumbs[i].latitude - 0.00011), lng: (crumbs[i].longitude - 0.00011)},
+          ];
+
+        var xMarker = new google.maps.Polyline({
+          path: xMarkerCoordinates,
+          geodesic: true,
+          strokeColor: 'black',
+          strokeOpacity: 0.6,
+          strokeWeight: 5
+        });
+
+         var yMarkerCoordinates = [
+          {lat: (crumbs[i].latitude - 0.00011), lng: (crumbs[i].longitude + 0.00011)},
+          {lat: (crumbs[i].latitude + 0.00011), lng: (crumbs[i].longitude - 0.00011)},
+          ];
+
+        var yMarker = new google.maps.Polyline({
+          path: yMarkerCoordinates,
+          geodesic: true,
+          strokeColor: 'black',
+          strokeOpacity: 0.6,
+          strokeWeight: 5
+        });
+
+        xMarker.setMap(map);
+        yMarker.setMap(map);
+
+    } // End FOR LOOP
+
 
   ////// SEARCH BOX //////
 
@@ -115,7 +183,12 @@ function initialize() {
 }
 // Close Initialize Function
 
-if ( $('.crumbs').length ){
-    // Initialize Map
-  google.maps.event.addDomListener(window, 'load', initialize);
-};
+$(".crumbs.new").ready(function() {
+  var trailId = $("#trail-id").text();
+  $.ajax({
+      url: "/trails/" + trailId + "/placed_crumbs",
+      method: 'get',
+      }).done( function (placed_crumbs) {
+        google.maps.event.addDomListener(window, 'load', initialize(placed_crumbs));
+      });
+});

@@ -63,6 +63,11 @@ before_action :already_published, only: [:edit, :update]
     render json: params[:id]
   end
 
+def placed_crumbs
+    render :json => {crumbs: current_trail.crumbs }
+  end
+
+
 private
 
   def trail_params

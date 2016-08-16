@@ -26,6 +26,6 @@ Rails.application.routes.draw do
   post '/actives/:id/joined' => 'actives#joined'
   delete '/actives/:id' => 'actives#destroy'
   get '/actives/:id/mapdetails' => 'actives#mapdetails', :as => :active_mapdetails
-
+  get '/trails/:id/placed_crumbs' => 'trails#placed_crumbs', :as => :placed_crumbs
 
 end
