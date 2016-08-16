@@ -64,8 +64,6 @@ function initialize() {
     circle.setMap(map);
     circle.bindTo('center', marker, 'position');
 
-    debugger;
-
     // // Print current coordinates of the Marker to the 'Current' Div
  google.maps.event.addListener(marker, 'dragend', function(evt){
       var pos = {

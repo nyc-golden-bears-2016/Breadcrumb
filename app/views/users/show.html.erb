@@ -7,8 +7,9 @@
 </div>
 
 <div>
-<h5>Created Trails<h5>
+<h5>Created Trails</h5>
 <%@page.created_trails.each do |t|%>
+  <div class='each-trail'>
   <%=link_to t.name, t%>
     <%if t.priv%>
       [PRIVATE]<br>
@@ -29,8 +30,8 @@
           <%= f.submit "Delete Trail" %>
           <% end %><br>
       <%end%>
+  </div>
     <%end%>
-
     <% if @page.favorites %>
       <h5>Saved Trails<h5>
       <%@page.favorites.each do |t|%>
@@ -78,6 +79,7 @@
     <div>
       <h4>Explore </h4>
         <%@trails.each do |t|%>
+        <div class="each-trail-desc">
         <%=link_to t.name, t%>
           <%if t.priv%>
             [PRIVATE]
@@ -86,6 +88,7 @@
           <%end%>
         by <%=link_to t.creator.username, t.creator%><br>
         <%=t.description%><br><br>
+      </div>
         <%end%>
     </div>
   <%end%>
