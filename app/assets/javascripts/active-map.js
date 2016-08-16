@@ -16,7 +16,7 @@ function initialize(mapdetails) {
         mapTypeId:google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         mapTypeControlOptions: {vmapTypeIds: ['styled_map'] },
-        maxZoom: 18
+        maxZoom: 17
       };
 
     // Create new Map
@@ -69,26 +69,22 @@ function initialize(mapdetails) {
                           draggable:false,
                           icon: markerImage
                           });
-    };
-
+        };
 
     // Set Map styles and marker
       marker.setMap(map);
     }
-
+    var child = asset_path("child.png");
+    var userMarkerImage = new google.maps.MarkerImage( String(child),
+              new google.maps.Size(90, 90),
+              new google.maps.Point(0, 0),
+              new google.maps.Point(45, 45));
 
     // Create a User Marker
      var userMarker = new google.maps.Marker({
           position:mapProps.center,
           draggable:false,
-          icon: {
-            path: google.maps.SymbolPath.CIRCLE,
-            scale: 4,
-            fillColor: '#105c5c',
-            fillOpacity: 1,
-            strokeColor: '#105c5c',
-            strokeWeight: 4
-            },
+          icon: userMarkerImage
           });
 
 
@@ -135,11 +131,36 @@ function initialize(mapdetails) {
         userMarker.setMap(map);
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
 
+
+         google.maps.event.addListener(map, 'zoom_changed', function() {
+
+          var pixelSizeAtZoom0 = 6; 
+          var maxPixelSize = 90; 
+
+
+          var zoom = map.getZoom();
+          var relativePixelSize = pixelSizeAtZoom0 * zoom ;
+
+          if(relativePixelSize > maxPixelSize) 
+              relativePixelSize = maxPixelSize;
+
+
+          //change the size of the icon
+          userMarker.setIcon(
+              new google.maps.MarkerImage(
+                  userMarker.getIcon( String(child) ).url, //marker's same icon graphic
+                  null,//size
+                  null,//origin
+                  new google.maps.Point(relativePixelSize/2, relativePixelSize/2), //anchor
+                  new google.maps.Size(relativePixelSize, relativePixelSize) //changes the scale
+              )
+          );        
+      });
+
+
         var distance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition); 
 
           
-
-
         if (distance < 30) { 
           console.log("hit");
           activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id 
@@ -155,21 +176,6 @@ function initialize(mapdetails) {
 
       }, errorHandler, options);
 
-
-    // Draw circle around the Marker
-    var circle = new google.maps.Circle({
-      center:mapProps.center,
-      radius:50,
-      strokeColor:"#105c5c",
-      strokeOpacity:0.3,
-      strokeWeight:3,
-      fillColor:"#105c5c",
-      fillOpacity:0.1
-      });
-
-    // Bind Circle to Marker's current location
-    circle.setMap(map);
-    circle.bindTo('center', userMarker, 'position');
 
 
     ////// RECENTER BUTTON //////
