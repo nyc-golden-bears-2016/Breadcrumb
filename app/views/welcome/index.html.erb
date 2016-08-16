@@ -1,5 +1,11 @@
 <div class="image-parent">
-  <%=image_tag("forest-children.jpg", :class => "style_image")%>
+  <%=image_tag("forest-children.jpg", :class => "main_image")%>
+  <% unless user_signed_in? %>
+    <div id="signup-login">
+      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+      <%=link_to "Login", new_user_session_path, :class => 'navbar-link'%>
+    <div>
+  <% end %>
 </div>
 <div class="hidden"></div>
 
