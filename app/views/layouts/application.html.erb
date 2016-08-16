@@ -34,8 +34,8 @@
 				<% end %>
 
 <% if user_signed_in? %>				
-<%= form_tag(trails_path, method: :"get", id: "trails-search-form") do %>
-  <%= text_field_tag :query, params[:query], placeholder: "Search Trails" %>
+<%= form_tag(trails_path, method: :"get", id: "master-search-form") do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search Trails or Tags" %>
   <%= submit_tag "GO", name: nil %>
 <% end %>		
 <% end %>			
