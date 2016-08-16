@@ -1,4 +1,4 @@
-//= require jquery
+ //= require jquery
 //= require app_assets
 //= require js-routes
 //= require jQueryRotate
@@ -26,6 +26,21 @@ $(document).ready(function() {
       })
     }, options);
   }
+
+  $('.edit_trail').on('click', function(event){
+    event.preventDefault();
+    // debugger;
+    var that = this;
+    $.ajax({
+      url: $(this).attr('action'),
+      method: 'delete',
+      data: $(this).serialize()
+    })
+    .done(function(response){
+      $('.each-trail').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
+      $('.each-trail-desc').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
+    });
+  })
 
 });
 

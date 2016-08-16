@@ -16,21 +16,20 @@ ActiveRecord::Schema.define(version: 20160815171159) do
   enable_extension "plpgsql"
 
   create_table "active_crumbs", force: :cascade do |t|
+    t.boolean  "reached",        default: false
     t.string   "entered_answer"
     t.integer  "active_id"
     t.integer  "crumb_id"
     t.integer  "order_number"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "actives", force: :cascade do |t|
     t.integer  "user_id",                            null: false
     t.integer  "trail_id",                           null: false
     t.boolean  "completed",          default: false
-    t.integer  "last_crumb_reached", default: 0
+    t.integer  "last_crumb_reached", default: 1
     t.boolean  "winner",             default: false
     t.string   "entered_password"
     t.datetime "created_at",                         null: false
@@ -46,7 +45,7 @@ ActiveRecord::Schema.define(version: 20160815171159) do
     t.string   "answer"
     t.integer  "trail_id",                         null: false
     t.integer  "order_number"
-    t.string   "crumb_image"
+    t.string   "crumg_image"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
     t.string   "img_file_name"
@@ -103,7 +102,7 @@ ActiveRecord::Schema.define(version: 20160815171159) do
     t.float    "latitude"
     t.float    "longitude"
     t.boolean  "priv",             default: false
-    t.boolean  "sequential",       default: true
+    t.boolean  "sequential",       default: false
     t.boolean  "published",        default: false
     t.integer  "creator_id"
     t.string   "password"

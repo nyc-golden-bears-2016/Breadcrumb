@@ -60,7 +60,7 @@ before_action :redirect, only: [:edit, :update, :destroy]
 
   def destroy
     @trail.destroy
-    redirect_to current_user
+    render json: params[:id]
   end
 
 private
@@ -69,6 +69,10 @@ private
 
   def trail_params
     params.require(:trail).permit(:name, :description, :latitude, :longitude, :private, :sequential, :published, :password, :img)
+  end
+
+  def destroy_params
+    params.require(:params).permit(:id)
   end
 
   def current_trail
