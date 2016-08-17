@@ -13,7 +13,8 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    @trails = @tag.trails
+    all = @tag.trails
+    @trails = all.where(published: true)
     #where published
   end
 

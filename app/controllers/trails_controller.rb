@@ -32,8 +32,8 @@ before_action :already_published, only: [:edit, :update]
 
       end
 
-     
-    end    
+
+    end
   end
 
   def new
@@ -56,7 +56,8 @@ before_action :already_published, only: [:edit, :update]
   end
 
   def update
-
+    @trail.update_attributes(trail_params)
+    redirect_to "/trails/#{@trail.id}/edit"
   end
 
   def removetag
@@ -76,7 +77,7 @@ before_action :already_published, only: [:edit, :update]
 
   def publish
     if @trail.too_many_crumbs
-      redirect_to @trail,
+      redirect_to edit_trail_path,
       alert: "Please make sure your trail has between one and twenty crumbs."
     else
       @trail.update_attribute(:published, true)

@@ -2,7 +2,7 @@ class ActivesController < ApplicationController
 before_action :log_in
 before_action :new_trail, only: [:joined, :join]
 before_action :current_active, only: [:show, :update, :destroy, :reached]
-before_action :current_trail, :correct_password, only: [:show, :update, :reached]
+before_action :current_trail, :correct_password, :published?, only: [:show, :update, :reached]
 
   def join
     if !Active.find_by(user: current_user, trail: @newtrail)
@@ -23,9 +23,9 @@ before_action :current_trail, :correct_password, only: [:show, :update, :reached
     if entered == @newtrail.password
       @active = Active.create(user: current_user, trail: @newtrail, entered_password: entered)
       @active.copy_crumbs
-      redirect_to "/actives/#{@active.id}"
+      redirect_to "/actives/#{@active.id}/"
     else
-      redirect_to current_user,
+      redirect_to request.referer,
       alert: "Incorrect password."
     end
   end
@@ -36,20 +36,9 @@ before_action :current_trail, :correct_password, only: [:show, :update, :reached
   end
 
   def reached
-    this_crumb = reached_params[:id]
-    this_number = (ActiveCrumb.find(num.to_i).order_number) - 1
-    previous_active = ActiveCrumb.find_by(active: @active, order_number: this_number)
-    previous_crumb = previous_active.crumb
-    #we could avoid this if we could just turn off map search if answer is incorrect
-    if previous_crumb.requires_answer && (previous_crumb.answer != previous_active.entered_answer)
-      redirect_to "/actives/#{@active.id}",
-      alert: "You must answer the question correctly to move forward."
-    #how will we get around getting the map geofence triggered again?
-    else
       @active.last_crumb_reached = num.to_i
       @active.save
       render json: {route: "/actives/#{@active.id}/active_crumbs/"}
-    end
   end
 
   def destroy
@@ -103,13 +92,16 @@ private
   end
 
   def correct_password
-    if @trail.priv
-      if @trail.password == @active.entered_password
-        true
-      else
-        redirect_to new_user_session_path
-        #error handling
-      end
+    if @trail.priv && !(@trail.password == @active.entered_password)
+        redirect_to current_trail,
+        alert: "You did not enter the correct password for that trail."
     end
   end
+
+  def published?
+    unless @trail.published || (current_user == @trail.creator)
+      redirect_to current_user
+    end
+  end
+
 end

@@ -1,9 +1,11 @@
 <div>
 <%if current_user == @page%>
-  <%=link_to 'Create Trail', new_trail_path%>
+  <%=link_to 'Create A Trail', new_trail_path%>
 
 <%else%>
+<div class="page-header">
   <%=@page.username.upcase%>'S PROFILE
+</div>
 <%end%>
 </div>
 
@@ -111,3 +113,6 @@
         <%end%>
       <%end%>
     </div>
+    <% if user_signed_in? %>
+      <div class="hidden"></div>
+    <% end %>
