@@ -11,7 +11,7 @@ before_action :current_active, :current_active_crumb, :related_crumb, :published
       @message = true
     end
     #for testing
-    @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
+    # @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
   end
 
   def update
