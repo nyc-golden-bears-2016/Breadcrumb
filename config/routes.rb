@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/set_coords' => 'users#set_user_coords'
 
   resources :trails do
-    resources :crumbs, except: [:index ]
+    resources :crumbs, except: [:index, :show]
   end
 
   get '/trails/:id/publish' => 'trails#publish'

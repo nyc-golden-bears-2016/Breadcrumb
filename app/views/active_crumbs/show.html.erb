@@ -6,7 +6,7 @@
 <%end%>
 
 <%if @needs_answer%>
-
+<%=@crumb.question%>
   <%=form_for(@active_crumb, url: "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}") do |c| %>
   This crumb is locked. You must answer correctly to see the content.
   <%= c.text_area(:entered_answer) %><br>
@@ -24,13 +24,17 @@
 <%=@crumb.description%>
 
 <%if @crumb.img_file_size%>
-<img src=<%= @crumb.img %>>
+<div id="view">
+  <img src= <%=@crumb.img%>/>
+</div>
 <%end%>
 
 <%if @crumb.sound_file_size%>
+<div id="view">
 <audio controls>
   <source src=<%= @crumb.sound %>>
 </audio>
+		</div>
 <%end%>
 
 <%end%>
