@@ -1,14 +1,3 @@
-<div class="image-parent">
-  <%=image_tag("forest-children.jpg", :class => "style_image")%>
-</div>
-
-<%if @trail_search != [] && !@trail_search.nil?%>
-  <h1>Your Trail Search:</h1>
-	<%@trail_search.each do |trail|%>
-	 <span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
-	<% end %>
-  <div class="hidden"></div>
-  <div class="nearby">
-    <%= link_to 'Trails near you!', trails_path%>
+  <div class="image-parent">
+    <%= image_tag("forest-children.jpg", :class => "style_image") %>
   </div>
-<% end %>

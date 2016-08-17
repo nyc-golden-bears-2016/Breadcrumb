@@ -1,6 +1,6 @@
 class Trail < ApplicationRecord
 	include PgSearch
-  multisearchable :against => [:name, :description]
+  multisearchable :against => [:name, :description, :tags_name]
 
   belongs_to :creator, class_name: 'User'
   has_many :crumbs, dependent: :destroy
@@ -38,4 +38,8 @@ class Trail < ApplicationRecord
 		end
 	end
 
-	end
+  def tags_name
+    tags.name
+  end
+
+end

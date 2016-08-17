@@ -1,6 +1,7 @@
 <div>
 <%if current_user == @page%>
   <%=link_to 'Create Trail', new_trail_path%>
+
 <%else%>
   <%=@page.username.upcase%>'S PROFILE
 <%end%>

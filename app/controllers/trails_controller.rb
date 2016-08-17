@@ -6,6 +6,34 @@ before_action :already_published, only: [:edit, :update]
 
   def index
     @trails = current_user.nearby_trails.page params[:page]
+
+    if params[:query] != nil
+      search = PgSearch.multisearch params[:query]
+      @found_trails_or_tags = []
+      search.each do |found_trail_or_tag|
+            # binding.pry
+        if found_trail_or_tag.searchable_type == "Trail"
+          @found_trails_or_tags << Trail.find(found_trail_or_tag.searchable_id)
+        elsif found_trail_or_tag.searchable_type == "Tag"
+          @found_trails_or_tags << Tag.find(found_trail_or_tag.searchable_id)
+        else
+          @error = []
+        end
+      end
+      @found_tags = []
+      @found_trails = []
+      @found_trails_or_tags.each do |trail_or_tag|
+        if trail_or_tag.class == Tag
+          @found_tags << Tag.find(trail_or_tag.id)
+        else trail_or_tag.class == Trail
+          @found_trails << Trail.find(trail_or_tag.id)
+           # binding.pry
+        end
+
+      end
+
+     
+    end    
   end
 
   def new
