@@ -69,15 +69,15 @@ before_action :already_published, only: [:edit, :update]
     tag = Tag.find(params[:tag_id])
     t = TagTrail.find_by(trail: @trail, tag: tag)
     t.destroy
-    redirect_to request.referer
+    render json: {tag: params[:tag_id], trail: @trail.id}
   end
 
   def addtag
     tag = Tag.find(params[:tag_id])
     if !TagTrail.find_by(trail: @trail, tag: tag)
-      TagTrail.create(trail: @trail, tag: tag)
+      @tt = TagTrail.create(trail: @trail, tag: tag)
+      render json: {tag_trail: "/trails/#{@tt.trail_id}/remove/#{@tt.tag_id}", tag: tag.subject}
     end
-    redirect_to request.referer
   end
 
   def publish

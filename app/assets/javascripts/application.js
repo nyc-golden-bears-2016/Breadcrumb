@@ -67,6 +67,30 @@ $(document).ready(function() {
     });
   })
 
+  $('.selected-tags').on('click', '.your-tag', function(event){
+    event.preventDefault();
+    $.ajax({
+      url: $(this).children().attr('href'),
+      method: 'get',
+      data: $(this).serialize()
+    })
+    .done(function(response){
+      $('.your-tag').find('a[href="/trails/' + response.trail + '/remove/' + response.tag + '"' + ']').remove();
+    });
+  })
+
+  $('.other-tag').on('click', 'a', function(event){
+    event.preventDefault();
+    $.ajax({
+      url: $(this).attr('href'),
+      method: 'get',
+      data: $(this).serialize()
+    })
+    .done(function(response){
+      $('.selected-tags').append("<span class='your-tag'><a href=" + response.tag_trail + ">" + response.tag + " | </a></span>")
+    });
+  })
+
 });
 
 
