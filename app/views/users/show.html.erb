@@ -1,15 +1,19 @@
-<div>
+<div class="container">
+<div class="row text-container matching-color" id="center">
+<div class="col-sm-12">
 <%if current_user == @page%>
   <%=link_to 'Create A Trail', new_trail_path%>
 
 <%else%>
-<div class="page-header">
+<div class="matching-color">
   <%=@page.username.upcase%>'S PROFILE
 </div>
 <%end%>
 </div>
+</div>
 
-<div>
+<div class="row text-container matching-color">
+<div class="col-sm-4">
 <h5>Created Trails</h5>
 <%if @page.created_trails%>
 <%@page.created_trails.each do |t|%>
@@ -42,7 +46,8 @@
    <%end%>
 </div>
 
-<div>
+
+<div class="col-sm-4">
 <%if @page.favorites %>
   <h5>Saved Trails</h5>
   <%@page.favorites.each do |t|%>
@@ -65,7 +70,7 @@
 <%end%>
 </div>
 
-<div>
+<div class="col-sm-4">
 <%if @page.actives%>
   <h5>Past Trails</h5>
   <%@page.actives.each do |t|%>
@@ -88,8 +93,10 @@
   <%end%>
 <%end%>
 </div>
+</div>
 
-<div>
+<div class="row text-container matching-color">
+<div class="col-sm-12">
   <%if current_user == @page%>
       <h4>Explore Nearby Trails</h4>
         <%@trails.each do |t|%>
@@ -103,7 +110,7 @@
         by <%=link_to t.creator.username, t.creator%><br>
         <%=t.description%><br><br>
         <%if t.tags%>
-        <br>Tags:
+          Tags:
           <%t.tags.each do |tag|%>
             <%=link_to tag.subject, tag%>
           <%end%>
@@ -113,6 +120,8 @@
         <%end%>
       <%end%>
     </div>
+  </div>
+</div>
     <% if user_signed_in? %>
       <div class="hidden"></div>
     <% end %>

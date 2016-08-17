@@ -5,20 +5,16 @@ before_action :redirect, only: [:edit, :update, :destroy]
 before_action :already_published, only: [:edit, :update]
 
   def index
-    @nearby_trails = current_user.nearby_trails.published.page params[:page]
-    @unpublished_trails = Trail.unpublished
-    @published_trails = Trail.published
+    @published_trails = Trail.published.order(created_at: :desc)
 
     if params[:query] != nil
       search = PgSearch.multisearch params[:query]
       @found_trails_or_tags = []
       search.each do |found_trail_or_tag|
-            # binding.pry
         if found_trail_or_tag.searchable_type == "Trail"
           @found_trails_or_tags << Trail.find(found_trail_or_tag.searchable_id)
         elsif found_trail_or_tag.searchable_type == "Tag"
           @found_trails_or_tags << Tag.find(found_trail_or_tag.searchable_id)
-          # binding.pry
         else
           @error = []
         end
@@ -32,12 +28,8 @@ before_action :already_published, only: [:edit, :update]
           if Trail.find(trail_or_tag).published
           @found_trails << Trail.find(trail_or_tag.id)
           end
-           # binding.pry
         end
-
       end
-
-
     end
   end
 
@@ -62,7 +54,7 @@ before_action :already_published, only: [:edit, :update]
 
   def update
     @trail.update_attributes(trail_params)
-    redirect_to "/trails/#{@trail.id}/edit"
+    redirect_to current_user
   end
 
   def removetag
