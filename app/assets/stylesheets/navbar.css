@@ -1,9 +1,9 @@
 
-.navbar-brand { position: relative; z-index: 20; margin: 0px; font-size: 1.8em; color: white !important}
+.navbar-brand { position: relative; z-index: 20; margin: 0; font-size: 1.8em; color: white !important}
 
 .navbar-nav.navbar-right .btn { position: relative; z-index: 20; padding: 4px 20px; margin: 10px auto; }
 
-.navbar .navbar-collapse { position: relative; }
+.navbar .navbar-collapse { position: relative}
 .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 22px; }
 
 .navbar .nav-collapse { position: absolute; z-index: 19; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding-right: 30px; padding-left: 30px; width: 100%; }
@@ -17,7 +17,8 @@
 .container-fluid.no-padding { padding: 0px }
 
 .container.small-margin {
-  margin: 0 auto;
+  margin: 0;
+  width: 100%;
 }
 
 .dark-green-navbar {
@@ -27,13 +28,15 @@
 
 .nav.navbar-nav.navbar-right li a {
   color: #2befc6 ;
+
 }
 
 .nav.navbar-nav.navbar-right li a:hover {
   color: white;
   text-shadow: 0 0 4px #9bfefa;
-  margin: 0;
 }
+
+
 
 input:-webkit-autofill  {
     color: white !important
@@ -54,8 +57,36 @@ input:-webkit-autofill:focus {
     color: white;
 }
 
-@media (max-width: 500px) {
-   .collapse {
-       display: none !important;
-   }
+.navbar-header {
+  position: absolute;
+  left: 10px;
 }
+
+.nav-spacer {
+  height: 10px;
+}
+
+button.navbar-toggle {
+  position: fixed; 
+  right: 1%;
+}
+
+.nav.navbar-nav.navbar-right li {
+  position: relative;
+  text-align: right;
+  margin: 0;
+}
+
+@media (max-width: 1000px) {
+
+    .nav.navbar-nav.navbar-right li a {
+      font-size: 2em;
+      padding: 20px 10px;
+    }
+
+}
+
+
+
+
+

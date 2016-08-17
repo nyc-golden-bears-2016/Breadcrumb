@@ -1,11 +1,14 @@
-<div class="text-container">
-<h2><%=@active.trail.name%></h2>
-<%if @active.trail.sequential%>
-<p>To be followed in sequence.</p>
-<%end%>
+<div class="text-container map-title">
+  <h1><%=@active.trail.name%></h1>
 </div>
 
 <%= render "maps/active-map" %>
+
+<div class="text-container">
+  <%if @active.trail.sequential%>
+    <p>To be followed in sequence.</p>
+  <%end%>
+</div>
 
 <div class="text-container">
   <p><%=@active.trail.description%></p>

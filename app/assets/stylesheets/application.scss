@@ -16,11 +16,14 @@
  */
 
 @import "bootstrap-sprockets";
+$grid-float-breakpoint: 1000px;
 @import "bootstrap";
 @import "main";
 @import "login-form";
 @import "navbar";
 @import "erica";
 
+
 @font-face { font-family: 'celtichand';
              src: asset_url('/assets/fonts/celtichand.ttf') format('truetype')}
+
