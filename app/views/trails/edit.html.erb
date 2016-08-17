@@ -1,12 +1,12 @@
-<%=render "maps/trail-map"%>
-
 <div class="text-container">
 	<%=form_for(@trail) do |t|%>
 		Title: <%= t.text_field :name, placeholder: @trail.name%>
 		<br>
     Description: <%= t.text_area :description, placeholder: @trail.description%>
 		<br>
-    <img src="<%=@trail.img%>">
+		<%if @trail.img_file_size%>
+		<img src="<%=@trail.img%>">
+		<%end%>
     <%=t.label :img%>
     <%=t.file_field :img%>
     Locked? <%= t.check_box(:priv) %>

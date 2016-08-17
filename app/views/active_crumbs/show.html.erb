@@ -15,11 +15,11 @@
 
 <%=@crumb.description%>
 
-<%if @crumb.img%>
+<%if @crumb.img_file_size%>
 <img src=<%= @crumb.img %>>
 <%end%>
 
-<%if @crumb.sound%>
+<%if @crumb.sound_file_size%>
 <audio controls>
   <source src=<%= @crumb.sound %>>
 </audio>

@@ -4,9 +4,9 @@ before_action :redirect, only: [:show]
 
   def show
     @trail = @active.trail
-    # if !@crumb.requires_answer && (@active_crumb.order_number > @active.last_crumb_reached)
-    #   @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
-    # end
+    if !@crumb.requires_answer && (@active_crumb.order_number > @active.last_crumb_reached)
+      @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
+    end
     if @trail.sequential && (@trail.crumbs.length == @active.last_crumb_reached) && (@trail.crumbs.length > 1)
       @message = true
     end
@@ -14,21 +14,19 @@ before_action :redirect, only: [:show]
 
   def update
     entered = active_crumb_params[:entered_answer]
-    @current_active_crumb.entered_answer == entered.downcase
-    @current_active_crumb.save
-    if entered.downcase == @crumb.answer.downcase
-      # @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
+    if entered && (entered.downcase == @crumb.answer.downcase)
+      @active_crumb.entered_answer == entered.downcase
+      @active_crumb.save
       redirect_to "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}",
       alert: "Correct answer!"
       #  && (@active_crumb.order_number > @active.last_crumb_reached)
-      # @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
+    # @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
       # redirect_to "/actives/#{@active.id}"
     else
       redirect_to "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}",
       alert: "Incorrect answer."
     end
   end
-
   private
 
   def current_active
