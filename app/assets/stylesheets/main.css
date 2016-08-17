@@ -1,15 +1,36 @@
 /* light green: #2befc6 */
+/*  mid green: #198c74 */
 /* dark green: #0f2c2a */
-/* */
+/* tan: #d9cab4 */
+
+
+
 
 
 input {
   border-radius: 5px;
-  background: #0f2c2a;
+  background: white;
+  color: #0f2c2a;
+}
 
+input:focus {
+  box-shadow: 0 0 8px #9bfefa;
+  outline: none;
 }
 
 
+input[type="submit"]{
+  background: #198c74 ;
+  color: white;
+  margin: 0 5px;
+  border: 2px solid #2befc6;
+}
+
+input[type="submit"]:hover{
+  background: #2befc6;
+  color: #0f2c2a;
+  box-shadow: 0 0 4px #9bfefa;
+}
 
 a {
   color: white;

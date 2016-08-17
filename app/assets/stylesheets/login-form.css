@@ -9,7 +9,7 @@
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   padding: 19px 29px 29px;
-  z-index: 1000;
+  z-index: 500;
   -webkit-border-radius: 9px;
      -moz-border-radius: 9px;
           border-radius: 9px;
