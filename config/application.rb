@@ -26,4 +26,6 @@ module Breadcrumb
   end
 end
 
+
 # config.assets.paths << Rails.root.join("app", "assets", "fonts")
+

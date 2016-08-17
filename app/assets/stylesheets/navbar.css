@@ -1,0 +1,55 @@
+
+.navbar-brand { position: relative; z-index: 20; margin: 0px; font-size: 1.8em; color: white !important}
+
+.navbar-nav.navbar-right .btn { position: relative; z-index: 20; padding: 4px 20px; margin: 10px auto; }
+
+.navbar .navbar-collapse { position: relative; }
+.navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 22px; }
+
+.navbar .nav-collapse { position: absolute; z-index: 19; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding-right: 30px; padding-left: 30px; width: 100%; }
+.navbar.navbar-default .nav-collapse { background-color: #3fdfde; }
+.navbar.navbar-inverse .nav-collapse { background-color: #3fdfde; }
+.navbar .nav-collapse .navbar-form { border-width: 0; box-shadow: none; }
+.nav-collapse>li { float: right; }
+
+.btn.btn-circle { border-radius: 50px; }
+.btn.btn-outline { background-color: transparent; }
+.container-fluid.no-padding { padding: 0px }
+
+.container.small-margin {
+  margin: 0 auto;
+}
+
+.dark-green-navbar {
+  background: #0f2c2a;
+  border: 2px solid #126453;
+}
+
+.nav.navbar-nav.navbar-right li a {
+  color: #2befc6 ;
+}
+
+.nav.navbar-nav.navbar-right li a:hover {
+  color: white;
+  text-shadow: 0 0 4px #9bfefa;
+  margin: 0;
+}
+
+input:-webkit-autofill  {
+    color: white !important
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #198c74 inset;
+    border: 2px solid #90fde2;
+}
+
+#user_login input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #198c74 inset;
+    border: 2px solid #90fde2;
+    color: white;
+}
