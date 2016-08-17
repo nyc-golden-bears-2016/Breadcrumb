@@ -10,6 +10,13 @@ a:visited {
   font-size: 1.5em;
 }
 
+
+a:hover {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
 body {
 /*  opacity: 0;
   -webkit-transition: opacity 3s ease-in;
@@ -19,6 +26,7 @@ body {
           transition: opacity 3s ease-in;*/
   background-color: black;
   color: white;
+  font-family: "Book Antiqua";
 
 }
 
@@ -28,31 +36,130 @@ body {
 
 h1 {
   color: white;
-  font-family: fantasy;
+  font-family: "celtichand";
+  letter-spacing: 2px;
 }
 
+
+h2 {
+  font-family: "celtichand";
+  color: white;
+  letter-spacing: 2px;
+}
 p {
   margin:  -5px;
   padding: 0px;
 }
 
-
-.image-parent {
- text-align: center;
-
+.control-label {
+  font-weight: normal;
 }
 
-.text-container{
-  margin: 10px auto;
-  text-align: center;
+.field {
+  font-size: 1.5em;
 }
 
+#fireflies {
+  z-index:1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: auto;
+}
 
-.style_image {
+.main_image {
   background-size: cover;
   text-align: center;
-  margin:0 auto;
+  max-height: 100vh;
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+.image-parent {
+   text-align: center;
+   max-height: 100vh;
+   position: relative
+
+}
+
+
+.signup-login{
+  
+  font-size: 3vmin;
+  color:#67f8d4;
+  animation: glow 1.5s infinite alternate;
+}
+
+
+@keyframes glow {
+    to {
+        text-shadow: 0 0 20px #9bfefa;
+    }
+}
+
+
+#signup-link {
+  display: none;
+  position: absolute;
+  bottom: 44%;
+  right: 40%;
+  color:#67f8d4;
+  z-index: 2;
+}
+
+#signup-link:visited {
+  color:#67f8d4;
+}
+
+#signup-link:hover{
+  color:#4cdb88;
+}
+
+#login-link {
+  display: none;
+  position: absolute;
+  bottom: 35%;
+  right: 41%;
+  color:#67f8d4;
+  z-index: 2;
+}
+
+#login-link:visited {
+  color:#67f8d4;
+}
+
+#login-link:hover{
+  color:#4cdb88;
+}
+
+#faq-link {
+  display: none;
+  position: absolute;
+  bottom: 26%;
+  right: 41.5%;
+  color:#67f8d4;
+  z-index: 2;
+}
+
+#faq-link:visited {
+  color:#67f8d4;
+}
+
+#faq-link:hover{
+  color:#4cdb88;
+}
+
+
+
+
+
+.text-container{
+  margin: 10% auto;
+  text-align: center;
+}
+
 
 #active-id {
   display: none;

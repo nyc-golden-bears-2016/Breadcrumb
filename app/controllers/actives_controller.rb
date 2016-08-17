@@ -60,9 +60,8 @@ before_action :current_trail, :correct_password, only: [:show, :update, :reached
   def mapdetails
     sorted_crumbs = current_active.active_crumbs.sort{|x,y| x.order_number <=> x.order_number}
     render :json => {crumbs: sorted_crumbs,
-                     zoom: calculate_zoom,
-                     initialLat: current_trail.latitude,
-                     initialLng: current_trail.longitude,
+                     initialLat: current_user.latitude,
+                     initialLng: current_user.longitude,
                      currentCrumbIndex: current_active.last_crumb_reached,
                      activeId: current_active.id}
   end
@@ -111,33 +110,6 @@ private
         redirect_to new_user_session_path
         #error handling
       end
-    end
-  end
-
-  def calculate_zoom
-    latitudes = current_trail.crumbs.map {|crumb| crumb.latitude}
-    longitudes = current_trail.crumbs.map {|crumb| crumb.longitude}
-    lat_distance = latitudes.sort[-1] - latitudes.sort[0]
-    lng_distance = longitudes.sort[-1] - longitudes.sort[0]
-    if (lng_distance / 3) >= (lat_distance / 2)
-      biggest_distance = lng_distance
-    else
-      biggest_distance = lat_distance
-    end
-    if biggest_distance < 0.02
-      return 18
-    elsif biggest_distance < 0.04
-      return 16
-    elsif biggest_distance < 0.06
-      return 14
-    elsif biggest_distance < 0.08
-      return 12
-    elsif biggest_distance < 2
-      return 10
-    elsif biggest_distance < 5
-      return 8
-    else
-      return 4
     end
   end
 end

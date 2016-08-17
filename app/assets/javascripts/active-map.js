@@ -6,12 +6,12 @@ function initialize(mapdetails) {
      );
 
 
-    var trailCenter = new google.maps.LatLng(mapdetails.initialLat, mapdetails.initialLng)
+    var userLocation = new google.maps.LatLng(mapdetails.initialLat, mapdetails.initialLng)
     // Set Initial Map Properties
 
     var mapProps = {
-        center: trailCenter,
-        zoom: mapdetails.zoom,
+        center: userLocation,
+        zoom: 16,
         streetViewControl: false,
         mapTypeId:google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
@@ -105,7 +105,7 @@ function initialize(mapdetails) {
       function printDistance(distance){
             var feet = Math.floor((distance * 3.28084) - 65);
             if (feet > 2000) {return String(Math.round( (feet/5280) * 100) / 100) + " miles"}
-            else { return String(feet) + " feet" };
+            else { return String(Math.round(feet)) + " feet" };
       };
 
 
