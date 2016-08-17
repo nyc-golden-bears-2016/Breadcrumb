@@ -1,5 +1,5 @@
 <div class="container">
-<div class="row text-container matching-color" id="center">
+<div class="row text-container matching-color" id="less-space">
 <div class="col-sm-12">
 <%if current_user == @page%>
   <%=link_to 'Create A Trail', new_trail_path%>
@@ -12,20 +12,20 @@
 </div>
 </div>
 
-<div class="row text-container matching-color">
+<div class="row text-container" id="less-space">
 <div class="col-sm-4">
-<h5>Created Trails</h5>
+<h5 class="matching-color">Created Trails</h5>
 <%if @page.created_trails%>
 <%@page.created_trails.each do |t|%>
   <div class='each-trail'>
-  <%=link_to t.name, t%>
+  <%=link_to t.name, t%><br>
     <%if t.priv%>
-      [PRIVATE]<br>
+    <span class="matching-color">[PRIVATE]</span><br>
         <%if current_user == t.creator%>
           Password: <%=t.password%><br>
         <%end%>
-    <%else%>
-      [PUBLIC]<br>
+        <%else%>
+        <span class="matching-color">[PUBLIC]</span><br>
     <%end%>
     <%if (current_user == t.creator) && !t.published%>
       <%=link_to 'Edit/Publish', "/trails/#{t.id}/edit"%>
@@ -36,7 +36,6 @@
         <br>
       <%elsif (current_user == t.creator) && t.published%>
         <div>*Published*</div>
-        <br>
         <%=form_for(t, :html => { :method => :delete }) do |f|%>
           <%= f.submit "Delete Trail" %>
           <% end %><br>
@@ -49,37 +48,35 @@
 
 <div class="col-sm-4">
 <%if @page.favorites %>
-  <h5>Saved Trails</h5>
+  <h5 class="matching-color">Saved Trails</h5>
   <%@page.favorites.each do |t|%>
   <div class="each-trail-saved">
-    <%=link_to t.trail.name, t.trail%>
+    <%=link_to t.trail.name, t.trail%><br>
     <%if t.trail.priv%>
-      [PRIVATE]
-      <br>
+    <span class="matching-color">[PRIVATE]</span><br>
     <%else%>
-      [PUBLIC]
-      <br>
+    <span class="matching-color">[PUBLIC]</span><br>
     <%end%>
     <%if current_user == @page%>
       <%=form_tag("/users/#{current_user.id}/remove/#{t.trail.id}", method: "delete") do %>
       <%=submit_tag("Remove from Saved")%>
       <%end%>
     <%end%>
-  </div>
+  </div><br>
   <%end%>
 <%end%>
 </div>
 
 <div class="col-sm-4">
 <%if @page.actives%>
-  <h5>Past Trails</h5>
+  <h5 class="matching-color">Past Trails</h5>
   <%@page.actives.each do |t|%>
   <div class="each-trail-active">
     <%=link_to t.trail.name, t.trail %>
-    <%if t.trail.priv%>
-      [PRIVATE]
+    <%if t.trail.priv%><br>
+    <span class="matching-color">[PRIVATE]</span><br>
     <%else%>
-      [PUBLIC]
+    <span class="matching-color">[PUBLIC]</span><br>
     <%end%>
     <%if t.completed%>
       Completed!
@@ -89,26 +86,26 @@
       <%=submit_tag("Delete from History")%>
       <%end%>
     <%end%>
-  </div>
+  </div><br>
   <%end%>
 <%end%>
 </div>
 </div>
 
-<div class="row text-container matching-color">
+<div class="row text-container" id="less-space">
 <div class="col-sm-12">
   <%if current_user == @page%>
-      <h4>Explore Nearby Trails</h4>
+      <h4 class="matching-color">Explore Nearby Trails</h4>
         <%@trails.each do |t|%>
         <div class="each-trail-desc">
         <%=link_to t.name, t%>
           <%if t.priv%>
-            [PRIVATE]
+          <span class="matching-color">[PRIVATE]</span>
           <%else%>
-            [PUBLIC]
+          <span class="matching-color">[PUBLIC]</span>
           <%end%>
-        by <%=link_to t.creator.username, t.creator%><br>
-        <%=t.description%><br><br>
+        <br>by <%=link_to t.creator.username, t.creator%><br>
+          <span id="compass-arrow-small">➹</span> <%=t.description%> <span id="compass-arrow-small">➹</span><br>
         <%if t.tags%>
           Tags:
           <%t.tags.each do |tag|%>
