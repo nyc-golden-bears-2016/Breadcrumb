@@ -12,7 +12,7 @@ $(document).ready(function() {
     maximumAge: 30000;
   };
 
-$(".search-bar").find('input')[1].value = "";
+// $(".search-bar").find('input')[1].value = "";
 
 
 
