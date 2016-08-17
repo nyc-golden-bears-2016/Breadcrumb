@@ -1,6 +1,6 @@
 class ActiveCrumbsController < ApplicationController
 before_action :current_active, :current_active_crumb, :related_crumb, :published?
-# before_action :redirect, only: [:show]
+before_action :redirect, only: [:show]
 
   def show
     @trail = @active.trail

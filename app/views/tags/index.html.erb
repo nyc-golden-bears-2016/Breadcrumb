@@ -1,6 +1,10 @@
 
-<div id="cloud">
+<div class="container">
+<div class="row text-container matching-color" id="less-space">
+<div class="col-sm-12" id="cloud">
   <%@tags.each do |tag|%>
   <span class="tag<%=rand(1..10)%>"><%=link_to tag.subject, tag%></span><span id="compass-arrow"> ➹ </span>
 <%end%>
+</div>
+</div>
 </div>
