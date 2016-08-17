@@ -1,3 +1,16 @@
+/* light green: #2befc6 */
+/* dark green: #0f2c2a */
+/* */
+
+
+input {
+  border-radius: 5px;
+  background: #0f2c2a;
+
+}
+
+
+
 a {
   color: white;
   text-decoration: none;
@@ -25,7 +38,7 @@ body {
        -o-transition: opacity 3s ease-in;
           transition: opacity 3s ease-in;*/
   background-color: black;
-  color: red;
+  color: white;
   font-family: "Book Antiqua";
 
 }
@@ -89,14 +102,7 @@ p {
 
   font-size: 3vmin;
   color:#67f8d4;
-  animation: glow 1.5s infinite alternate;
-}
-
-
-@keyframes glow {
-    to {
-        text-shadow: 0 0 20px #9bfefa;
-    }
+  animation: textglow 1.5s infinite alternate;
 }
 
 
@@ -114,8 +120,10 @@ p {
 }
 
 #signup-link:hover{
-  color:#4cdb88;
+  color:#c8fff8;
+  animation: textglow 1.5s infinite alternate;
 }
+
 
 #login-link {
   display: none;
@@ -131,8 +139,10 @@ p {
 }
 
 #login-link:hover{
-  color:#4cdb88;
+  color:#c8fff8;
+  animation: textglow 1.5s infinite alternate;
 }
+
 
 #faq-link {
   display: none;
@@ -148,10 +158,16 @@ p {
 }
 
 #faq-link:hover{
-  color:#4cdb88;
+  color:#c8fff8;
+  animation: textglow 1.5s infinite alternate;
 }
 
 
+@keyframes textglow {
+    to {
+        text-shadow: 0 0 20px #9bfefa;
+    }
+}
 
 
 
@@ -252,6 +268,12 @@ position: absolute;
   padding: 5px 10px;
   font-family: fantasy;
 }
+
+.search-bar {
+  font-size: 1.5em;
+  padding: 5px 0 0 0 ;
+}
+
 
 #search-box {
   font-size: 1em;

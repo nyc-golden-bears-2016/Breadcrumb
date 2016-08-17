@@ -1,26 +1,19 @@
 
 /* User sign in and sign forms. */
 .border-form-div {
+  width: 50%;
+  height: 50%;
+  max-width: 350px;
+  overflow: auto;
+  margin: auto;
   position: absolute;
-  top: 30%;
-  right: 45%;
-  max-width: 300px;
+  top: 0; left: 0; bottom: 0; right: 0;
   padding: 19px 29px 29px;
-
-  background-color:#105c5c;
-  border: 1px solid black;
   z-index: 1000;
   -webkit-border-radius: 9px;
      -moz-border-radius: 9px;
           border-radius: 9px;
-  animation: glow 1.5s infinite alternate;
-}
-
-
-@keyframes glow {
-    to {
-        box-shadow: 0 0 20px #9bfefa;
-    }
+          z-index: 4;
 }
 
 
@@ -37,6 +30,3 @@
   padding: 7px 9px;
 }
 
-.form-control{
-  background: white;
-};
