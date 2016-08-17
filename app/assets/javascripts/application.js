@@ -12,6 +12,9 @@ $(document).ready(function() {
     maximumAge: 30000;
   };
 
+$(".search-bar").find('input')[1].value = "";
+
+
 
   if ($('.hidden').length) {
     navigator.geolocation.getCurrentPosition(function(position) {

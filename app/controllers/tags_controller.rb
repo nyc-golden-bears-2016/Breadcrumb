@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
 
+
   def index
     @tags = Tag.all
   end
@@ -9,5 +10,6 @@ class TagsController < ApplicationController
     all = @tag.trails
     @trails = @tag.trails.published
   end
+
 
 end
