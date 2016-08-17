@@ -11,8 +11,8 @@ $(document).ready(function() {
     maximumAge: 30000;
   };
 
+
   if ($('.hidden').length) {
-    debugger;
     navigator.geolocation.getCurrentPosition(function(position) {
       this.pos = {
         lat: position.coords.latitude,

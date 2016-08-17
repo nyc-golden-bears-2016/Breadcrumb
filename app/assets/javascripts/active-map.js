@@ -6,12 +6,12 @@ function initialize(mapdetails) {
      );
 
 
-    var trailCenter = new google.maps.LatLng(mapdetails.initialLat, mapdetails.initialLng)
+    var userLocation = new google.maps.LatLng(mapdetails.initialLat, mapdetails.initialLng)
     // Set Initial Map Properties
 
     var mapProps = {
-        center: trailCenter,
-        zoom: mapdetails.zoom,
+        center: userLocation,
+        zoom: 16,
         streetViewControl: false,
         mapTypeId:google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,

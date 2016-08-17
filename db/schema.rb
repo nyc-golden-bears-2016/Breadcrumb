@@ -120,15 +120,15 @@ ActiveRecord::Schema.define(version: 20160816194953) do
   create_table "users", force: :cascade do |t|
     t.string   "username"
     t.string   "email"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at",                          null: false
-    t.datetime "updated_at",                          null: false
-    t.string   "encrypted_password",     default: "", null: false
+    t.float    "latitude",               default: 40.706417
+    t.float    "longitude",              default: -74.009082
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
+    t.string   "encrypted_password",     default: "",         null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          default: 0,  null: false
+    t.integer  "sign_in_count",          default: 0,          null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
