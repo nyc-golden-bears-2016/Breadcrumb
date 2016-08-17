@@ -5,7 +5,9 @@ before_action :redirect, only: [:edit, :update, :destroy]
 before_action :already_published, only: [:edit, :update]
 
   def index
-    @trails = current_user.nearby_trails.page params[:page]
+    @nearby_trails = current_user.nearby_trails.published.page params[:page]
+    @unpublished_trails = Trail.unpublished
+    @published_trails = Trail.published
 
     if params[:query] != nil
       search = PgSearch.multisearch params[:query]
@@ -16,6 +18,7 @@ before_action :already_published, only: [:edit, :update]
           @found_trails_or_tags << Trail.find(found_trail_or_tag.searchable_id)
         elsif found_trail_or_tag.searchable_type == "Tag"
           @found_trails_or_tags << Tag.find(found_trail_or_tag.searchable_id)
+          # binding.pry
         else
           @error = []
         end
@@ -26,7 +29,9 @@ before_action :already_published, only: [:edit, :update]
         if trail_or_tag.class == Tag
           @found_tags << Tag.find(trail_or_tag.id)
         else trail_or_tag.class == Trail
+          if Trail.find(trail_or_tag).published
           @found_trails << Trail.find(trail_or_tag.id)
+          end
            # binding.pry
         end
 

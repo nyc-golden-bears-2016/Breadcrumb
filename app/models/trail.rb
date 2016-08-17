@@ -2,6 +2,9 @@ class Trail < ApplicationRecord
 	include PgSearch
   multisearchable :against => [:name, :description, :tags_name]
 
+  scope :published, -> { where(:published => true) }
+  scope :unpublished, -> { where(:published => false) }  
+
   belongs_to :creator, class_name: 'User'
   has_many :crumbs, dependent: :destroy
 
