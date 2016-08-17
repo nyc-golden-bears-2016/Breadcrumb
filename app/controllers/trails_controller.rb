@@ -16,6 +16,7 @@ before_action :already_published, only: [:edit, :update]
           @found_trails_or_tags << Trail.find(found_trail_or_tag.searchable_id)
         elsif found_trail_or_tag.searchable_type == "Tag"
           @found_trails_or_tags << Tag.find(found_trail_or_tag.searchable_id)
+          # binding.pry
         else
           @error = []
         end
