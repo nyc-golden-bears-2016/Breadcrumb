@@ -25,16 +25,17 @@ class Trail < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode
 
-def order_crumbs
-  ordered = self.crumbs.sort {|a,b| a.created_at <=> b.created_at}
-  ordered.each_with_index do |t, i|
-    t.update_attribute(:order_number, i + 1)
-    end
- end
+	def order_crumbs
+	  ordered = self.crumbs.sort {|a,b| a.created_at <=> b.created_at}
+	  ordered.each_with_index do |t, i|
+	    t.update_attribute(:order_number, i + 1)
+	    end
+	 end
 
-# def too_many_crumbs
-#   if self.crumbs.length < 1 || self.crumbs.length > 20
-#     self.errors.full_messages << "Trails must have between 1 and 20 crumbs."
-#   end
-# end
-end
+	def too_many_crumbs
+	  if self.crumbs.length < 1 || self.crumbs.length > 20
+			true
+		end
+	end
+
+	end

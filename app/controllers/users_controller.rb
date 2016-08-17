@@ -2,7 +2,7 @@ class UsersController < ApplicationController
 before_action :redirect
 
   def show
-    @trails = Trail.where(published: true)
+    @trails = current_user.nearby_trails.where(published: true)
     # @trails = Trail.where(published: true).page params[:page]
     @page = User.find(params[:id])
   end

@@ -2,7 +2,7 @@ class ActivesController < ApplicationController
 before_action :log_in
 before_action :new_trail, only: [:joined, :join]
 before_action :current_active, only: [:show, :update, :destroy, :reached]
-before_action :current_trail, :correct_password, only: [:show, :update]
+before_action :current_trail, :correct_password, only: [:show, :update, :reached]
 
   def join
     if !Active.find_by(user: current_user, trail: @newtrail)
@@ -25,24 +25,31 @@ before_action :current_trail, :correct_password, only: [:show, :update]
       @active.copy_crumbs
       redirect_to "/actives/#{@active.id}"
     else
-      redirect_to current_user
-      #make error handling
+      redirect_to current_user,
+      alert: "Incorrect password."
     end
   end
 
   def show
     @active ||= Active.create(user: current_user, trail: @trail)
     @crumbs = @active.crumbs_available
-    if @trail.sequential && (@trail.crumbs.length == @active.last_crumb_reached) && (@trail.crumbs.length > 1)
-      @message = "Ya finished, bro"
-    end
   end
 
   def reached
-    num = reached_params[:id]
-    @active.last_crumb_reached = num.to_i
-    @active.save
-    render json: {route: "/actives/#{@active.id}/active_crumbs/"}
+    this_crumb = reached_params[:id]
+    this_number = (ActiveCrumb.find(num.to_i).order_number) - 1
+    previous_active = ActiveCrumb.find_by(active: @active, order_number: this_number)
+    previous_crumb = previous_active.crumb
+    #we could avoid this if we could just turn off map search if answer is incorrect
+    if previous_crumb.requires_answer && (previous_crumb.answer != previous_active.entered_answer)
+      redirect_to "/actives/#{@active.id}",
+      alert: "You must answer the question correctly to move forward."
+    #how will we get around getting the map geofence triggered again?
+    else
+      @active.last_crumb_reached = num.to_i
+      @active.save
+      render json: {route: "/actives/#{@active.id}/active_crumbs/"}
+    end
   end
 
   def destroy
@@ -51,7 +58,6 @@ before_action :current_trail, :correct_password, only: [:show, :update]
   end
 
   def mapdetails
-    # byebug
     sorted_crumbs = current_active.active_crumbs.sort{|x,y| x.order_number <=> x.order_number}
     render :json => {crumbs: sorted_crumbs,
                      zoom: calculate_zoom,

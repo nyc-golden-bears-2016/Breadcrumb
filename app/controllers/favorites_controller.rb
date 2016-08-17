@@ -6,8 +6,8 @@ before_action :current_trail, :redirect, only: [:add, :remove]
       Favorite.create(user: current_user, trail: @trail)
       redirect_to current_user
     else
-      redirect_to current_user
-      #make error handling
+      redirect_to current_user,
+      alert: "Already saved for later"
     end
   end
 
@@ -15,10 +15,9 @@ before_action :current_trail, :redirect, only: [:add, :remove]
     if Favorite.find_by(user: current_user, trail: @trail)
       Favorite.find_by(user: current_user, trail: @trail).destroy
       render json: params[:id]
-
     else
-      redirect_to root_path
-      #make error handling
+      redirect_to current_user,
+      alert: "Could not find saved."
     end
   end
 
