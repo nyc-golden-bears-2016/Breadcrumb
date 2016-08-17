@@ -5,6 +5,7 @@
   <%=link_to "Trail", "/actives/#{@active.id}"%>
 <%end%>
 
+<%unless @no_answer%>
 <h2><%=@trail.name%></h2>
 
 <%=@crumb.name%>
@@ -25,9 +26,10 @@
 </audio>
 <%end%>
 
+<%end%>
 <% if @crumb.requires_answer%>
   <%=form_for(@active_crumb, url: "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}") do |c| %>
-    This crumb is locked. You must answer correctly to move on.
+    This crumb is locked. You must answer correctly to see the content.
     <%= c.text_area(:entered_answer) %><br>
     <%= c.submit "Enter" %>
   <% end %>

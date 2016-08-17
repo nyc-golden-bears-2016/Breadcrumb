@@ -4,12 +4,14 @@ before_action :redirect, only: [:show]
 
   def show
     @trail = @active.trail
-    if !@crumb.requires_answer && (@active_crumb.order_number > @active.last_crumb_reached)
-      @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
+    if @crumb.requires_answer && (@active_crumb.entered_answer != @crumb.answer.downcase)
+      @no_answer = true
     end
     if @trail.sequential && (@trail.crumbs.length == @active.last_crumb_reached) && (@trail.crumbs.length > 1)
       @message = true
     end
+    #for testing
+    @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
   end
 
   def update
@@ -19,9 +21,6 @@ before_action :redirect, only: [:show]
       @active_crumb.save
       redirect_to "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}",
       alert: "Correct answer!"
-      #  && (@active_crumb.order_number > @active.last_crumb_reached)
-    # @active.update_attribute(:last_crumb_reached, @active_crumb.order_number)
-      # redirect_to "/actives/#{@active.id}"
     else
       redirect_to "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}",
       alert: "Incorrect answer."

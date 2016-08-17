@@ -32,8 +32,8 @@ before_action :already_published, only: [:edit, :update]
 
       end
 
-     
-    end    
+
+    end
   end
 
   def new
@@ -56,7 +56,8 @@ before_action :already_published, only: [:edit, :update]
   end
 
   def update
-
+    @trail.update_attributes(trail_params)
+    redirect_to "/trails/#{@trail.id}/edit"
   end
 
   def removetag

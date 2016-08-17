@@ -1,3 +1,5 @@
+<%=render "maps/trail-map"%>
+
 <div class="text-container">
 	<%=form_for(@trail) do |t|%>
 		Title: <%= t.text_field :name, placeholder: @trail.name%>

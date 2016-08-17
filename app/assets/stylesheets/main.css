@@ -25,7 +25,7 @@ body {
        -o-transition: opacity 3s ease-in;
           transition: opacity 3s ease-in;*/
   background-color: black;
-  color: white;
+  color: red;
   font-family: "Book Antiqua";
 
 }
@@ -86,7 +86,7 @@ p {
 
 
 .signup-login{
-  
+
   font-size: 3vmin;
   color:#67f8d4;
   animation: glow 1.5s infinite alternate;
