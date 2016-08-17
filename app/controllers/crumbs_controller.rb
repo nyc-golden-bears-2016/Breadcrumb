@@ -14,8 +14,8 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
     elsif @crumb.save
       redirect_to "/trails/#{@trail.id}/edit"
     else
-      redirect_to current_user
-      #make error handling
+      redirect_to current_user,
+      alert: "Errors"
     end
   end
 

@@ -1,3 +1,10 @@
+<%if @message%>
+  Last crumb!
+  <%=link_to "Back", current_user%>
+<%else%>
+  <%=link_to "Trail", "/actives/#{@active.id}"%>
+<%end%>
+
 <h2><%=@trail.name%></h2>
 
 <%=@crumb.name%>
@@ -8,13 +15,15 @@
 
 <%=@crumb.description%>
 
+<%if @crumb.img_file_size%>
 <img src=<%= @crumb.img %>>
+<%end%>
 
-
+<%if @crumb.sound_file_size%>
 <audio controls>
   <source src=<%= @crumb.sound %>>
 </audio>
-
+<%end%>
 
 <% if @crumb.requires_answer%>
   <%=form_for(@active_crumb, url: "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}") do |c| %>
@@ -23,7 +32,3 @@
     <%= c.submit "Enter" %>
   <% end %>
 <%end%>
-
-<br>
-<br>
-<%=link_to "Trail", "/actives/#{@active.id}"%>

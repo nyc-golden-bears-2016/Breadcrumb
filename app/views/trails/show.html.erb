@@ -9,20 +9,24 @@
   <span>To be followed in sequence.</span>
 <%end%>
 
+<%if @trail.img_file_size%>
 <img src="<%=@trail.img%>">
+<%end%>
+
+<p><%=@trail.description%></p>
+<br>
 
 <div>
   <%if @trail.tags%>
-  <br>Tags:
+  <br>Tagged:
     <%@trail.tags.each do |tag|%>
-      <%=tag.subject%>
+    <%=link_to tag.subject, tag%>
     <%end%>
   <br>
   <%end%>
 </div>
 
-<p><%=@trail.description%></p>
-<br>
+
 <br>
 <%=link_to 'Save for Later?', "/users/#{current_user.id}/add/#{@trail.id}"%>
 <br>

@@ -88,7 +88,7 @@
 
 <div>
   <%if current_user == @page%>
-      <h4>Explore </h4>
+      <h4>Explore Nearby Trails</h4>
         <%@trails.each do |t|%>
         <div class="each-trail-desc">
         <%=link_to t.name, t%>
@@ -102,7 +102,7 @@
         <%if t.tags%>
         <br>Tags:
           <%t.tags.each do |tag|%>
-            <%=tag.subject%>
+            <%=link_to tag.subject, tag%>
           <%end%>
         <%end%>
         <br>

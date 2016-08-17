@@ -121,7 +121,7 @@ function initialize(mapdetails) {
         maximumAge: 5000,
         timeout: 60000
       };
-
+      // debugger;
       navigator.geolocation.watchPosition(function(position) {
         var pos = {
           lat: position.coords.latitude,
@@ -132,26 +132,29 @@ function initialize(mapdetails) {
         var userPosition = new google.maps.LatLng(pos.lat, pos.lng);
 
         var distance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition);
-        
-        if (distance < 30) { 
-          console.log("hit");
-          activeCrumbPath = "/actives/" + activeIdLink + "/active_crumbs/" + currentCrumb.id
-          var xhr = new XMLHttpRequest();
-          xhr.open('PUT', activeCrumbPath, false);
-          xhr.send();
-          window.location = activeCrumbPath;
+
+        if (distance < 450) {
+          var url = '/actives/' + activeIdLink + '/reached';
+          var data = { crumb: {id: currentCrumb.order_number } };
+          $.ajax({
+              url: url,
+              method: 'GET',
+              data: data
+            }).done( function (response) {
+              window.location = response.route + String(currentCrumb.id)
+            })
         }
 
          google.maps.event.addListener(map, 'zoom_changed', function() {
 
-          var pixelSizeAtZoom0 = 5; 
-          var maxPixelSize = 90; 
+          var pixelSizeAtZoom0 = 5;
+          var maxPixelSize = 90;
 
 
           var zoom = map.getZoom();
           var relativePixelSize = pixelSizeAtZoom0 * zoom ;
 
-          if(relativePixelSize > maxPixelSize) 
+          if(relativePixelSize > maxPixelSize)
               relativePixelSize = maxPixelSize;
 
 
@@ -164,7 +167,7 @@ function initialize(mapdetails) {
                   new google.maps.Point(relativePixelSize/2, relativePixelSize/2), //anchor
                   new google.maps.Size(relativePixelSize, relativePixelSize) //changes the scale
               )
-          );        
+          );
       });
 
         $("#current").html("<p>You're roughly " + printDistance(distance) + " away from the next Crumb</p>" );

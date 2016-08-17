@@ -8,7 +8,7 @@
   <%if t.tags%>
   <br>Tags:
     <%t.tags.each do |tag|%>
-      <%=tag.subject%>
+      <%=link_to tag.subject, tag%>
     <%end%>
   <br>
   <%end%>

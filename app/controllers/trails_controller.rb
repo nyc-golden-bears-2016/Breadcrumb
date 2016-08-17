@@ -14,23 +14,17 @@ before_action :already_published, only: [:edit, :update]
 
   def create
   @trail = current_user.created_trails.new(trail_params)
-  # @trail.too_many_crumbs
     if @trail.save
       redirect_to "/trails/#{@trail.id}/edit"
     else
-      redirect_to current_user
-      #make error handling
+      redirect_to current_user,
+      alert: "Errors."
     end
   end
 
   def edit
       @your_tags = TagTrail.where(trail: @trail)
       @other_tags = Tag.all
-  end
-
-  def show
-    #initialize map with user and either first crumb or all crumbs
-    #links for each crumb on the page appear but do not work until you enter the area
   end
 
   def update
@@ -53,9 +47,14 @@ before_action :already_published, only: [:edit, :update]
   end
 
   def publish
-    @trail.update_attribute(:published, true)
-    @trail.order_crumbs
-    redirect_to current_user
+    if @trail.too_many_crumbs
+      redirect_to @trail,
+      alert: "Please make sure your trail has between one and twenty crumbs."
+    else
+      @trail.update_attribute(:published, true)
+      @trail.order_crumbs
+      redirect_to current_user
+    end
   end
 
   def destroy
@@ -63,7 +62,7 @@ before_action :already_published, only: [:edit, :update]
     render json: params[:id]
   end
 
-def placed_crumbs
+  def placed_crumbs
     render :json => {crumbs: current_trail.crumbs }
   end
 
@@ -95,7 +94,10 @@ private
   end
 
   def already_published
-    redirect_to current_user if @trail.published
+    if @trail.published
+      redirect_to current_user,
+      alert: "Cannot change a published trail."
+    end
   end
 
 end

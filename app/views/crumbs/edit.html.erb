@@ -1,4 +1,4 @@
-<!-- <%= render "maps/crumb-map" %>
+<%= render "maps/crumb-map" %>
 
 <%=form_for([@trail, @crumb]) do |c| %>
     Name: <%= c.text_field(:name) %><br>
@@ -9,4 +9,4 @@
     <%= c.hidden_field(:latitude, :value => @crumb.latitude) %>
     <%= c.hidden_field(:longitude, :value => @crumb.longitude) %>
     <%= c.submit "Edit Crumb" %>
-  <%end %> -->
+  <%end %>
