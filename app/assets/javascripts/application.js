@@ -29,7 +29,6 @@ $(document).ready(function() {
   }
 
   $('.each-trail').on('click', function(event){
-    debugger;
     event.preventDefault();
     $.ajax({
       url: $(this).attr('action'),
@@ -45,7 +44,6 @@ $(document).ready(function() {
   })
 
   $('.each-trail-active').on('click', 'form', function(event){
-    debugger;
     event.preventDefault();
     $.ajax({
       url: $(this).attr('action'),
@@ -58,7 +56,6 @@ $(document).ready(function() {
   })
 
   $('.each-trail-saved').on('click', 'form', function(event){
-    debugger;
     event.preventDefault();
     $.ajax({
       url: $(this).attr('action'),
