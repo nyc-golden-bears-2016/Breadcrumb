@@ -25,7 +25,3 @@ module Breadcrumb
     # -- all .rb files in that directory are automatically loaded.
   end
 end
-
-
-# config.assets.paths << Rails.root.join("app", "assets", "fonts")
-

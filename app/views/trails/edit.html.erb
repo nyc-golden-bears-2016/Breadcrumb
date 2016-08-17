@@ -39,15 +39,17 @@
 
 Remove Tags:
 <br>
+<div class ="selected-tags">
 <%@your_tags.each do |t|%>
-<%= link_to t.tag.subject, "/trails/#{@trail.id}/remove/#{t.tag.id}"%> |
+<span class="your-tag"><%= link_to t.tag.subject + ' | ', "/trails/#{@trail.id}/remove/#{t.tag.id}"%></span>
 <%end%>
+</div>
 <br>
 <br>
 Choose Tags Below:
 <br>
 <%@other_tags.each do |tag|%>
-<%=link_to tag.subject, "/trails/#{@trail.id}/add/#{tag.id}"%> |
+<span class="other-tag"><%=link_to tag.subject + ' | ', "/trails/#{@trail.id}/add/#{tag.id}"%></span>
 <%end%>
 <br>
 <br>

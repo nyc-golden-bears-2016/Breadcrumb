@@ -29,6 +29,7 @@ $(document).ready(function() {
   }
 
   $('.each-trail').on('click', function(event){
+    debugger;
     event.preventDefault();
     $.ajax({
       url: $(this).attr('action'),
@@ -44,6 +45,7 @@ $(document).ready(function() {
   })
 
   $('.each-trail-active').on('click', 'form', function(event){
+    debugger;
     event.preventDefault();
     $.ajax({
       url: $(this).attr('action'),
@@ -56,6 +58,7 @@ $(document).ready(function() {
   })
 
   $('.each-trail-saved').on('click', 'form', function(event){
+    debugger;
     event.preventDefault();
     $.ajax({
       url: $(this).attr('action'),
@@ -64,6 +67,30 @@ $(document).ready(function() {
     })
     .done(function(response){
       $('.each-trail-saved').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
+    });
+  })
+
+  $('.selected-tags').on('click', '.your-tag', function(event){
+    event.preventDefault();
+    $.ajax({
+      url: $(this).children().attr('href'),
+      method: 'get',
+      data: $(this).serialize()
+    })
+    .done(function(response){
+      $('.your-tag').find('a[href="/trails/' + response.trail + '/remove/' + response.tag + '"' + ']').remove();
+    });
+  })
+
+  $('.other-tag').on('click', 'a', function(event){
+    event.preventDefault();
+    $.ajax({
+      url: $(this).attr('href'),
+      method: 'get',
+      data: $(this).serialize()
+    })
+    .done(function(response){
+      $('.selected-tags').append("<span class='your-tag'><a href=" + response.tag_trail + ">" + response.tag + " | </a></span>")
     });
   })
 
