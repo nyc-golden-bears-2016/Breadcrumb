@@ -47,7 +47,7 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
   end
 
   def crumb_params
-    params.require(:crumb).permit(:name, :description, :latitude, :longitude, :requires_answer, :answer, :order_number, :img, :sound)
+    params.require(:crumb).permit(:name, :description, :latitude, :longitude, :requires_answer, :answer, :order_number, :img, :sound, :question)
   end
 
   def invalid_crumb_spacing(new_crumb)

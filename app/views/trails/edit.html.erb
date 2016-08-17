@@ -9,7 +9,6 @@
 	<div class="row text-container">
 	<div class="col-sm-3">
     <%=c.name%><br>
-    <%=c.description%><br>
     <%=link_to "Edit Crumb", "/trails/#{@trail.id}/crumbs/#{c.id}/edit"%>
     <%=form_for([@trail, c], :html => { :method => :delete }) do |f|%>
       <%= f.submit "Delete Crumb" %>
@@ -51,9 +50,11 @@
 	</div>
 	<div class="col-sm-4">
 		<%if @trail.img_file_size%>
-		<img src="<%=@trail.img%>">
+		<div id="view">
+		  <img src= <%=@trail.img%>/>
+		</div>
 		<%end%>
-    <%=t.label :img%>
+		Image<br>
     <%=t.file_field :img%>
 	 </div>
 	 <div class="col-sm-4">

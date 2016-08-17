@@ -5,10 +5,10 @@
  </div>
 
  <div class="row text-container" id="less-space">
-  <% @found_trails_or_tags.each do |found_trail_or_tag| %>
+ <div class="col-sm-6">
+ <% @found_trails_or_tags.each do |found_trail_or_tag| %>
 	  <% if found_trail_or_tag.respond_to?(:subject) %>
 		<% @found_tags.each do |tag| %>
-    <div class="col-sm-6">
 		<h2 class="matching-color">Tag: <%= tag.subject %></h2>
 			<% tag.trails.each do |trail| %>
 		 			<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>

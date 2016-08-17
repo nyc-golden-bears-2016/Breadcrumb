@@ -18,10 +18,17 @@
 
 #less-space{ margin-top: 0px; margin-bottom: 0px;}
 
+#view img{
+   height: auto;
+    width: auto;
+    max-width: 300px;
+    max-height: 300px;
+}
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
     [class*="col-"] {
         width: 100%;
+        // font-size: 20%;
     }
 }
