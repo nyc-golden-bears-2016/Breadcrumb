@@ -7,8 +7,9 @@
     <%= javascript_include_tag 'application' %>
   </head>
 
-  <body class="<%= controller_name %> <%= action_name %>">
+  <body class="<%= controller_name %> <%= action_name %>">    
     <% if user_signed_in? %>
+
   <div class="container-fluid no-padding">
     <nav class="navbar navbar-default dark-green-navbar">
       <div class="container small-margin">
@@ -29,10 +30,12 @@
             <li><%= link_to 'Preferences', edit_user_registration_path, :class => 'navbar-link navbar-link-text' %></li>
             <li><%= link_to "FAQ", '/faq', :class => 'navbar-link navbar-link-text'  %></li>
             <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link navbar-link-text'%></li>
-            <li><%= form_tag root_path, class: "search-bar", method: :get do %>
-              <%= text_field_tag :query, params[:query], placeholder: "Search Trails" %>
+            <li><%= form_tag trails_path, class: "search-bar", method: :get do %>
+              <%= text_field_tag :query, params[:query], placeholder: "Search Trails or Tags" %>
               <%= submit_tag "GO", name: nil %></li>
             <% end %>
+
+
 
           </ul>
           <ul class="collapse nav navbar-nav nav-collapse" id="nav-collapse1">
@@ -49,6 +52,7 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
     </nav><!-- /.navbar -->
+
     <% end %>
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
