@@ -10,6 +10,13 @@ a:visited {
   font-size: 1.5em;
 }
 
+
+a:hover {
+  color: white;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
 body {
 /*  opacity: 0;
   -webkit-transition: opacity 3s ease-in;
@@ -19,6 +26,7 @@ body {
           transition: opacity 3s ease-in;*/
   background-color: black;
   color: white;
+  font-family: "Book Antiqua";
 
 }
 
@@ -28,12 +36,27 @@ body {
 
 h1 {
   color: white;
-  font-family: fantasy;
+  font-family: celtichand;
+  letter-spacing: 2px;
 }
 
+
+h2 {
+  font-family: celtichand;
+  color: white;
+  letter-spacing: 2px;
+}
 p {
   margin:  -5px;
   padding: 0px;
+}
+
+.control-label {
+  font-weight: normal;
+}
+
+.field {
+  font-size: 1.5em;
 }
 
 #fireflies {
@@ -62,16 +85,9 @@ p {
 }
 
 
-#signup-login{
-  display: none;
-  position: absolute;
-  bottom: 52%;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 3.3vmin;
-  z-index: 2;
+.signup-login{
+  
+  font-size: 3vmin;
   color:#67f8d4;
   animation: glow 1.5s infinite alternate;
 }
@@ -83,18 +99,60 @@ p {
     }
 }
 
-.signup-link {
+
+#signup-link {
+  display: none;
+  position: absolute;
+  bottom: 44%;
+  right: 40%;
   color:#67f8d4;
-  padding: 0 2%;
+  z-index: 2;
 }
 
-.signup-link:visited {
+#signup-link:visited {
   color:#67f8d4;
 }
 
-.signup-link:hover{
+#signup-link:hover{
   color:#4cdb88;
 }
+
+#login-link {
+  display: none;
+  position: absolute;
+  bottom: 35%;
+  right: 41%;
+  color:#67f8d4;
+  z-index: 2;
+}
+
+#login-link:visited {
+  color:#67f8d4;
+}
+
+#login-link:hover{
+  color:#4cdb88;
+}
+
+#faq-link {
+  display: none;
+  position: absolute;
+  bottom: 26%;
+  right: 41.5%;
+  color:#67f8d4;
+  z-index: 2;
+}
+
+#faq-link:visited {
+  color:#67f8d4;
+}
+
+#faq-link:hover{
+  color:#4cdb88;
+}
+
+
+
 
 
 .text-container{

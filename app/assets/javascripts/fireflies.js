@@ -9,8 +9,9 @@ var rint2 = 500;
 
 $(document).ready(function(){
 
-  $("#signup-login").delay(800).fadeIn(3000);
-
+  $("#signup-link").delay(800).fadeIn(3000);
+  $("#login-link").delay(1800).fadeIn(3000);
+  $("#faq-link").delay(2800).fadeIn(3000);
   WIDTH = window.innerWidth;
   HEIGHT = window.innerHeight;
   canvas = document.getElementById('fireflies');

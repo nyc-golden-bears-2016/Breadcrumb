@@ -2,6 +2,7 @@
 //= require app_assets
 //= require js-routes
 //= require jQueryRotate
+//= require bootstrap-sprockets
 
 $(document).ready(function() {
   $("#password_confirmation").keyup(validate);

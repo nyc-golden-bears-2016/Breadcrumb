@@ -10,6 +10,15 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
+ *= require rails_bootstrap_forms
  *=require_tree .
  *=require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "main";
+@import "login-form";
+
+@font-face { font-family: 'celtichand'; 
+             src: asset_url('/assets/fonts/celtichand.ttf') format('truetype')}
