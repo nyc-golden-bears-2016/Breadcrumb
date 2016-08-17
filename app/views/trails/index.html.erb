@@ -1,4 +1,35 @@
-<div><%=link_to 'Create Trail', new_trail_path%></div>
+<br><div><%=link_to 'Create Trail', new_trail_path%></div>
+
+
+<% if @found_trails_or_tags != [] && !@found_trails_or_tags.nil? %>
+ <br><br> <h1>Search Results:</h1>
+  <% @found_trails_or_tags.each do |found_trail_or_tag| %>
+	  <% if found_trail_or_tag.respond_to?(:subject) %>
+		<% @found_tags.each do |tag| %>
+		<h2><%= tag.subject %> - (tag):</h2>
+			<% tag.trails.each do |trail| %>
+		 			<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
+		 		<%end%>	
+		 			<%end%>
+		<% elsif found_trail_or_tag.respond_to?(:name) %>
+		<% @found_trails.each do |trail| %>
+				<h2><%= "Trails:" %></h2>
+		 			<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
+		 			<%end%>					
+		<%end%>
+		<%end%>
+<% end %>
+
+
+<br><br><br><br><h1>Trails Near You:</h1>
+<% @trails.each do |trail| %>
+	<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
+	<% end %>
+
+
+
+<br><div><%=link_to 'Create Trail', new_trail_path%></div>		
+
 
 <h4>Explore </h4>
 
