@@ -141,6 +141,7 @@ function initialize(mapdetails) {
               method: 'GET',
               data: data
             }).done( function (response) {
+              debugger;
               window.location = response.route + String(currentCrumb.id)
             })
         }

@@ -16,6 +16,7 @@ input {
   border-radius: 5px;
   background: white;
   color: #0f2c2a;
+  
 }
 
 input:focus {
@@ -35,6 +36,7 @@ input[type="submit"]:hover{
   background: #2befc6;
   color: #0f2c2a;
   box-shadow: 0 0 4px #9bfefa;
+  border: 2px solid white;
 }
 
 a {

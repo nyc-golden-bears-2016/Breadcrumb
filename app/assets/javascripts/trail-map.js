@@ -11,12 +11,12 @@ function initialize() {
     // Set Initial Map Properties
     var mapProps = {
         center:new google.maps.LatLng(initalLat, initialLong),
-        zoom:10,
+        zoom:15,
         streetViewControl: false,
         mapTypeId:google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         mapTypeControlOptions: {vmapTypeIds: ['styled_map'] },
-        maxZoom: 18
+        maxZoom: 20
       };
 
     // Create new Map

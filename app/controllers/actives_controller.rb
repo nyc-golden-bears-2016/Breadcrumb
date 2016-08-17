@@ -36,7 +36,7 @@ before_action :current_trail, :correct_password, :published?, only: [:show, :upd
   end
 
   def reached
-      @active.last_crumb_reached = num.to_i
+      @active.last_crumb_reached = params[:crumb][:id].to_i
       @active.save
       render json: {route: "/actives/#{@active.id}/active_crumbs/"}
   end
