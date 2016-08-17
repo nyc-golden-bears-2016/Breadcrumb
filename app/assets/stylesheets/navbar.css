@@ -3,7 +3,7 @@
 
 .navbar-nav.navbar-right .btn { position: relative; z-index: 20; padding: 4px 20px; margin: 10px auto; }
 
-.navbar .navbar-collapse { position: relative}
+.navbar .navbar-collapse { position: relative; z-index: 1001;}
 .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 22px; }
 
 .navbar .nav-collapse { position: absolute; z-index: 19; top: 0; left: 0; right: 0; bottom: 0; margin: 0; padding-right: 30px; padding-left: 30px; width: 100%; }

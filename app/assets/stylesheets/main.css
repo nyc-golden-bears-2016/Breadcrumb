@@ -87,7 +87,40 @@ h2 {
 }
 p {
   margin:  -5px;
-  padding: 0px;
+  padding: 10px 15px;
+  font-size: 2em;
+}
+
+
+.center-text {
+  position: relative;
+  width: 100%;
+  margin: 30px auto;
+  padding: 10px 20%;
+  height: 100%;
+}
+
+
+@media (max-width: 1000px) { 
+  .center-text { padding: 10px 5%}
+  
+}
+
+
+
+.center-text li {
+  font-size: 2em;
+  padding: 5px 10px;
+}
+
+.title {
+  text-align: center;
+  margin: 20px auto 40px auto;
+}
+
+.center-text strong {
+  color: #2befc6;
+  padding: 0 20px 0 0;
 }
 
 .control-label {
@@ -194,7 +227,6 @@ p {
         text-shadow: 0 0 20px #9bfefa;
     }
 }
-
 
 
 .text-container{
