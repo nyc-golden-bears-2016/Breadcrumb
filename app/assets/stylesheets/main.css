@@ -36,42 +36,71 @@ p {
   padding: 0px;
 }
 
+#fireflies {
+  z-index:1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100%;
+  height: auto;
+}
+
+.main_image {
+  background-size: cover;
+  text-align: center;
+  max-height: 100vh;
+  max-width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .image-parent {
- text-align: center;
- max-height: 100vh;
- position: relative
+   text-align: center;
+   max-height: 100vh;
+   position: relative
 
 }
+
+
+#signup-login{
+  display: none;
+  position: absolute;
+  bottom: 52%;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 3.3vmin;
+  z-index: 2;
+  color:#67f8d4;
+  animation: glow 1.5s infinite alternate;
+}
+
+
+@keyframes glow {
+    to {
+        text-shadow: 0 0 20px #9bfefa;
+    }
+}
+
+.signup-link {
+  color:#67f8d4;
+  padding: 0 2%;
+}
+
+.signup-link:visited {
+  color:#67f8d4;
+}
+
+.signup-link:hover{
+  color:#4cdb88;
+}
+
 
 .text-container{
   margin: 10% auto;
   text-align: center;
 }
-
-
-.main_image {
-  background-size: cover;
-  text-align: center;
-  max-width: 75%;
-  margin:0 auto;
-  max-height: 100vh;
-}
-
-.pipes {
-  padding: 0 10px;
-}
-
-#signup-login{
-  position: absolute;
-  top: 40%;
-  left: 0;
-  right: 0;
-  margin-left: auto;
-  margin-right: auto;
-  font-size: 2.8vmin;
-}
-
 
 
 #active-id {

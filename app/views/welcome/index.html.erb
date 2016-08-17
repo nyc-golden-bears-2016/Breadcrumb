@@ -1,14 +1,16 @@
-<div class="image-parent">
-  <%=image_tag("forest-children.jpg", :class => "main_image")%>
+<%= javascript_include_tag "fireflies" %>
 
-  <% unless user_signed_in? %>
-  <div class="main_image">
-    <div id="signup-login">
-      <%=link_to "Login", new_user_session_path, :class => 'navbar-link'%>
-      <span class="pipes">|</span>
-      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> 
-    <div>
-  </div>
-  <% end %>
-</div>
-<div class="hidden"></div>
+<% unless user_signed_in? %>
+  <div class="image-parent">
+    <%=image_tag("forest-children.jpg", :class => "main_image")%>
+    <canvas id="fireflies"></canvas>
+    <div class="signup-login">
+      <%= link_to "Sign up", new_user_registration_path, :id => 'signup-link'  %>
+      <%=link_to "Login", new_user_session_path, :id => 'login-link'%>
+      <%= link_to "FAQ", '/faq', :id => 'faq-link'  %>
+    </div>
+   </div>   
+<% end %>
+<% if user_signed_in? %>
+  <div class="hidden"></div>
+<% end %>
