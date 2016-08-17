@@ -12,17 +12,17 @@
 		 		<%end%>	
 		 			<%end%>
 		<% elsif found_trail_or_tag.respond_to?(:name) %>
+			<%end%>
+			<%end%>
+		<h2><%= "Trails:" %></h2>
 		<% @found_trails.each do |trail| %>
-				<h2><%= "Trails:" %></h2>
-		 			<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
-		 			<%end%>					
-		<%end%>
-		<%end%>
+ 				<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
+ 			<%end%>					
 <% end %>
 
 
 <br><br><br><br><h1>Trails Near You:</h1>
-<% @trails.each do |trail| %>
+<% @nearby_trails.each do |trail| %>
 	<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
 	<% end %>
 
@@ -33,7 +33,7 @@
 
 <h4>Explore </h4>
 
-<%@trails.each do |t|%>
+<%@published_trails.each do |t|%>
   <%=link_to t.name, t%> by <%=link_to t.creator.username, t.creator%><br>
   <%=t.description%>
   <%if t.tags%>
@@ -47,6 +47,6 @@
   <br>
 <%end%>
 
-<%= link_to_previous_page @trails, 'Previous' %>
-<%= paginate @trails, :window => 1, :remote => true %>
-<%= link_to_next_page @trails, 'Next' %>
+<%= link_to_previous_page @nearby_trails, 'Previous' %>
+<%= paginate @nearby_trails, :window => 1, :remote => true %>
+<%= link_to_next_page @nearby_trails, 'Next' %>
