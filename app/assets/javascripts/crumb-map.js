@@ -16,12 +16,12 @@ function initialize(placed_crumbs) {
     // Set Initial Map Properties
     var mapProps = {
         center:new google.maps.LatLng(initalLat, initialLong),
-        zoom:15,
+        zoom:16,
         streetViewControl: false,
         mapTypeId:google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         mapTypeControlOptions: {vmapTypeIds: ['styled_map'] },
-        maxZoom: 17
+        maxZoom: 20
       };
 
     // Create new Map
