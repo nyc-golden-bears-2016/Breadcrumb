@@ -71,7 +71,7 @@ function initialize(placed_crumbs) {
                             strokeOpacity: 0.0,
                             }
                           });
-        
+
         crumbMarker.setMap(map);
 
 
@@ -183,7 +183,7 @@ function initialize(placed_crumbs) {
 }
 // Close Initialize Function
 
-$(".crumbs.new").ready(function() {
+$(".crumbs").ready(function() {
   var trailId = $("#trail-id").text();
   $.ajax({
       url: "/trails/" + trailId + "/placed_crumbs",

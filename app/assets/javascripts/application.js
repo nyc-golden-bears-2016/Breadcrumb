@@ -11,37 +11,21 @@ $(document).ready(function() {
     maximumAge: 30000;
   };
 
-  // $('#tag-search-form').submit(function(e){
-  //   e.preventDefault();
+  if ($('.hidden').length) {
+    debugger;
+    navigator.geolocation.getCurrentPosition(function(position) {
+      this.pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+        };
 
-  //   var target = e.target
-    
-  //   $.ajax({
-  //     url:$(this).attr('action'),
-  //     method:'GET'
-  //   })
-
-  //   .done(function(response){
-  //     $('.tag').html(response);
-  //     // debugger
-  //   })
-  // });
-
-  // if ($('.hidden').length == 0) {
-
-  //   navigator.geolocation.getCurrentPosition(function(position) {
-  //     this.pos = {
-  //       lat: position.coords.latitude,
-  //       lng: position.coords.longitude
-  //       };
-
-  //     $.ajax({
-  //       url: '/set_coords',
-  //       method: 'get',
-  //       data: {user_position: pos},
-  //     })
-  //   }, options);
-  // }
+      $.ajax({
+        url: '/set_coords',
+        method: 'get',
+        data: {user_position: pos},
+      })
+    }, options);
+  }
 
   $('.edit_trail').on('click', function(event){
     event.preventDefault();
