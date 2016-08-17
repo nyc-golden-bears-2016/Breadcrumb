@@ -18,27 +18,15 @@
 			<%end%>
 			<%end%>
 
-			<% if !@found_trails.empty? %>
-			    </div>
-			   <div class="col-sm-6">
-					<h2 class="matching-color">Related Trails</h2>
-					<% @found_trails.each do |trail| %>
-			 				<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
-			 			<%end%>
-			   </div>
-			  </div>
-		<%else%>
-		 		<h2><%= "Trails:" %></h2>	
-		 			<span>Your search has yielded no trails. Please try again.</span>
-		 			<%end%>	
-<% end %>
-
-
-<br><br><br><br><h1>Trails Near You:</h1>
-<% @nearby_trails.each do |trail| %>
-	<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
-	<% end %>
-
+    </div>
+   <div class="col-sm-6">
+		<h2 class="matching-color">Related Trails</h2>
+		<% @found_trails.each do |trail| %>
+ 				<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
+ 			<%end%>
+   </div>
+  </div>
+<%else%>
 
 <div class="page-header">
 <h2 class="matching-color">Explore</h2>
