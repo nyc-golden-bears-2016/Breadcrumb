@@ -18,7 +18,6 @@ function initialize() {
         mapTypeControlOptions: {vmapTypeIds: ['styled_map'] },
         maxZoom: 20
       };
-
     // Create new Map
     var map = new google.maps.Map(document.getElementById("display-map"),mapProps);
 

@@ -7,6 +7,7 @@ before_action :redirect
   end
 
   def set_user_coords
+    byebug
     current_user.set_coords(user_coord_params[:lat].to_f, user_coord_params[:lng].to_f)
   end
 
