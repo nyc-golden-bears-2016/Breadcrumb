@@ -25,7 +25,6 @@ class Trail < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode
 
-<<<<<<< 751fdbda84e0feccf07dca0620f57c02e4e4ea62
 	def order_crumbs
 	  ordered = self.crumbs.sort {|a,b| a.created_at <=> b.created_at}
 	  ordered.each_with_index do |t, i|
@@ -39,21 +38,8 @@ class Trail < ApplicationRecord
 		end
 	end
 
-	end
-=======
-def order_crumbs
-  ordered = self.crumbs.sort {|a,b| a.created_at <=> b.created_at}
-  ordered.each_with_index do |t, i|
-    t.update_attribute(:order_number, i + 1)
-    end
- end
-
-
   def tags_name
     tags.name
   end
 
-
-
 end
->>>>>>> reconfigure main search to include both tags and trails search
