@@ -103,7 +103,7 @@ function initialize(mapdetails) {
       };
 
       function printDistance(distance){
-            var feet = Math.floor((distance * 3.28084) - 65);
+            var feet = Math.floor((distance * 3.28084) - 90);
             if (feet > 2000) {return String(Math.round( (feet/5280) * 100) / 100) + " miles"}
             else { return String(Math.round(feet)) + " feet" };
       };
@@ -133,7 +133,7 @@ function initialize(mapdetails) {
 
         var distance = google.maps.geometry.spherical.computeDistanceBetween(userPosition, currentCrumbPosition);
 
-        if (distance < 450) {
+        if (distance < 30) {
           var url = '/actives/' + activeIdLink + '/reached';
           var data = { crumb: {id: currentCrumb.order_number } };
           $.ajax({

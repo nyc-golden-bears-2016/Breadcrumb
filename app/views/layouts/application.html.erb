@@ -22,9 +22,12 @@
           </button>
           <h1 class="navbar-brand">Breadcrumb</h1>
         </div>
-
         <div class="collapse navbar-collapse" id="navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
+            <li><div class="nav-spacer"><div></li>
+            <li><div class="nav-spacer"><div></li>
+            <li><div class="nav-spacer"><div></li>
+            <li><div class="nav-spacer"><div></li>
             <li><%=link_to "Home", current_user, :class => 'navbar-link navbar-link-text' %></li>
             <li><%= link_to 'Tags', tags_path, :class => 'navbar-link navbar-link-text' %></li>
             <li><%= link_to 'Preferences', edit_user_registration_path, :class => 'navbar-link navbar-link-text' %></li>
@@ -33,20 +36,6 @@
             <li><%= form_tag trails_path, class: "search-bar", method: :get do %>
               <%= text_field_tag :query, params[:query], placeholder: "Search Trails or Tags" %>
               <%= submit_tag "GO", name: nil %></li>
-            <% end %>
-
-
-
-          </ul>
-          <ul class="collapse nav navbar-nav nav-collapse" id="nav-collapse1">
-            <li><%=link_to "Home", current_user, :class => 'navbar-link navbar-link-text' %></li>
-            <li><%= link_to 'Tags', tags_path, :class => 'navbar-link navbar-link-text' %></li>
-            <li><%= link_to 'Preferences', edit_user_registration_path, :class => 'navbar-link navbar-link-text' %></li>
-            <li><%= link_to "FAQ", '/faq', :class => 'navbar-link navbar-link-text'  %></li>
-            <li><%= form_tag root_path, class: "search-bar", method: :get do %>
-              <%= text_field_tag :query, params[:query], placeholder: "Search Trails" %>
-              <%= submit_tag "GO", name: nil %></li>
-            <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link navbar-link-text'%></li>
             <% end %>
           </ul>
         </div><!-- /.navbar-collapse -->
