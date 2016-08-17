@@ -1,19 +1,42 @@
-<%=render "maps/trail-map"%>
+<div class="container">
 
-<div class="text-container">
-	<%=form_for(@trail) do |t|%>
-		Title: <%= t.text_field(:name)%>
-		<br>
-    Description: <%= t.text_area(:description)%>
-		<br>
-    <%=t.label :img%>
-    <%=t.file_field :img%>
-    Private? <%= t.check_box(:priv)%>
-		<br>
-		If private, please enter a password:<%=t.text_field(:password)%>
-    <%=t.hidden_field(:latitude, :value => current_user.latitude)%>
-    <%=t.hidden_field(:longitude, :value => current_user.longitude)%>
-		<br>
-		<%=t.submit "Save Trail"%>
-	<%end%>
+	<div class="row text-container">
+	  <div class="col-sm-12">
+			<%=render "maps/trail-map"%>
+		</div>
+	</div>
+
+	<div class="row text-container">
+		<div class="col-sm-12">
+			<%=form_for(@trail) do |t|%>
+				Title:<br>
+				<%= t.text_field(:name)%>
+			</div>
+		</div>
+		<div class="row text-container">
+			<div class="col-sm-4">
+		    Description:<br>
+				<%= t.text_area(:description)%>
+			</div>
+			<div class="col-sm-4">
+		    Cover Image:<br>
+		    <%=t.file_field :img%>
+			</div>
+			<div class="col-sm-4">
+		    Private? <%= t.check_box(:priv)%>
+				<br>
+				If private, please enter a password:<br>
+				<%=t.text_field(:password)%>
+		    <%=t.hidden_field(:latitude, :value => current_user.latitude)%>
+		    <%=t.hidden_field(:longitude, :value => current_user.longitude)%>
+				<br>
+			</div>
+		</div>
+		<div class="row text-container">
+		<div class="col-sm-12">
+				<%=t.submit "Save Trail"%>
+			<%end%>
+		</div>
+	</div>
+
 </div>

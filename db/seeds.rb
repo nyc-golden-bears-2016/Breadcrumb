@@ -47,7 +47,7 @@ fidi.crumbs.create!(name: "The Charging Bull", description: "Charging Bull, whic
 
 fidi.crumbs.create!(name: "Federal Hall", description: "Federal Hall, built in 1700 as New York's City Hall, later served as the first capitol building of the United States of America under the Constitution, as well as the site of George Washington's inauguration as the first President of the United States.", requires_answer: false, latitude: 40.707130, longitude: -74.010397, order_number: 3)
 
-longisland = erica.created_trails.create!(name: "North Shore Wine Tour", description: "Find clues along the West Side Piers", sequential: false, priv: true, published: true, password: "vino", latitude: 40.991211, longitude: -72.534255)
+longisland = erica.created_trails.create!(name: "North Shore Wine Tour", description: "Find clues along the West Side Piers", sequential: true, priv: true, published: true, password: "vino", latitude: 40.991211, longitude: -72.534255)
 
 TagTrail.create!(trail: longisland, tag: e1)
 TagTrail.create!(trail: longisland, tag: e2)

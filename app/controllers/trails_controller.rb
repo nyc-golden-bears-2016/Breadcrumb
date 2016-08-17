@@ -77,7 +77,7 @@ before_action :already_published, only: [:edit, :update]
 
   def publish
     if @trail.too_many_crumbs
-      redirect_to @trail,
+      redirect_to edit_trail_path,
       alert: "Please make sure your trail has between one and twenty crumbs."
     else
       @trail.update_attribute(:published, true)
