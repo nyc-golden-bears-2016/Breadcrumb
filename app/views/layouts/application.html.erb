@@ -29,6 +29,7 @@
             <li><div class="nav-spacer"><div></li>
             <li><div class="nav-spacer"><div></li>
             <li><%=link_to "Home", current_user, :class => 'navbar-link navbar-link-text' %></li>
+            <li><%= link_to 'Trails', trails_path, :class => 'navbar-link navbar-link-text' %></li>
             <li><%= link_to 'Tags', tags_path, :class => 'navbar-link navbar-link-text' %></li>
             <li><%= link_to 'Preferences', edit_user_registration_path, :class => 'navbar-link navbar-link-text' %></li>
             <li><%= link_to "FAQ", '/faq', :class => 'navbar-link navbar-link-text'  %></li>
@@ -37,6 +38,7 @@
               <%= text_field_tag :query, params[:query], placeholder: "Search Trails or Tags" %>
               <%= submit_tag "GO", name: nil %></li>
             <% end %>
+
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container -->
