@@ -1,43 +1,43 @@
-<br><div><%=link_to 'Create Trail', new_trail_path%></div>
-
-
 <% if @found_trails_or_tags != [] && !@found_trails_or_tags.nil? %>
- <br><br> <h1>Search Results:</h1>
+<div class="container">
+  <div class="page-header">
+   <h2>Search Results:</h2>
+ </div>
+
+ <div class="row text-container" id="less-space">
   <% @found_trails_or_tags.each do |found_trail_or_tag| %>
 	  <% if found_trail_or_tag.respond_to?(:subject) %>
 		<% @found_tags.each do |tag| %>
-		<h2><%= tag.subject %> - (tag):</h2>
+    <div class="col-sm-6">
+		<h2 class="matching-color">Tag: <%= tag.subject %></h2>
 			<% tag.trails.each do |trail| %>
 		 			<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
-		 		<%end%>	
+		 		<%end%>
 		 			<%end%>
 		<% elsif found_trail_or_tag.respond_to?(:name) %>
 			<%end%>
 			<%end%>
-		<h2><%= "Trails:" %></h2>
+    </div>
+   <div class="col-sm-6">
+		<h2 class="matching-color">Related Trails</h2>
 		<% @found_trails.each do |trail| %>
  				<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
- 			<%end%>					
-<% end %>
+ 			<%end%>
+   </div>
+  </div>
+<%else%>
 
+<div class="page-header">
+<h2 class="matching-color">Explore</h2>
+</div>
 
-<br><br><br><br><h1>Trails Near You:</h1>
-<% @nearby_trails.each do |trail| %>
-	<span><%= link_to "#{trail.name}", trail_path(trail), class: 'link'  %><br></span>
-	<% end %>
-
-
-
-<br><div><%=link_to 'Create Trail', new_trail_path%></div>		
-
-
-<h4>Explore </h4>
-
+<div class="row text-container" id="less-space">
+<div class="col-sm-12">
 <%@published_trails.each do |t|%>
   <%=link_to t.name, t%> by <%=link_to t.creator.username, t.creator%><br>
-  <%=t.description%>
+  <span id="compass-arrow-small">➹</span> <%=t.description%> <span id="compass-arrow-small">➹</span>
   <%if t.tags%>
-  <br>Tags:
+  <br><span class="matching-color">Tags:</span>
     <%t.tags.each do |tag|%>
       <%=link_to tag.subject, tag%>
     <%end%>
@@ -46,7 +46,7 @@
   <br>
   <br>
 <%end%>
-
-<%= link_to_previous_page @nearby_trails, 'Previous' %>
-<%= paginate @nearby_trails, :window => 1, :remote => true %>
-<%= link_to_next_page @nearby_trails, 'Next' %>
+<% end %>
+ </div>
+</div>
+</div>

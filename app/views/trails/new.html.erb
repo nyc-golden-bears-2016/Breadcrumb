@@ -9,27 +9,25 @@
 	<div class="row text-container">
 		<div class="col-sm-12">
 			<%=form_for(@trail) do |t|%>
-				Title:<br>
+				Title<br>
 				<%= t.text_field(:name)%>
 			</div>
 		</div>
 		<div class="row text-container">
 			<div class="col-sm-4">
-		    Description:<br>
+		    Description<br>
 				<%= t.text_area(:description)%>
 			</div>
 			<div class="col-sm-4">
-		    Cover Image:<br>
+		    Cover Image<br>
 		    <%=t.file_field :img%>
 			</div>
 			<div class="col-sm-4">
-		    Private? <%= t.check_box(:priv)%>
-				<br>
+		    Private? <%= t.check_box(:priv)%><br>
 				If private, please enter a password:<br>
 				<%=t.text_field(:password)%>
 		    <%=t.hidden_field(:latitude, :value => current_user.latitude)%>
 		    <%=t.hidden_field(:longitude, :value => current_user.longitude)%>
-				<br>
 			</div>
 		</div>
 		<div class="row text-container">

@@ -1,27 +1,13 @@
-<%=render "maps/trail-map"%>
+<div class="container">
+	<div class="row text-container matching-color">
+		<div class="col-sm-12"><%=link_to "Add Crumbs", new_trail_crumb_path(@trail)%>
+		</div>
+	</div>
 
-<div class="text-container">
-	<%=form_for(@trail) do |t|%>
-		Title: <%= t.text_field :name, placeholder: @trail.name%>
-		<br>
-    Description: <%= t.text_area :description, placeholder: @trail.description%>
-		<br>
-		<%if @trail.img_file_size%>
-		<img src="<%=@trail.img%>">
-		<%end%>
-    <%=t.label :img%>
-    <%=t.file_field :img%>
-    Locked? <%= t.check_box(:priv) %>
-    <%=t.text_field :password, placeholder: @trail.password%>
-    <%=t.hidden_field(:latitude, :value => current_user.latitude)%>
-    <%=t.hidden_field(:longitude, :value => current_user.longitude)%>
-		<br>
-		<%=t.submit "Update Trail"%>
-	<%end%>
-</div>
-
-<%if @trail.crumbs%>
+	<%if @trail.crumbs%>
   <%@trail.crumbs.each do |c|%>
+	<div class="row text-container">
+	<div class="col-sm-3">
     <%=c.name%><br>
     <%=c.description%><br>
     <%=link_to "Edit Crumb", "/trails/#{@trail.id}/crumbs/#{c.id}/edit"%>
@@ -29,29 +15,59 @@
       <%= f.submit "Delete Crumb" %>
     <% end %>
   <% end %>
+ </div>
 <% end %>
-
-<br>
-<br>
-<div><%=link_to "New Crumb", new_trail_crumb_path(@trail)%></div>
-<br>
-
-
-Remove Tags:
-<br>
-<div class ="selected-tags">
-<%@your_tags.each do |t|%>
-<span class="your-tag"><%= link_to t.tag.subject + ' | ', "/trails/#{@trail.id}/remove/#{t.tag.id}"%></span>
-<%end%>
 </div>
-<br>
-<br>
-Choose Tags Below:
-<br>
-<%@other_tags.each do |tag|%>
-<span class="other-tag"><%=link_to tag.subject + ' | ', "/trails/#{@trail.id}/add/#{tag.id}"%></span>
-<%end%>
-<br>
-<br>
-<br>
-<td><%=link_to "Publish", "/trails/#{@trail.id}/publish"%></td>
+
+<div class="row text-container">
+	<div class="col-sm-6">
+		<h3 class="matching-color">Choose Tags Below:</h3><br>
+	<%@other_tags.each do |tag|%>
+	<span class="other-tag"><%=link_to tag.subject + ' | ', "/trails/#{@trail.id}/add/#{tag.id}"%></span>
+	<%end%>
+</div>
+<div class="col-sm-6">
+<h3 class="matching-color">Remove Added Tags:</h3><br>
+	<div class ="selected-tags">
+	<%@your_tags.each do |t|%>
+	<span class="your-tag"><%= link_to t.tag.subject + ' | ', "/trails/#{@trail.id}/remove/#{t.tag.id}"%></span>
+	<%end%>
+	</div>
+</div>
+</div>
+
+<%=render "maps/trail-map"%>
+
+<div class="container">
+	<div class="row text-container">
+	  <div class="col-sm-12">
+	<%=form_for(@trail) do |t|%>
+		Title <br><%= t.text_field :name, placeholder: @trail.name%>
+		</div>
+		</div>
+		<div class="row text-container">
+	  <div class="col-sm-4">
+		Description<br> <%= t.text_area :description, placeholder: @trail.description%>
+	</div>
+	<div class="col-sm-4">
+		<%if @trail.img_file_size%>
+		<img src="<%=@trail.img%>">
+		<%end%>
+    <%=t.label :img%>
+    <%=t.file_field :img%>
+	 </div>
+	 <div class="col-sm-4">
+		Locked? <%= t.check_box(:priv) %><br>
+    <%=t.text_field :password, placeholder: @trail.password%>
+    <%=t.hidden_field(:latitude, :value => current_user.latitude)%>
+    <%=t.hidden_field(:longitude, :value => current_user.longitude)%>
+	</div>
+	</div>
+	<div class="row text-container">
+	<div class="col-sm-12">
+		<%=t.submit "Update Trail"%>
+	<%end%><br><br>
+	<div class="matching-color"><%=link_to "Publish", "/trails/#{@trail.id}/publish"%></div>
+	</div>
+</div>
+</div>

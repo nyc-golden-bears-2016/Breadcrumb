@@ -1,29 +1,5 @@
-<br>
-<br>
-<h2>Type to find tags:</h2>
-  <%=form_tag(tags_path, method: :"get", id: "tag-search-form") do%>
-  <%=text_field_tag :search, params[:search], placeholder: "Search Tags"%>
-  <%=submit_tag "Search"%>
-  <%end%>
-
-
-<%= form_tag(tags_path, method: "get", id: "tag-search-form") do %>
-<%= text_field_tag :search, params[:search], placeholder: "Search Tags" %>
-<%= submit_tag "Search" %>
-<% end %>
-
-<%if @errors%>
-<%@errors.each do |error| %>
-<%= error %>
+<div id="cloud">
+  <%@tags.each do |tag|%>
+  <span class="tag<%=rand(1..10)%>"><%=link_to tag.subject, tag%></span><span id="compass-arrow"> ➹ </span>
 <%end%>
-
-<%end%>
-
-
-<% if @tags.present? %>
-  <h1>Tags:</h1>
-	<% @tags.each do |tag| %>
-	 <span class="tag"><%= link_to "#{tag.subject}", tag_path(tag), class: 'link'  %><br></span>
-
-	<% end %>
-<% end %>
+</div>

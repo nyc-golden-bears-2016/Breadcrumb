@@ -28,7 +28,7 @@ $(document).ready(function() {
     }, options);
   }
 
-  $('.each-trail').on('click', function(event){
+  $('.each-trail').on('click', 'form', function(event){
     event.preventDefault();
     $.ajax({
       url: $(this).attr('action'),
