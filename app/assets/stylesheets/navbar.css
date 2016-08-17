@@ -53,3 +53,9 @@ input:-webkit-autofill:focus {
     border: 2px solid #90fde2;
     color: white;
 }
+
+@media (max-width: 500px) {
+   .collapse {
+       display: none !important;
+   }
+}
