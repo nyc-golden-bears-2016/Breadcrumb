@@ -1,29 +1,49 @@
-<%= render "maps/crumb-map" %>
+<div class="container">
+	<div class="row text-container">
+		<div class="col-sm-12">
+    <%= render "maps/crumb-map" %>
+    </div>
+  </div>
 
-<%=form_for([@trail, @crumb]) do |c| %>
-    Name: <%= c.text_field(:name) %><br>
-    Description: <%= c.text_area(:description) %><br>
+<div class="row text-container">
+  <div class="col-sm-6">
+  <%=form_for([@trail, @crumb]) do |c| %>
+    Name:<br> <%= c.text_field(:name) %><br>
+    Description:<br> <%= c.text_area(:description) %><br>
     Locked? <%= c.check_box(:requires_answer) %><br>
-    If locked, inlcude question in description and add answer below.
-    <%= c.text_area(:question) %><br>
-    <%= c.text_area(:answer) %><br>
+    If locked, please fill out below below.<br>
+    Question:<br><%= c.text_area(:question) %><br>
+    Answer:<br><%=c.text_area(:answer) %><br>
+  </div>
+
+  <div class="col-sm-6">
     <%if @crumb.img_file_size%>
     <div id="view">
       <img src= <%=@crumb.img%>/>
     </div>
     <%end%>
-    <%= c.file_field :img %>
+    Image:<%= c.file_field :img %><br>
     <%if @crumb.sound_file_size%>
     <div id="view">
     <audio controls>
-      <source src=<%= @crumb.sound %>>
+      <source src=<%= @crumb.sound %>><br>
     </audio>
     </div>
     <%end%>
-    <%=c.file_field :sound%>
+    Sound:<%=c.file_field :sound%>
     <%= c.hidden_field(:latitude, :value => @crumb.latitude) %>
     <%= c.hidden_field(:longitude, :value => @crumb.longitude) %>
-    <%= c.submit "Edit Crumb" %>
-  <%end%>
+  </div>
+
+    <div class="row text-container">
+      <div class="col-sm-12">
+    <br><br><br><br><%= c.submit "Edit Crumb" %><br><br><br><br>
+    <%end%>
+</div>
+</div>
+
+
+</div>
 
 <div style="display: none;" id="trail-id"><%= @trail.id %></div>
+</div>

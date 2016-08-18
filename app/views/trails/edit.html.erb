@@ -1,14 +1,10 @@
 <div class="container">
-	<div class="row text-container matching-color">
-		<div class="col-sm-12"><%=link_to "Add Crumbs", new_trail_crumb_path(@trail)%>
-		</div>
-	</div>
+	<div class="row text-container">
+		<div class="col-sm-12"><%=link_to "Add Crumbs", new_trail_crumb_path(@trail)%><br>
 
 	<%if @trail.crumbs%>
-  <%@trail.crumbs.each do |c|%>
-	<div class="row text-container">
-	<div class="col-sm-3">
-    <%=c.name%><br>
+  <%@trail.crumbs.each_with_index do |c, i|%>
+    <h2>#<%=i+1%> <%=c.name%></h2>
     <%=link_to "Edit Crumb", "/trails/#{@trail.id}/crumbs/#{c.id}/edit"%>
     <%=form_for([@trail, c], :html => { :method => :delete }) do |f|%>
       <%= f.submit "Delete Crumb" %>
@@ -35,8 +31,6 @@
 </div>
 </div>
 
-<%=render "maps/trail-map"%>
-
 <div class="container">
 	<div class="row text-container">
 	  <div class="col-sm-12">
@@ -54,7 +48,7 @@
 		  <img src= <%=@trail.img%>/>
 		</div>
 		<%end%>
-		Image<br>
+		Image
     <%=t.file_field :img%>
 	 </div>
 	 <div class="col-sm-4">

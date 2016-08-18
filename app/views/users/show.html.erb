@@ -2,11 +2,11 @@
 <div class="row text-container matching-color" id="less-space">
 <div class="col-sm-12">
 <%if current_user == @page%>
-  <%=link_to 'Create A Trail', new_trail_path%>
+  <h1><%=link_to 'Create A Trail', new_trail_path%></h1>
 
 <%else%>
 <div class="matching-color">
-  <%=@page.username.upcase%>'S PROFILE
+  <h1><%=@page.username.upcase%>'S PROFILE</h1>
 </div>
 <%end%>
 </div>
