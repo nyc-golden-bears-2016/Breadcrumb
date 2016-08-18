@@ -77,9 +77,9 @@ p {
 }
 
 
-@media (max-width: 1000px) { 
+@media (max-width: 1000px) {
   .center-text { padding: 10px 5%}
-  
+
 }
 
 
@@ -350,7 +350,7 @@ label {
 
 .form-text {
   position: absolute;
-  left:0; 
+  left:0;
   right:0;
   top: 10%;
   padding: 10px;
@@ -367,14 +367,14 @@ label {
 }
 
 
-input {
+textarea, input {
   border-radius: 5px;
   background: white;
   color: #0f2c2a;
   box-shadow: 0 0 0px 1000px #198c74 inset;
 }
 
-input:focus {
+textarea, input:focus {
   box-shadow: 0 0 8px #9bfefa;
   outline: none;
 }
@@ -458,7 +458,7 @@ input:focus {
     }
 
     .form-text {
-     top: 0; 
+     top: 0;
    }
 }
 

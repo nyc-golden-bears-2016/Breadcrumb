@@ -121,7 +121,6 @@ function initialize(mapdetails) {
         maximumAge: 5000,
         timeout: 60000
       };
-      // debugger;
       navigator.geolocation.watchPosition(function(position) {
         var pos = {
           lat: position.coords.latitude,
@@ -141,7 +140,6 @@ function initialize(mapdetails) {
               method: 'GET',
               data: data
             }).done( function (response) {
-              debugger;
               window.location = response.route + String(currentCrumb.id)
             })
         }

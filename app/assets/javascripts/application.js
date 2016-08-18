@@ -22,7 +22,6 @@ $(document).ready(function() {
         lat: position.coords.latitude,
         lng: position.coords.longitude
         };
-        debugger;
       $.ajax({
         url: '/set_coords',
         method: 'get',
