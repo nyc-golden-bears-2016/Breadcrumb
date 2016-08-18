@@ -159,77 +159,6 @@ p {
 }
 
 
-.signup-login{
-
-  font-size: 3vmin;
-  color:#67f8d4;
-  animation: textglow 1.5s infinite alternate;
-}
-
-
-#signup-link {
-  display: none;
-  position: absolute;
-  bottom: 44%;
-  right: 40%;
-  color:#67f8d4;
-  z-index: 2;
-}
-
-#signup-link:visited {
-  color:#67f8d4;
-}
-
-#signup-link:hover{
-  color:#c8fff8;
-  animation: textglow 1.5s infinite alternate;
-}
-
-
-#login-link {
-  display: none;
-  position: absolute;
-  bottom: 35%;
-  right: 41%;
-  color:#67f8d4;
-  z-index: 2;
-}
-
-#login-link:visited {
-  color:#67f8d4;
-}
-
-#login-link:hover{
-  color:#c8fff8;
-  animation: textglow 1.5s infinite alternate;
-}
-
-
-#faq-link {
-  display: none;
-  position: absolute;
-  bottom: 26%;
-  right: 41.5%;
-  color:#67f8d4;
-  z-index: 2;
-}
-
-#faq-link:visited {
-  color:#67f8d4;
-}
-
-#faq-link:hover{
-  color:#c8fff8;
-  animation: textglow 1.5s infinite alternate;
-}
-
-
-@keyframes textglow {
-    to {
-        text-shadow: 0 0 20px #9bfefa;
-    }
-}
-
 
 .text-container{
   margin: 20px auto;
@@ -395,6 +324,124 @@ div.panel.show {
 
 
 
+
+
+
+
+
+
+
+.signup-login{
+
+  font-size: 3vmin;
+  color:#67f8d4;
+  animation: textglow 1.5s infinite alternate;
+}
+
+
+#signup-link {
+  display: none;
+  position: absolute;
+  bottom: 44%;
+  right: 40%;
+  color:#67f8d4;
+  z-index: 2;
+}
+
+#signup-link:visited {
+  color:#67f8d4;
+}
+
+#signup-link:hover{
+  color:#c8fff8;
+  animation: textglow 1.5s infinite alternate;
+}
+
+
+#login-link {
+  display: none;
+  position: absolute;
+  bottom: 35%;
+  right: 41%;
+  color:#67f8d4;
+  z-index: 2;
+}
+
+#login-link:visited {
+  color:#67f8d4;
+}
+
+#login-link:hover{
+  color:#c8fff8;
+  animation: textglow 1.5s infinite alternate;
+}
+
+
+#faq-link {
+  display: none;
+  position: absolute;
+  bottom: 26%;
+  right: 41.5%;
+  color:#67f8d4;
+  z-index: 2;
+}
+
+#faq-link:visited {
+  color:#67f8d4;
+}
+
+#faq-link:hover{
+  color:#c8fff8;
+  animation: textglow 1.5s infinite alternate;
+}
+
+
+@keyframes textglow {
+    to {
+        text-shadow: 0 0 20px #9bfefa;
+    }
+}
+
+
+
+
+@media (max-width: 320px) {
+
+    .signup-login{
+      position: absolute;
+      top: 300px;
+      right: 0;
+      left: 25%;
+      font-size: 2em;
+      animation: textglow 1.5s infinite alternate;
+    }
+
+    #signup-link {
+      margin-right: auto;
+      margin-left: auto;
+      bottom: 0;
+      }
+
+    #login-link {
+      top: 20px;
+      margin-right: auto;
+      margin-left: auto;
+      left: 0;
+    }
+
+    #faq-link {
+      top: 100px;
+      margin-right: auto;
+      margin-left: auto;
+      left: 0;
+      bottom: 0;
+    }
+
+
+    .main_image {
+      max-width: 100%;
+    }
+}
 
 
 
