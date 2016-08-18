@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 // $(".search-bar").find('input')[1].value = "";
 
-
+  $(".alert").fadeOut(5000);
 
   if ($('.hidden').length) {
     navigator.geolocation.getCurrentPosition(function(position) {
