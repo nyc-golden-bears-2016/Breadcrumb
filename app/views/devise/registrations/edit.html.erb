@@ -13,9 +13,6 @@
     <%= f.text_field :username, autofocus: true %>
   </div>
 
-    <%=f.label :img%>
-    <%=f.file_field :img%>
-
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
   <% end %>

@@ -1,6 +1,7 @@
 <div class="container">
 	<div class="row text-container">
-		<div class="col-sm-12"><%=link_to "Add Crumbs", new_trail_crumb_path(@trail)%><br>
+		<div class="col-sm-12 matching-color">
+		<h3><span id="compass-arrow"> ➹ </span><%=link_to "Add Crumb", new_trail_crumb_path(@trail)%><span id="compass-arrow"> ➹ </span></h3><br>
 
 	<%if @trail.crumbs%>
   <%@trail.crumbs.each_with_index do |c, i|%>

@@ -3,7 +3,7 @@ class Trail < ApplicationRecord
   multisearchable :against => [:name, :description, :tags_name]
 
   scope :published, -> { where(:published => true) }
-  scope :unpublished, -> { where(:published => false) }  
+  scope :unpublished, -> { where(:published => false) }
 
   belongs_to :creator, class_name: 'User'
   has_many :crumbs, dependent: :destroy
@@ -28,6 +28,8 @@ class Trail < ApplicationRecord
   reverse_geocoded_by :latitude, :longitude
   after_validation :geocode
 
+
+	validates :name, { presence: true }
 	def order_crumbs
 	  ordered = self.crumbs.sort {|a,b| a.created_at <=> b.created_at}
 	  ordered.each_with_index do |t, i|

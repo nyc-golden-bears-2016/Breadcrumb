@@ -106,13 +106,13 @@
           <%end%>
         <br>by <%=link_to t.creator.username, t.creator%><br>
           <span id="compass-arrow-small">➹</span> <%=t.description%> <span id="compass-arrow-small">➹</span><br>
-        <%if t.tags%>
+          <%if t.tags.length > 0%>
           Tags:
           <%t.tags.each do |tag|%>
             <%=link_to tag.subject, tag%>
           <%end%>
         <%end%>
-        <br>
+        <br><br>
       </div>
         <%end%>
       <%end%>
