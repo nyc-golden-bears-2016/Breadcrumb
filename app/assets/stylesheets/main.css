@@ -51,13 +51,13 @@ body {
 
 h1 {
   color: white;
-  font-family: "Palatino";
+  font-family: "celtichand";
   letter-spacing: 2px;
 }
 
 
 h2 {
-  font-family: "Palatino";
+  font-family: "celtichand";
   color: white;
   letter-spacing: 2px;
 }
@@ -534,7 +534,7 @@ input:focus {
 }
 
 
-@media (max-width: 320px) {
+@media (max-width: 420px) {
     input[type="submit"] {
 
       font-size: 1.75em;
@@ -578,16 +578,12 @@ input:focus {
     .form-text {
      top: 0;
    }
+
+    .responsive-vertical {display: none}
 }
 
-@media (max-width: 440px) {
 
-
-  .responsive-vertical {display: none}
-
-}
-
-@media  (max-width: 480px) and (orientation: landscape) {
+@media (max-width: 480px) and (orientation: landscape) {
 
 .signup-login{
       position: absolute;
