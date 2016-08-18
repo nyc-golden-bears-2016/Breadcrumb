@@ -1,23 +1,25 @@
-<div class="text-container map-title">
-  <h1><%=@active.trail.name%></h1>
+<div class="container">
+  <div class="text-container map-title">
+    <h1><%=@active.trail.name%></h1>
+  </div>
+
+    <%= render "maps/active-map" %>
+
+  <div class="text-container">
+    <%if @active.trail.sequential%>
+      <p>To be followed in sequence.</p>
+    <%end%>
+  </div>
+
+  <div class="text-container">
+    <p><%=@active.trail.description%></p>
+    <br>
+    <p><%@crumbs.each do |c|%>
+      <%=link_to c.crumb.name, "/actives/#{@active.id}/active_crumbs/#{c.id}"%>
+    <%end%>
+    </p>
+    <br>
+  </div>
+
+  <div id="active-id"><%= @active.id %></div>
 </div>
-
-<%= render "maps/active-map" %>
-
-<div class="text-container">
-  <%if @active.trail.sequential%>
-    <p>To be followed in sequence.</p>
-  <%end%>
-</div>
-
-<div class="text-container">
-  <p><%=@active.trail.description%></p>
-  <br>
-  <p><%@crumbs.each do |c|%>
-    <%=link_to c.crumb.name, "/actives/#{@active.id}/active_crumbs/#{c.id}"%>
-  <%end%>
-  </p>
-  <br>
-</div>
-
-<div id="active-id"><%= @active.id %></div>

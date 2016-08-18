@@ -1,4 +1,4 @@
- //= require jquery
+//= require jquery
 //= require app_assets
 //= require js-routes
 //= require jQueryRotate
@@ -15,6 +15,8 @@ $(document).ready(function() {
 // $(".search-bar").find('input')[1].value = "";
 
   $(".alert").delay(1500).fadeOut(3000);
+
+
 
 
   $(".boy-crumbs:even").removeClass("unflipped");

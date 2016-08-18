@@ -23,8 +23,8 @@ $grid-float-breakpoint: 1000px;
 @import "erica";
 
 @font-face {
-font-family: 'celtichand';
-font-style: normal;
-font-weight: normal;
-src: local('CelticHand'), font-url('CELTICHD.woff') format('woff');
+  font-family: 'CelticHand';
+  font-style: normal;
+  font-weight: normal;
+  src: local('CelticHand'), url('CELTICHD.woff') format('woff');
 }

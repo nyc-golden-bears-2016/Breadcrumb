@@ -14,4 +14,4 @@ Rails.application.config.assets.version = '1.0'
   Rails.application.config.assets.precompile += %w( active-map.js )
   Rails.application.config.assets.precompile += %w( fireflies.js )
   JsAssets::List.allow << '*.png'
-  
+  Rails.application.config.assets.precompile << /\.(?:svg|eot|woff|ttf)\z/

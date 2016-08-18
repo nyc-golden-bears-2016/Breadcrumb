@@ -11,25 +11,19 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <% if user_signed_in? %>
 
-  <div class="container-fluid no-padding">
-    <nav class="navbar navbar-default dark-green-navbar">
-      <div class="container small-margin">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <h1 class="navbar-brand">Breadcrumb</h1>
-        </div>
-        <div class="collapse navbar-collapse" id="navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
-            <li><div class="nav-spacer"><div></li>
-            <li><div class="nav-spacer"><div></li>
-            <li><div class="nav-spacer"><div></li>
-            <li><div class="nav-spacer"><div></li>
-            <li><%=link_to "Home", current_user, :class => 'navbar-link navbar-link-text' %></li>
+ <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar top-bar"></span>
+                <span class="icon-bar middle-bar"></span>
+                <span class="icon-bar bottom-bar"></span>
+              </button>
+              <%= link_to "Breadcrumb", current_user, id: "logo", class: "navbar-brand" %>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
             <li><%= link_to 'Trails', trails_path, :class => 'navbar-link navbar-link-text' %></li>
             <li><%= link_to 'Tags', tags_path, :class => 'navbar-link navbar-link-text' %></li>
             <li><%= link_to 'Preferences', edit_user_registration_path, :class => 'navbar-link navbar-link-text' %></li>
@@ -39,11 +33,16 @@
               <%= text_field_tag :query, params[:query], placeholder: "Search Trails or Tags" %>
               <%= submit_tag "GO", name: nil, id: "go-button" %></li>
             <% end %>
+                    </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
 
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container -->
-    </nav><!-- /.navbar -->
+
+
+
 
     <% end %>
     <% if notice %>

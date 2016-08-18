@@ -1,0 +1,104 @@
+
+#navbar {
+  .navbar-link-text {
+    padding-top: 25px;
+    font-size: 1.6em;
+  }
+  .search-bar {
+    margin-left: 15px;
+  }
+}
+
+
+.navbar-header {
+  padding-top: 4px;
+
+}
+
+#logo {
+  font-family: "celtichand";
+  font-size: 1.8em;
+  color: white;
+  &:focus, &:hover, &:active {
+    color: white;
+  }
+}
+
+.navbar {
+  background: #0f2c2a;
+  border: 2px solid #126453;
+}
+
+.navbar-toggle {
+  border: none;
+  background: transparent !important;
+
+  &:hover {
+    background: transparent !important;
+  }
+
+  .icon-bar {
+    width: 22px;
+    transition: all 0.2s;
+  }
+  .top-bar {
+    transform: rotate(45deg);
+    transform-origin: 10% 10%;
+  }
+  .middle-bar {
+    opacity: 0;
+  }
+  .bottom-bar {
+    transform: rotate(-45deg);
+    transform-origin: 10% 90%;
+  }
+}
+
+.navbar-toggle.collapsed {
+  .top-bar {
+    transform: rotate(0);
+  }
+  .middle-bar {
+    opacity: 1;
+  }
+  .bottom-bar {
+    transform: rotate(0);
+  }
+}
+
+.navbar-default {
+  .navbar-toggle {
+    .icon-bar {
+    background-color: #126453;
+    }
+  }
+  .navbar-nav {
+    li {
+      a {
+        color: #2befc6;
+        &:focus, &:hover, &:active {
+          color: white;
+        }
+      }
+    }
+    .open {
+      a {
+        background-color: #D8BF8A;
+        color: #715420;
+        &:focus, &:hover, &:active {
+        background-color: #D8BF8A;
+        color: #715420;
+        }
+      }
+      .dropdown {
+        .dropdown-toggle {
+          &:focus, &:hover, &:active, &:visited {
+            background-color: #D8BF8A;
+            color: #715420;
+          }
+        }
+      }
+    }
+  }
+}
+

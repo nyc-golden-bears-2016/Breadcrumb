@@ -22,11 +22,8 @@
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em class="light-green">(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br/>
-    <%= f.password_field :password, autocomplete: "off" %>
+    <%= f.label :password %><br/>
+    <%= f.password_field :password, autocomplete: "off", placeholder: "6 character minimum" %>
   </div>
 
   <div class="field">
@@ -34,10 +31,10 @@
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
   <p id="validate-status"></p>
-  
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>
 <% end %>
-</div> 
- 
+</div>
+
