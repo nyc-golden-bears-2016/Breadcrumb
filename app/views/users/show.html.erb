@@ -14,7 +14,7 @@
 
 <div class="row text-container" id="less-space">
 <div class="col-sm-4">
-<h5 class="matching-color">Created Trails</h5>
+<h3 class="matching-color">Created Trails</h3>
 <%if @page.created_trails%>
 <%@page.created_trails.each do |t|%>
   <div class='each-trail'>
@@ -48,7 +48,7 @@
 
 <div class="col-sm-4">
 <%if @page.favorites %>
-  <h5 class="matching-color">Saved Trails</h5>
+  <h3 class="matching-color">Saved Trails</h3>
   <%@page.favorites.each do |t|%>
   <div class="each-trail-saved">
     <%=link_to t.trail.name, t.trail%><br>
@@ -69,7 +69,7 @@
 
 <div class="col-sm-4">
 <%if @page.actives%>
-  <h5 class="matching-color">Past Trails</h5>
+  <h3 class="matching-color">Past Trails</h3>
   <%@page.actives.each do |t|%>
   <div class="each-trail-active">
     <%=link_to t.trail.name, t.trail %>
@@ -95,30 +95,41 @@
 <div class="row text-container" id="less-space">
 <div class="col-sm-12">
   <%if current_user == @page%>
-      <h4 class="matching-color">Explore Nearby Trails</h4>
+      <h2 class="matching-color">Explore Nearby Trails</h2>
+
+          <%=image_tag("boy-crumbs.png", :class =>"responsive-horizontal") %>
+
         <%@trails.each do |t|%>
-        <div class="each-trail-desc">
-        <%=link_to t.name, t%>
+        <div class="each-trail-desc position-relative">
+        <%=link_to t.name, t, :class =>"light-green" %>
           <%if t.priv%>
-          <span class="matching-color">[PRIVATE]</span>
+          <span class="matching-color mid-green">[PRIVATE]</span>
           <%else%>
-          <span class="matching-color">[PUBLIC]</span>
+          <span class="matching-color mid-green">[PUBLIC]</span>
           <%end%>
         <br>by <%=link_to t.creator.username, t.creator%><br>
           <span id="compass-arrow-small">➹</span> <%=t.description%> <span id="compass-arrow-small">➹</span><br>
           <%if t.tags.length > 0%>
-          Tags:
+        <div class="max-width-300">
+          <h4 class="tag-title mid-green">Tags:</h4>
           <%t.tags.each do |tag|%>
-            <%=link_to tag.subject, tag%>
+            <div class="taglist"><%=link_to tag.subject, tag%></div>
           <%end%>
+          </div>
         <%end%>
-        <br><br>
+
+        <div class="boy-crumbs .position-relative ">
+          <%=image_tag("horizontal-crumbs.png", :class =>"responsive-horizontal")%>
+          <%=image_tag("vertical-crumbs.png", :class =>"responsive-vertical")%>
+        </div>
+        <br>
       </div>
         <%end%>
       <%end%>
     </div>
   </div>
 </div>
+<div style="height:300px"></div>
     <% if user_signed_in? %>
       <div class="hidden"></div>
     <% end %>

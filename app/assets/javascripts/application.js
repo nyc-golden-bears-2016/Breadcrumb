@@ -14,7 +14,13 @@ $(document).ready(function() {
 
 // $(".search-bar").find('input')[1].value = "";
 
-  $(".alert").fadeOut(5000);
+  $(".alert").delay(1500).fadeOut(3000);
+
+
+  $(".boy-crumbs:even").removeClass("unflipped");
+  $(".boy-crumbs:even").addClass("flipped");
+  $(".boy-crumbs:odd").removeClass("flipped");
+  $(".boy-crumbs:odd").addClass("unflipped");
 
   if ($('.hidden').length) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -42,6 +48,10 @@ $(document).ready(function() {
       $('.each-trail-desc').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
       $('.each-trail-saved').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
       $('.each-trail-active').find('a[href="/trails/' + response + '"'+ ']').parent().remove();
+      $(".boy-crumbs:even").removeClass("unflipped");
+      $(".boy-crumbs:even").addClass("flipped");
+      $(".boy-crumbs:odd").removeClass("flipped");
+      $(".boy-crumbs:odd").addClass("unflipped");
     });
   })
 

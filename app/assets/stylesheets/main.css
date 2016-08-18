@@ -220,6 +220,7 @@ position: absolute;
 
 #pac-input:focus {
   border-color: #4d90fe;
+
 }
 
 #recenter-button {
@@ -265,10 +266,51 @@ position: absolute;
 }
 
 
+::-webkit-input-placeholder { /* Chrome */
+  color: white;
+  transition: opacity 250ms ease-in-out;
+}
+:focus::-webkit-input-placeholder {
+  opacity: 0.5;
+}
+:-ms-input-placeholder { /* IE 10+ */
+  color: white;
+  transition: opacity 250ms ease-in-out;
+}
+:focus:-ms-input-placeholder {
+  opacity: 0.5;
+}
+::-moz-placeholder { /* Firefox 19+ */
+  color: white;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+:focus::-moz-placeholder {
+  opacity: 0.5;
+}
+:-moz-placeholder { /* Firefox 4 - 18 */
+  color: white;
+  opacity: 1;
+  transition: opacity 250ms ease-in-out;
+}
+:focus:-moz-placeholder {
+  opacity: 0.5;
+}
+
+.matching-color.mid-green {
+  color: #198c74;
+}
 
 
+.mid-green {
+  color: #198c74;
+}
 
-
+.i-meant-to-register {
+  font-size: 0.8em;
+  padding: 20px 0;
+  opacity: 0.6;
+}
 
 .signup-login{
 
@@ -361,31 +403,36 @@ label {
   min-width: 300px;
 }
 
-.light-green {
 
-  color: #2befc6
+
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 8px #9bfefa;
+  color: black;
 }
+
 
 
 textarea, input {
   border-radius: 5px;
   background: white;
-  color: #0f2c2a;
+  color: white;
   box-shadow: 0 0 0px 1000px #198c74 inset;
 }
 
-textarea, input:focus {
+ input:focus {
   box-shadow: 0 0 8px #9bfefa;
   outline: none;
+  color: black;
 }
 
 
 input[type="submit"]{
   background: #198c74 ;
   color: white;
-  margin: 5px;
+  margin: 10px 5px;
   border: 2px solid #2befc6;
-  font-size: 2em;
+  font-size: 1.25em;
 }
 
 input[type="submit"]:hover{
@@ -405,7 +452,7 @@ input:focus {
 .alert {
   text-align: center;
   position: fixed;
-  top: 15px;
+  bottom: 0;
   width: 100%;
   z-index: 1005;
 }
@@ -415,12 +462,83 @@ input:focus {
   font-size: 1.2em;
 }
 
+.responsive-horizontal {
+    max-width: 100%;
+    height: auto;
+}
+
+.responsive-vertical {
+  height: 100%;
+  position: absolute;
+  min-height: 170px;
+  bottom: 30px;
+}
+
+.responsive-vertical .unflipped {
+  bottom: 0;
+  height: 100%;
+}
 
 
+.responsive-vertical .flipped {
+  bottom: 0;
+  height: 100%;
+}
 
+.flipped {
+       -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+        height: 100%;
+
+}
+
+.unflipped {
+       -moz-transform: scaleX(1);
+        -o-transform: scaleX(1);
+        -webkit-transform: scaleX(1);
+        transform: scaleX(1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+        height: 100%;
+
+}
+
+.position-relative {
+  position: relative;
+}
+
+.max-width-300 {
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.tag-title {
+  display: inline;
+}
+
+.taglist {
+  display: inline;
+  font-size: 0.8em;
+  padding: 0 3px;
+}
+
+
+.each-trail-desc .light-green {
+  color: #2befc6;
+  padding-right: 10px;
+
+}
 
 
 @media (max-width: 320px) {
+    input[type="submit"] {
+
+      font-size: 1.75em;
+    }
 
     .signup-login{
       position: absolute;
@@ -462,6 +580,12 @@ input:focus {
    }
 }
 
+@media (max-width: 440px) {
+
+
+  .responsive-vertical {display: none}
+
+}
 
 @media  (max-width: 480px) and (orientation: landscape) {
 

@@ -41,7 +41,7 @@
 		</div>
 		<div class="row text-container">
 	  <div class="col-sm-4">
-		Description<br> <%= t.text_area :description, placeholder: @trail.description%>
+		Description<br> <%= t.text_area :description, placeholder: @trail.description, id: "message_area"%>
 	</div>
 	<div class="col-sm-4">
 		<%if @trail.img_file_size%>

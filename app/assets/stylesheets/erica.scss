@@ -29,6 +29,10 @@ input[type="file"]{
 width: 100%;
 }
 
+#message_area{
+    height: 100px;
+    width:250px;
+}
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */

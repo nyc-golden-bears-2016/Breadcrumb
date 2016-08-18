@@ -5,7 +5,7 @@
 
     <canvas id="fireflies"></canvas>
     <%=image_tag("forest.jpg", :class => "main_image")%>
-    
+
   <div class="form-text">
 
   <h2>Log In</h2>
@@ -16,7 +16,7 @@
         <%= f.label :username %><br/>
         <%= f.text_field :login, autofocus: true %>
       </div>
-      
+
       <div class="field">
         <%= f.label :password %><br/>
         <%= f.password_field :password, autocomplete: "off" %>
@@ -34,6 +34,9 @@
     <% end %>
     <div class="forgot-password">
       <%= link_to "Forgot Password", new_user_password_path, :class => 'light-green'  %>
+    </div>
+        <div class="i-meant-to-register">
+      <%= link_to "I meant to register!", new_user_registration_path, :class => 'light-green'  %>
     </div>
   </div>
 </div>

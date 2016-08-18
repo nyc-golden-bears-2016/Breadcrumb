@@ -169,7 +169,7 @@ function initialize(mapdetails) {
           );
       });
 
-        $("#current").html("<p>You're roughly " + printDistance(distance) + " away from the next Crumb</p>" );
+        $("#current").html("<p>" + printDistance(distance) + " away from the next Crumb</p>" );
         $("#compass_hands").rotate({duration:3000, animateTo:calcHeading(userPosition, currentCrumbPosition)});
         $("#blank-map-overlay").fadeOut(3500);
 

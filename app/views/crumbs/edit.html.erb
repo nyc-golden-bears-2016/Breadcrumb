@@ -9,11 +9,11 @@
   <div class="col-sm-6">
   <%=form_for([@trail, @crumb]) do |c| %>
     Name:<br> <%= c.text_field(:name) %><br>
-    Description:<br> <%= c.text_area(:description) %><br>
+    Description:<br> <%= c.text_field :description, id: "message_area"%><br>
     Locked? <%= c.check_box(:requires_answer) %><br>
     If locked, please fill out below below.<br>
-    Question:<br><%= c.text_area(:question) %><br>
-    Answer:<br><%=c.text_area(:answer) %><br>
+    Question:<br><%= c.text_field :question, id: "message_area"%><br>
+    Answer:<br><%=c.text_field :answer, id: "message_area"%><br>
   </div>
 
   <div class="col-sm-6">
