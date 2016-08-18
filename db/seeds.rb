@@ -6,15 +6,10 @@ Active.delete_all
 ActiveCrumb.delete_all
 Tag.delete_all
 TagTrail.delete_all
-
 erica = User.create!(username: "codingerica", email:"erica@gmail.com", password: "bootcamp")
-
 mason = User.create!(username: "codingmason", email:"mason@gmail.com", password: "bootcamp")
-
 marco = User.create!(username: "codingmarco", email:"marco@gmail.com", password: "bootcamp")
-
 prajay = User.create!(username: "codingprajay", email:"prajay@gmail.com", password: "bootcamp")
-
 
 e1 = Tag.create!(subject: "Bars/Alcohol")
 e2 = Tag.create!(subject: "Outdoor")
@@ -31,12 +26,12 @@ Tag.create!(subject: "Indoor")
 Tag.create!(subject: "Celebration")
 Tag.create!(subject: "Scavenger Hunt")
 Tag.create!(subject: "Ghost Tour")
-Tag.create!(subject: "Food")
+p1 = Tag.create!(subject: "Food")
 Tag.create!(subject: "Holiday")
 Tag.create!(subject: "Music")
+p2 = Tag.create!(subject: "Favorites")
 
-
-fidi = mason.created_trails.create!(name: "Places we can test!", description: "A lovely walk in the oppresive heat.", priv: false, published: true, latitude: 40.706417, longitude: -74.009082)
+fidi = mason.created_trails.create!(name: "Places we can test!", description: "A lovely walk in the oppresive heat.", priv: false, published: true, sequential: true, latitude: 40.706417, longitude: -74.009082)
 
 TagTrail.create!(trail: fidi, tag: m1)
 TagTrail.create!(trail: fidi, tag: m2)
@@ -58,3 +53,15 @@ longisland.crumbs.create!(name: "Macari Vineyards", requires_answer: false, lati
 longisland.crumbs.create!(name: "Shinn Estate Vineyards and Farmhouse", requires_answer: false, latitude: 41.013866, longitude: -72.532554, order_number: 2)
 
 longisland.crumbs.create!(name: "Castello di Borghese Vineyard", requires_answer: false, latitude: 41.016651, longitude: -72.506247, order_number: 3)
+
+
+food = prajay.created_trails.create!(name: "Best Food by DBC", description: "Some of my favorite places to get lunch.", sequential: true, priv: true, published: true, password: "boss triangles", latitude: 40.706417, longitude: -74.009082)
+
+TagTrail.create!(trail: food, tag: p1)
+TagTrail.create!(trail: food, tag: p2)
+
+food.crumbs.create!(name: "Leo's Bagels", requires_answer: false, latitude: 40.704998, longitude: -74.009625, order_number: 1)
+
+food.crumbs.create!(name: "Adrienne's Pizzabar", requires_answer: false, latitude: 41.013866, longitude: -72.532554, order_number: 2)
+
+food.crumbs.create!(name: "Melt Shop", requires_answer: false, latitude: 40.704285, longitude: -74.010121, order_number: 3)

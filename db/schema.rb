@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20160816194953) do
     t.float    "longitude"
     t.boolean  "requires_answer",    default: false
     t.string   "answer"
+    t.string   "question"
     t.integer  "trail_id",                           null: false
     t.integer  "order_number"
     t.datetime "created_at",                         null: false
