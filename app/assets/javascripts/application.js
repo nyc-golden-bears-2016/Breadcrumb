@@ -14,7 +14,7 @@ $(document).ready(function() {
 
 // $(".search-bar").find('input')[1].value = "";
 
-
+  $(".alert").fadeOut(5000);
 
   if ($('.hidden').length) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -22,7 +22,7 @@ $(document).ready(function() {
         lat: position.coords.latitude,
         lng: position.coords.longitude
         };
-
+        debugger;
       $.ajax({
         url: '/set_coords',
         method: 'get',

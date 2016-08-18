@@ -38,25 +38,6 @@
 
 
 
-input:-webkit-autofill  {
-    color: white !important
-}
-
-input:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0px 1000px white inset;
-}
-
-input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #198c74 inset;
-    border: 2px solid #90fde2;
-}
-
-#user_login input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #198c74 inset;
-    border: 2px solid #90fde2;
-    color: white;
-}
-
 .navbar-header {
   position: absolute;
   left: 10px;
@@ -86,6 +67,9 @@ button.navbar-toggle {
 
 }
 
+#go-button {
+  font-size: 1em;
+}
 
 
 

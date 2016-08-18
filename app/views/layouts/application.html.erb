@@ -36,7 +36,7 @@
             <li><%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link navbar-link-text'%></li>
             <li><%= form_tag trails_path, class: "search-bar", method: :get do %>
               <%= text_field_tag :query, params[:query], placeholder: "Search Trails or Tags" %>
-              <%= submit_tag "GO", name: nil %></li>
+              <%= submit_tag "GO", name: nil, id: "go-button" %></li>
             <% end %>
 
           </ul>
