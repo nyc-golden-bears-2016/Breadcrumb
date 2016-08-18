@@ -534,7 +534,7 @@ input:focus {
 }
 
 
-@media (max-width: 420px) {
+@media only screen and (max-width: 420px) {
     input[type="submit"] {
 
       font-size: 1.75em;
@@ -583,7 +583,7 @@ input:focus {
 }
 
 
-@media (max-width: 480px) and (orientation: landscape) {
+@media  only screen and (max-width: 480px) and (orientation: landscape) {
 
 .signup-login{
       position: absolute;
