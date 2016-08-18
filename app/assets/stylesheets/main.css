@@ -12,33 +12,6 @@ p {
 }
 
 
-input {
-  border-radius: 5px;
-  background: white;
-  color: #0f2c2a;
-  
-}
-
-input:focus {
-  box-shadow: 0 0 8px #9bfefa;
-  outline: none;
-}
-
-
-input[type="submit"]{
-  background: #198c74 ;
-  color: white;
-  margin: 5px;
-  border: 2px solid #2befc6;
-  font-size: 2em;
-}
-
-input[type="submit"]:hover{
-  background: #2befc6;
-  color: #0f2c2a;
-  box-shadow: 0 0 4px #9bfefa;
-  border: 2px solid white;
-}
 
 a {
   color: white;
@@ -394,15 +367,45 @@ label {
 }
 
 
+input {
+  border-radius: 5px;
+  background: white;
+  color: #0f2c2a;
+  box-shadow: 0 0 0px 1000px #198c74 inset;
+}
+
+input:focus {
+  box-shadow: 0 0 8px #9bfefa;
+  outline: none;
+}
+
+
+input[type="submit"]{
+  background: #198c74 ;
+  color: white;
+  margin: 5px;
+  border: 2px solid #2befc6;
+  font-size: 2em;
+}
+
+input[type="submit"]:hover{
+  background: #2befc6;
+  color: #0f2c2a;
+  box-shadow: 0 0 4px #9bfefa;
+  border: 2px solid white;
+}
+
+
+/*
 input:focus {
     box-shadow: 0 0 0px 1000px #198c74 inset;
     border: 2px solid #90fde2;
-}
+}*/
 
 .alert {
   text-align: center;
   position: fixed;
-  top: 0;
+  top: 15px;
   width: 100%;
   z-index: 1005;
 }
