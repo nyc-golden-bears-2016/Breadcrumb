@@ -42,3 +42,53 @@ width: 100%;
     }
     // .tags{font-size: 70%;}
 }
+
+
+@media (max-width: 375px) {
+
+input[type="submit"] {
+      font-size: 1.75em;
+    }
+
+    .signup-login{
+      position: absolute;
+      top: 325px;
+      right: 0;
+      left: 0;
+      font-size: 2em;
+      animation: textglow 1.5s infinite alternate;
+    }
+
+    #signup-link {
+      margin-right: auto;
+      margin-left: auto;
+      bottom: 0;
+      }
+
+    #login-link {
+      top: 20px;
+      margin-right: auto;
+      margin-left: auto;
+      padding-right: 5%;
+    }
+
+    #faq-link {
+      top: 100px;
+      margin-right: auto;
+      margin-left: auto;
+      bottom: 0;
+     padding-right: 8%;
+    }
+
+
+    .main_image {
+      max-width: 100%;
+    }
+
+    .form-text {
+     top: 0;
+   }
+
+    .responsive-vertical {display: none}
+}
+
