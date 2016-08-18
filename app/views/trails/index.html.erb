@@ -37,7 +37,7 @@
 <%@published_trails.each do |t|%>
   <%=link_to t.name, t%> by <%=link_to t.creator.username, t.creator%><br>
   <span id="compass-arrow-small">➹</span> <%=t.description%> <span id="compass-arrow-small">➹</span>
-  <%if t.tags%>
+  <%if t.tags.length > 0%>
   <br><span class="matching-color">Tags:</span>
     <%t.tags.each do |tag|%>
       <%=link_to tag.subject, tag%>

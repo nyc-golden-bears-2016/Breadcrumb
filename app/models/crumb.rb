@@ -21,4 +21,6 @@ class Crumb < ApplicationRecord
                              :message => 'only .mpeg or .wav files',
                              :size => { in: 0..4.megabytes }
 
+
+	validates :name, { presence: true }
 end

@@ -15,7 +15,7 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
       redirect_to "/trails/#{@trail.id}/edit"
     else
       redirect_to current_user,
-      alert: "Errors"
+      alert: "Sorry! Something went wrong. Please check that you've filled out all required information."
     end
   end
 
