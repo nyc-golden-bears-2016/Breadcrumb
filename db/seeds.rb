@@ -65,3 +65,11 @@ food.crumbs.create!(name: "Leo's Bagels", requires_answer: false, latitude: 40.7
 food.crumbs.create!(name: "Adrienne's Pizzabar", requires_answer: false, latitude: 41.013866, longitude: -72.532554, order_number: 2)
 
 food.crumbs.create!(name: "Melt Shop", requires_answer: false, latitude: 40.704285, longitude: -74.010121, order_number: 3)
+
+testing = prajay.created_trails.create!(name: "Close Spots", description: "Testing", sequential: true, priv: true, published: true, password: "boss triangles", latitude: 40.706417, longitude: -74.009082)
+
+testing.crumbs.create!(name: "Full Shilling", requires_answer: false, latitude: 40.706123, longitude: -74.009432, order_number: 1, description: "This is a description.")
+
+testing.crumbs.create!(name: "Colombe", requires_answer: true, latitude: 40.705579, longitude: -74.008378, order_number: 2, description: "This is a description.", question: "Test question?", answer: "DBC")
+
+testing.crumbs.create!(name: "DBC", requires_answer: false, latitude: 40.706417, longitude: -74.009082, order_number: 3, description: "This is a description.")
