@@ -26,7 +26,10 @@
 }
 
 input[type="file"]{
-width: 100%;
+  width: 100%;
+  max-width: 180px;
+  margin: 0 auto;
+  padding: 2px;
 }
 
 #message_area{

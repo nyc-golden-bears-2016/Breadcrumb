@@ -84,12 +84,6 @@ p {
 }
 
 
-/*@media (max-width: 1000px) {
-  .center-text { padding: 10px 5%}
-
-}
-*/
-
 
 .center-text li {
   font-size: 2em;
@@ -290,16 +284,6 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   outline-color: #ffd9b3;
 }
 
-.green-gradient {
-  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#003a26+0,000000+50,003a26+100 */
-  background: #003a26; /* Old browsers */
-  background: -moz-linear-gradient(left,  #003a26 0%, #000000 50%, #003a26 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(left,  #003a26 0%,#000000 50%,#003a26 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(to right,  #003a26 0%,#000000 50%,#003a26 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#003a26', endColorstr='#003a26',GradientType=1 ); /* IE6-9 */
-
-}
-
 
 ::-webkit-input-placeholder { /* Chrome */
   color: white;
@@ -449,18 +433,25 @@ textarea:focus {
 
 textarea, input {
   border-radius: 5px;
-  background: white;
+  background: #198c74;
   color: white;
   box-shadow: 0 0 0px 1000px #198c74 inset;
   padding: 0 6px;
+}
+
+ textarea:focus {
+  box-shadow: 0 0 8px #9bfefa;
+  outline: none;
+  color: black;
+  background: white
 }
 
  input:focus {
   box-shadow: 0 0 8px #9bfefa;
   outline: none;
   color: black;
+  background: white
 }
-
 
 input[type="submit"]{
   background: #198c74 ;
@@ -505,7 +496,8 @@ input:focus {
 .responsive-vertical {
   height: 100%;
   position: absolute;
-  min-height: 170px;
+  min-height: 160px;
+
   bottom: 30px;
 }
 
