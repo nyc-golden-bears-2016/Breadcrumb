@@ -74,7 +74,7 @@ function initialize(mapdetails) {
     // Set Map styles and marker
       marker.setMap(map);
     }
-    var child = asset_path("child.png");
+    var child = asset_path("child-outline.png");
     var userMarkerImage = new google.maps.MarkerImage( String(child),
               new google.maps.Size(50, 50),
               new google.maps.Point(0, 0),
