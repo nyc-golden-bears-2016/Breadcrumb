@@ -28,19 +28,19 @@
   </div>
 <%else%>
 
-<div class="page-header">
+<div class="page-header text-container">
 <h2 class="matching-color">Explore</h2>
 </div>
 
 <div class="row text-container" id="less-space">
 <div class="col-sm-12">
 <%@published_trails.each do |t|%>
-  <%=link_to t.name, t%> by <%=link_to t.creator.username, t.creator%><br>
-  <span id="compass-arrow-small">➹</span> <%=t.description%> <span id="compass-arrow-small">➹</span>
+  <h3><%=link_to t.name, t%></h3> by  <%=link_to t.creator.username, t.creator%><br>
+  <p><span id="compass-arrow-small">➹</span> <%=t.description%> <span id="compass-arrow-small">➹</span></p>
   <%if t.tags.length > 0%>
-  <br><span class="matching-color">Tags:</span>
+  <br><span class="matching-color mid-green">Tags:</span>
     <%t.tags.each do |tag|%>
-      <%=link_to tag.subject, tag%>
+      <%=link_to tag.subject, tag, class: "light-green" %>
     <%end%>
   <br>
   <%end%>

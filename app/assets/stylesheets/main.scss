@@ -569,8 +569,12 @@ input:focus {
   display: inline;
   font-size: 0.8em;
   padding: 0 3px;
+
 }
 
+.light-green {
+    color: #2befc6;
+}
 
 .each-trail-desc .light-green {
   color: #2befc6;
@@ -578,6 +582,10 @@ input:focus {
 
 }
 
+.taglist .light-green {
+  color: #2befc6;
+
+}
 
 /*
 @media (max-width: 420px) {

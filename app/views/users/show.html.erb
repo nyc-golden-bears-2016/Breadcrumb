@@ -108,12 +108,12 @@
           <span class="matching-color mid-green">[PUBLIC]</span>
           <%end%>
         <br>by <%=link_to t.creator.username, t.creator%><br>
-          <span id="compass-arrow-small">➹</span> <%=t.description%> <span id="compass-arrow-small">➹</span><br>
+          <p class="max-width-300"><span id="compass-arrow-small">➹  </span><%=t.description%><span id="compass-arrow-small">  ➹</span></p><br>
           <%if t.tags.length > 0%>
         <div class="max-width-300">
           <h4 class="tag-title mid-green">Tags:</h4>
           <%t.tags.each do |tag|%>
-            <div class="taglist"><%=link_to tag.subject, tag%></div>
+            <div class="taglist"><%=link_to tag.subject, tag, class: "light-green" %></div>
           <%end%>
           </div>
         <%end%>
