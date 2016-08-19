@@ -8,10 +8,11 @@ before_action :current_crumb, only: [:edit, :update, :destroy, :show]
 
   def create
     @crumb = @trail.crumbs.new(crumb_params)
-    if invalid_crumb_spacing(@crumb)
-      redirect_to "/trails/#{@trail.id}/crumbs/new",
-       alert: "Crumbs have to be spaced at least 30 meters apart"
-    elsif @crumb.save
+    # if invalid_crumb_spacing(@crumb)
+    #   redirect_to "/trails/#{@trail.id}/crumbs/new",
+    #    alert: "Crumbs have to be spaced at least 30 meters apart"
+    # elsif @crumb.save
+    if @crumb.save
       redirect_to "/trails/#{@trail.id}/edit"
     else
       redirect_to current_user,

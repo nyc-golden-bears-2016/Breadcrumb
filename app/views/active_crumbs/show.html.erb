@@ -1,8 +1,7 @@
 <div class="text-container">
 
 <%if @message%>
-  <h1>You've Reached The End Of The Trail</h1>
-  <%=link_to "Back to Home", current_user %>
+  <h1>You've Reached The End Of The Trail!</h1>
 <%else%>
   <%=button_to "On to the next Crumb", "/actives/#{@active.id}", method: "get" %>
 <%end%>
@@ -28,6 +27,10 @@
 <div id="view">
   <img src= <%=@crumb.img%>/>
 </div>
+<%end%>
+
+<%if @message%>
+  <%=button_to "Back to Home", current_user, method: "get"  %>
 <%end%>
 
 <%if @crumb.sound_file_size%>
