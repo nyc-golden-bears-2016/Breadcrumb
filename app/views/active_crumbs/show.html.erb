@@ -1,27 +1,28 @@
+<div class="text-container">
+
 <%if @message%>
-  Last crumb!
-  <%=link_to "Back", current_user %>
+  <h1>You've Reached The End Of The Trail</h1>
+  <%=link_to "Back to Home", current_user %>
 <%else%>
-  <%=button_to "Back To Trail", "/actives/#{@active.id}", method: "get" %>
+  <%=button_to "On to the next Crumb", "/actives/#{@active.id}", method: "get" %>
 <%end%>
+
 
 <%if @needs_answer%>
 <%=@crumb.question%>
   <%=form_for(@active_crumb, url: "/actives/#{@active.id}/active_crumbs/#{@active_crumb.id}") do |c| %>
-  This crumb is locked. You must answer correctly to see the content.
+  <p>This crumb is locked. You must answer correctly to see the content.</p>
   <%= c.text_area(:entered_answer) %><br>
   <%= c.submit "Enter" %>
   <%end%>
 <%else%>
-<h2><%=@trail.name%></h2>
+<h1 class="crumb-title"><%=@crumb.name%></h1>
+<div class="position-relative">
+ <%=image_tag("boy-crumbs.png", :class =>"crumb-title-boy") %>
+</div>
 
-<%=@crumb.name%>
 
-<% if @trail.sequential%>
-  #<%=@crumb.order_number%>
-<%end%>
-
-<%=@crumb.description%>
+<p><%=@crumb.description%></p>
 
 <%if @crumb.img_file_size%>
 <div id="view">
@@ -30,11 +31,12 @@
 <%end%>
 
 <%if @crumb.sound_file_size%>
-<div id="view">
-<audio controls>
-  <source src=<%= @crumb.sound %>>
-</audio>
+<div id="view" class="audio-controls">
+  <audio controls>
+    <source src=<%= @crumb.sound %>>
+  </audio>
 		</div>
 <%end%>
 
 <%end%>
+</div>

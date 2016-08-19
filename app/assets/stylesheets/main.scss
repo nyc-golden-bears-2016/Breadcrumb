@@ -11,13 +11,28 @@ html {
   margin-top: 40px;
 }
 
-
-
-
-p {
-  font-size: 1.25em;
+.crumb-title {
+  color: #2befc6;
+  max-width: 300px;
+  margin: 30px auto;
 }
 
+.crumb-title-boy {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  bottom: 0;
+  max-width: 360px;
+
+}
+
+
+.audio-controls {
+  position: fixed;
+  bottom: 2px;
+  width: 100%;
+}
 
 
 a {
@@ -71,7 +86,7 @@ h2 {
 p {
   margin:  -5px;
   padding: 10px 15px;
-  font-size: 2em;
+  font-size: 1.25em;
 }
 
 
@@ -166,7 +181,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 
 #map-parent {
   min-width: 340px;
-  width: 100%;
+  width: 95%;
   min-height: 200px;
   height: 20%;
   margin: 0 auto;
@@ -258,7 +273,7 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0,0,0,.3);
   cursor: pointer;
-  margin-top: 15px;
+  margin-top: 10px;
   margin-right: 40px;
   color: rgb(25,25,25);
   font-size: 16px;
@@ -522,6 +537,9 @@ input:focus {
         height: 100%;
 
 }
+
+
+
 
 .unflipped {
        -moz-transform: scaleX(1);

@@ -4,21 +4,21 @@
 	<div class="row text-container">
 		<div class="col-sm-12">
 			<%=form_for(@trail) do |t|%>
-				<h4>Title</h4><br>
+				<h3>Title</h3><br>
 				<%= t.text_field(:name)%>
 			</div>
 		</div>
 		<div class="row text-container">
 			<div class="col-sm-4">
-		    <h4>Description</h4><br>
+		    <h3>Description</h3><br>
 				<%= t.text_area :description, id: "message_area"%>
 			</div>
 			<div class="col-sm-4">
-		    <h4>Cover Image</h4><br>
+		    <h3>Cover Image</h3><br>
 		    <%=t.file_field :img%>
 			</div>
 			<div class="col-sm-4">
-		    <h4>Private?</h4> <%= t.check_box(:priv)%><br>
+		    <h3>Private?</h3> <%= t.check_box(:priv)%><br>
 				If private, please enter a password:<br>
 				<%=t.text_field(:password)%>
 		    <%=t.hidden_field(:latitude, :value => current_user.latitude)%>

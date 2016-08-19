@@ -5,11 +5,6 @@
 
     <%= render "maps/active-map" %>
 
-  <div class="text-container">
-    <%if @active.trail.sequential%>
-      <p>To be followed in sequence.</p>
-    <%end%>
-  </div>
 
   <div class="text-container">
     <p><%=@active.trail.description%></p>

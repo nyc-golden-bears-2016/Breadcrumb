@@ -18,9 +18,7 @@
     <%else%>
 	    <span class="matching-color">[PUBLIC]</span>
     <%end%>
-    <%if @trail.sequential%>
-      <span>To be followed in sequence.</span>
-    <%end%>
+
     </div>
     </div>
 
@@ -38,11 +36,12 @@
 </div>
 
   <div class="row text-container">
-  <div class="col-sm-6">
-  <%=button_to 'Save for Later?', "/users/#{current_user.id}/add/#{@trail.id}", method: :get%>
-  </div>
+
   <div class="col-sm-6">
   <%=button_to 'Start Now!', "/actives/#{@trail.id}/join", method: :get %>
+  </div>
+  <div class="col-sm-6">
+  <%=button_to 'Save for Later?', "/users/#{current_user.id}/add/#{@trail.id}", method: :get%>
   </div>
   </div>
 </div>
