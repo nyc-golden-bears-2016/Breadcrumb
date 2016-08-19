@@ -45,7 +45,7 @@ function initialize() {
         // Draw circle around the Marker
     var circle = new google.maps.Circle({
       center:mapProps.center,
-      radius:1000,
+      radius:250,
       strokeColor:"#de3d21",
       strokeOpacity:0.8,
       strokeWeight:6,

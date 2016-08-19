@@ -39,10 +39,10 @@
 
   <div class="row text-container">
   <div class="col-sm-6">
-  <%=link_to 'Save for Later?', "/users/#{current_user.id}/add/#{@trail.id}"%>
+  <%=button_to 'Save for Later?', "/users/#{current_user.id}/add/#{@trail.id}", method: :get%>
   </div>
   <div class="col-sm-6">
-  <%=link_to 'Start Now!', "/actives/#{@trail.id}/join"%>
+  <%=button_to 'Start Now!', "/actives/#{@trail.id}/join", method: :get %>
   </div>
   </div>
 </div>

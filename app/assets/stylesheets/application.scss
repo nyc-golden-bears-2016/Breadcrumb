@@ -26,5 +26,5 @@ $grid-float-breakpoint: 1000px;
   font-family: 'CelticHand';
   font-style: normal;
   font-weight: normal;
-  src: local('CelticHand'), url('CELTICHD.woff') format('woff');
+  src: local('CelticHand'), asset-url('CELTICHD.woff') format('woff');
 }

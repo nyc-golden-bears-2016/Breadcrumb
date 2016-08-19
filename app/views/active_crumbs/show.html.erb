@@ -1,8 +1,8 @@
 <%if @message%>
   Last crumb!
-  <%=link_to "Back", current_user%>
+  <%=link_to "Back", current_user %>
 <%else%>
-  <%=link_to "Trail", "/actives/#{@active.id}"%>
+  <%=button_to "Back To Trail", "/actives/#{@active.id}", method: "get" %>
 <%end%>
 
 <%if @needs_answer%>

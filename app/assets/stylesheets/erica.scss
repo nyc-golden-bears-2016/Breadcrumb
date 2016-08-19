@@ -59,9 +59,14 @@ input[type="submit"] {
       animation: textglow 1.5s infinite alternate;
     }
 
+    #go-button {
+    font-size: 1.2em
+    }
+
+
     #signup-link {
       right: 0;
-      left: 0;
+      left: 1%;
       bottom: 0;
       }
 
