@@ -11,6 +11,9 @@ html {
   margin-top: 40px;
 }
 
+
+
+
 p {
   font-size: 1.25em;
 }
@@ -137,7 +140,11 @@ p {
 }
 
 
-
+#current {
+  max-width: 70%;
+  margin-left: 20%;
+  font-size: 3vmin;
+}
 
 
 
@@ -217,21 +224,20 @@ a[href^="https://maps.google.com/maps"]{display:none !important}
 }
 
 #compass_face {
-
+  width:  20%;
   position: absolute;
-  bottom: -80px;
-  left: 0;
-  right: 700px;
+  bottom: -15%;
+  left: 5%;
   margin:auto;
   pointer-events: none;
   z-index: 4;
 }
 
 #compass_hands{
+  width:  20%;
   position: absolute;
-  bottom: -80px;
-  left: 0;
-  right: 700px;
+  bottom: -15%;
+  left: 5%;
   margin:auto;
   pointer-events: none;
   z-index: 5;
