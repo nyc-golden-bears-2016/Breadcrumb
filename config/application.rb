@@ -28,4 +28,4 @@ end
 
 
 config.assets.paths << Rails.root.join('app', 'assets', 'fonts')
-config.assets.enabled = true
+
