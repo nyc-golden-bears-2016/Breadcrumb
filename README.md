@@ -1,8 +1,8 @@
-Mobile-friendly Rails 5.0 app currently launched on Heroku at *bread-crumb.herokuapp.com*. Upon registration, you will be redirected to the FAQ page which includes detailed instructions on trail creation.
+*Breadcrumb* is a mobile-friendly Rails 5.0 app currently launched on Heroku at *bread-crumb.herokuapp.com*. Upon registration, you will be redirected to the FAQ page which includes detailed instructions on trail creation.
 
 Deployment from a fork requires your own AWS & Google Maps keys.
 
-![welcome-creenshot](/app/assets/images/ReadMeScreen.png?raw=true "Title")
+![welcome-screenshot](/app/assets/images/ReadMeScreen.png?raw=true "Breadcrumb")
 
 *What is Breadcrumb?* Breadcrumb is a community-driven application in which users create posts of meaningful content ("crumbs"), associate them with a point in space, and then link them together in a trail. A person walking the trail will receive directional instruction to the next crumb, but will only see the full post upon arriving at the set location. Simply, *our users create digital content that can becomes accessible through real world exploration.*
 
