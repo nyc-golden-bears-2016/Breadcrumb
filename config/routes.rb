@@ -14,7 +14,6 @@ Rails.application.routes.draw do
     resources :crumbs, except: [:index, :show]
   end
 
-  get '/trails/:id/publish' => 'trails#publish'
   get '/trails/:id/remove/:tag_id' => 'trails#removetag'
   get '/trails/:id/add/:tag_id' => 'trails#addtag'
 

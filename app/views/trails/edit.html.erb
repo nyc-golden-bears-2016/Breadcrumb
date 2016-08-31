@@ -53,7 +53,7 @@
     <%=t.file_field :img%>
 	 </div>
 	 <div class="col-sm-4">
-		Locked? <%= t.check_box(:priv) %><br>
+		Want to lock the it? Enter a password:<br>
     <%=t.text_field :password, placeholder: @trail.password%>
     <%=t.hidden_field(:latitude, :value => current_user.latitude)%>
     <%=t.hidden_field(:longitude, :value => current_user.longitude)%>
@@ -61,9 +61,9 @@
 	</div>
 	<div class="row text-container">
 	<div class="col-sm-12">
+		Publish?(this cannot be undone) <%= t.check_box(:published) %><br>
 		<%=t.submit "Update Trail"%>
 	<%end%><br><br>
-	<div class="matching-color"><%=link_to "Publish", "/trails/#{@trail.id}/publish"%></div>
 	</div>
 </div>
 </div>

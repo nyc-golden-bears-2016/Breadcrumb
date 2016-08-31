@@ -18,8 +18,8 @@
 		    <%=t.file_field :img%>
 			</div>
 			<div class="col-sm-4">
-		    <h3>Private?</h3> <%= t.check_box(:priv)%><br>
-				If private, please enter a password:<br>
+		    <h3>Private?</h3>
+				Please enter a password:<br>
 				<%=t.text_field(:password)%>
 		    <%=t.hidden_field(:latitude, :value => current_user.latitude)%>
 		    <%=t.hidden_field(:longitude, :value => current_user.longitude)%>
@@ -32,4 +32,3 @@
 		</div>
 	</div>
 </div>
-
