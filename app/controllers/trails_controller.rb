@@ -40,6 +40,9 @@ before_action :already_published, only: [:edit, :update]
   def create
   @trail = current_user.created_trails.new(trail_params)
     if @trail.save
+      if trail_params[:password].length > 0
+        @trail.update_attribute(:priv, true)
+      end
       redirect_to "/trails/#{@trail.id}/edit"
     else
       redirect_to current_user,
@@ -53,8 +56,16 @@ before_action :already_published, only: [:edit, :update]
   end
 
   def update
+    if (trail_params[:published] == "1") && @trail.too_many_crumbs
+      redirect_to edit_trail_path,
+      alert: "Please make sure your trail has between one and twenty crumbs."
+    else
     @trail.update_attributes(trail_params)
+      if trail_params[:password].length > 0
+        @trail.update_attribute(:priv, true)
+      end
     redirect_to current_user
+    end
   end
 
   def removetag
@@ -69,17 +80,6 @@ before_action :already_published, only: [:edit, :update]
     if !TagTrail.find_by(trail: @trail, tag: tag)
       @tt = TagTrail.create(trail: @trail, tag: tag)
       render json: {tag_trail: "/trails/#{@tt.trail_id}/remove/#{@tt.tag_id}", tag: tag.subject}
-    end
-  end
-
-  def publish
-    if @trail.too_many_crumbs
-      redirect_to edit_trail_path,
-      alert: "Please make sure your trail has between one and twenty crumbs."
-    else
-      @trail.update_attribute(:published, true)
-      @trail.order_crumbs
-      redirect_to current_user
     end
   end
 
